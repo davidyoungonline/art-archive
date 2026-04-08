@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Minotaur Trilogy — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2a3f6e;
+    --ink-light: #4e6694;
+    --ink-faint: #7d93b8;
+    --ink-ghost: #adbdd6;
+    --paper: #f7f5f1;
+    --paper-dark: #edeae4;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 2rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 36vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.9;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 2rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .work-byline {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    line-height: 1.9;
+    margin-bottom: 3rem;
+  }
+
+  .work-byline a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .work-byline a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .photo {
+    margin: 4rem 0;
+    position: relative;
+  }
+
+  .photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transform: scale(1.008);
+    transition: opacity 2s ease, transform 2.5s ease;
+  }
+
+  .photo.seen img { opacity: 1; transform: scale(1); }
+
+  .photo.drift-right { width: 130%; }
+  .photo.portrait    { width: 60%; margin-left: auto; margin-right: -12%; }
+  .photo.wide        { width: 140%; margin-left: -10%; }
+
+  @media (max-width: 900px) {
+    .photo.drift-right { width: 110%; }
+    .photo.portrait    { width: 70%; margin-right: -5%; }
+    .photo.wide        { width: 115%; margin-left: -5%; }
+  }
+
+  .photo .whisper {
+    margin-top: 0.8rem;
+    font-family: var(--serif);
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    opacity: 0;
+    transition: opacity 1.8s ease 0.8s;
+  }
+
+  .photo.seen .whisper { opacity: 1; }
+
+  .pause {
+    padding: 3.5rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  .margin-note {
+    margin: 1.5rem 0 3rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+
+  .margin-note p {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .margin-note a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .margin-note a:hover { border-bottom-color: var(--ink); }
+
+  .margin-note .note-sub {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    margin-top: 0.5rem;
+    line-height: 1.9;
+  }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+  }
+
+  /* IMAGE GRID */
+  .image-grid {
+    margin: 0 0 0.8rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+
+  .grid-item {
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--paper-dark);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+
+  .grid-item.seen { opacity: 1; }
+
+  .grid-item:first-child { grid-column: 1 / -1; }
+
+  .grid-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+    filter: saturate(0.88) contrast(1.02);
+    transition: transform 0.9s ease, filter 0.6s ease;
+  }
+
+  .grid-item:first-child img { aspect-ratio: 16/9; }
+
+  .grid-item:hover img {
+    transform: scale(1.04);
+    filter: saturate(1) contrast(1.02);
+  }
+
+  .view-all-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-light);
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+    margin-top: 0.9rem;
+    display: inline-block;
+  }
+
+  .view-all-btn:hover { color: var(--ink); border-bottom-color: var(--ink-ghost); }
+
+  /* LIGHTBOX */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(14, 20, 38, 0.95);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    padding: 2.5rem 1rem;
+  }
+
+  .lightbox.open { opacity: 1; pointer-events: all; }
+
+  .lightbox-inner {
+    position: relative;
+    max-width: 860px;
+    width: 100%;
+  }
+
+  .lightbox-img {
+    display: block;
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    filter: saturate(0.9) contrast(1.01);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .lightbox-img.ready { opacity: 1; }
+
+  .lightbox-caption {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: rgba(173, 189, 214, 0.6);
+    text-align: center;
+    min-height: 1.2rem;
+  }
+
+  .lb-close {
+    position: absolute;
+    top: -2.2rem;
+    right: 0;
+    background: none;
+    border: none;
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-ghost);
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: color 0.3s;
+    padding: 0;
+  }
+
+  .lb-close:hover { color: #fff; }
+
+  .lb-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: rgba(173, 189, 214, 0.35);
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 0.5rem;
+    line-height: 1;
+  }
+
+  .lb-nav:hover { color: rgba(173, 189, 214, 0.9); }
+  .lb-prev { left: -3.5rem; }
+  .lb-next { right: -3.5rem; }
+
+  @media (max-width: 700px) {
+    .lb-prev { left: -1.8rem; }
+    .lb-next { right: -1.8rem; }
+  }
+
+  /* GALLERY OVERLAY */
+  .gallery-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--paper);
+    z-index: 1000;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  .gallery-overlay.open { opacity: 1; pointer-events: all; }
+
+  .gallery-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 6rem;
+  }
+
+  .gallery-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+
+  .gallery-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .gallery-close {
+    background: none;
+    border: none;
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+    padding: 0;
+  }
+
+  .gallery-close:hover { color: var(--ink); }
+
+  .gallery-thumbs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+
+  @media (max-width: 600px) { .gallery-thumbs { grid-template-columns: repeat(2, 1fr); } }
+
+  .gallery-thumb {
+    aspect-ratio: 1;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--paper-dark);
+  }
+
+  .gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85) contrast(1.02);
+    transition: transform 0.8s ease, filter 0.5s ease;
+    display: block;
+  }
+
+  .gallery-thumb:hover img { transform: scale(1.05); filter: saturate(1) contrast(1.02); }
+
+  /* VIDEO */
+  .video-item { margin: 2.2rem 0; }
+
+  .video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    background: var(--paper-dark);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .video-embed.seen { opacity: 1; }
+
+  .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* LINKS */
+  .links-list { margin: 0.5rem 0 2rem; }
+
+  .link-row {
+    display: block;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.4s, padding-left 0.35s;
+  }
+
+  .link-row:first-child { border-top: 1px solid var(--paper-dark); }
+  .link-row:hover { color: var(--ink-light); padding-left: 0.35rem; }
+
+  .link-row .link-type {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  }
+
+  /* CREDITS */
+  .credits-block {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    line-height: 2.1;
+    color: var(--ink-light);
+  }
+
+  .credits-block strong { font-weight: 500; color: var(--ink); }
+
+  /* PERFORMANCE LIST */
+  .perf-list { margin: 0.5rem 0 2rem; }
+
+  .perf-row {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+
+  .perf-row:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .perf-row strong {
+    display: block;
+    font-weight: 400;
+    color: var(--ink);
+    font-size: 1rem;
+  }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    margin-right: 1.4rem;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  /* APPEAR */
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- GALLERY OVERLAY -->
+<div class="gallery-overlay" id="galleryOverlay">
+  <div class="gallery-inner">
+    <div class="gallery-header">
+      <span class="gallery-title">The Minotaur Trilogy &mdash; photographs</span>
+      <button class="gallery-close" onclick="closeGallery()">close</button>
+    </div>
+    <div class="gallery-thumbs" id="galleryThumbs"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lb-close" onclick="closeLightbox()">close</button>
+    <button class="lb-nav lb-prev" onclick="lbStep(-1)">&#8592;</button>
+    <img class="lightbox-img" id="lbImg" src="" alt="">
+    <button class="lb-nav lb-next" onclick="lbStep(1)">&#8594;</button>
+    <div class="lightbox-caption" id="lbCaption"></div>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="https://www.davidyoung.online/art">&#8592; art</a></p>
+
+    <h1 class="work-title appear">The Minotaur Trilogy</h1>
+    <p class="work-byline appear">
+      Margaret Cameron &amp; David Young &middot; chamber opera in three parts &middot; 2011&ndash;2012<br>
+      Presented by <a href="https://chambermade.org/works/the-minotaur-trilogy/">Chamber Made Opera</a>
+    </p>
+
+    <p class="appear">
+      A chamber opera made from two kinds of loss. The first: Monteverdi's <em>L'Arianna</em>, composed in 1608 and almost entirely vanished &mdash; only its lament survives. The second: the myth of the Minotaur, Ariadne, and the labyrinth, lifted out of linear time and reassembled in pieces. Together they make something that is less a narrative than a condition &mdash; the experience of being inside something you cannot see the shape of.
+    </p>
+
+    <div class="photo wide">
+      <img src="https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0044-scaled.jpg"
+           alt="The Minotaur Trilogy, Melbourne Recital Centre, October 2012"
+           onerror="this.style.display='none'">
+      <div class="whisper">Melbourne Recital Centre, October 2012. Photograph by Daisy Noyes.</div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <p class="appear">
+      <em>The Minotaur Trilogy</em> began on an island. The first part, <em>The Island</em>, premiered on 26 March 2011 in a community hall on Bruny Island, Tasmania, as part of Ten Days on the Island. Chamber Made had spent time there as artists-in-residence, working with the community, making something that could only have come from that particular place and that particular silence. The hall held perhaps fifty people. It felt closer to ceremony than performance.
+    </p>
+
+    <p class="appear">
+      The work grew outward from there &mdash; into private apartments in St Kilda, a house at Mount Macedon, the Lennox Theatre in Parramatta &mdash; before arriving at its full form in October 2012, when all three parts were presented together for the first time at the Melbourne Recital Centre as part of the Melbourne Festival. The complete trilogy ran 147 minutes, performed by Caroline Lee, Deborah Kayser and Hellen Sky, with Mark Cauvin on double bass, Matthias Schack-Arnott on percussion and Anastasia Russell-Head at the harpsichord. Michael Roper designed the space.
+    </p>
+
+    <p class="appear">
+      Margaret Cameron made the texts. I made the music. But those sentences are too clean for what the work actually was. We had been making things together for a long time, and the Minotaur Trilogy was the place we went furthest. The composition was a continuous negotiation between her language and my sound &mdash; between image and duration, between what is said and what is withheld. The score was designed by Henry Fuller at Sweet Design in St Kilda, printed as a limited edition: an object as well as a document.
+    </p>
+
+    <p class="appear">
+      Margaret died on 20 October 2014 &mdash; two years, almost to the day, after the Melbourne Festival premiere. She was 59. The Minotaur Trilogy remains the clearest record of what we made together, and of what she was.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- PHOTOGRAPHS -->
+    <p class="section-label appear">Photographs</p>
+
+    <div class="image-grid appear" id="featuredGrid"></div>
+    <button class="view-all-btn appear" onclick="openGallery()">View all photographs &rarr;</button>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- VIDEO -->
+    <p class="section-label appear">Film</p>
+
+    <div class="video-item appear">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/WuE9l9Cc55s"
+                title="The Minotaur Trilogy — documentation"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <div class="video-label">Documentation &mdash; Chamber Made Opera</div>
+    </div>
+
+    <div class="video-item appear">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/V6QIHLgtGOQ"
+                title="The Minotaur Trilogy — Melbourne Festival interview"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <div class="video-label">Interview with Margaret Cameron &amp; David Young &mdash; Melbourne Festival, 2012</div>
+    </div>
+
+    <div class="video-item appear">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/8WjqM0g3QIE"
+                title="The Minotaur Trilogy — promotional trailer"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <div class="video-label">Promotional trailer &mdash; Melbourne Festival, 2012</div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- RECORDING -->
+    <p class="section-label appear">Recording</p>
+
+    <div class="margin-note appear">
+      <p><em>The Minotaur Trilogy</em></p>
+      <p>Limited edition 3-CD box set &mdash; 147 copies</p>
+      <p>Recorded for ABC Classic FM</p>
+      <p class="note-sub">
+        Chamber Made Opera Records, 2013<br>
+        Produced by Haig Burnell (disc 1) and Duncan Yardley (discs 2&ndash;3)<br>
+        Photography by Daisy Noyes and David Young<br><br>
+        <a href="https://www.australianmusiccentre.com.au/product/the-minotaur-trilogy">Available from the Australian Music Centre</a>
+      </p>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- LINKS -->
+    <p class="section-label appear">Further reading &amp; listening</p>
+
+    <div class="links-list appear">
+      <a class="link-row" href="https://chambermade.org/works/the-minotaur-trilogy/" target="_blank">
+        <span class="link-type">Archive</span>
+        The Minotaur Trilogy &mdash; Chamber Made Opera
+      </a>
+      <a class="link-row" href="https://www.australianmusiccentre.com.au/work/young-david-minotaur-trilogy" target="_blank">
+        <span class="link-type">Score &amp; catalogue</span>
+        Work entry &mdash; Australian Music Centre
+      </a>
+      <a class="link-row" href="https://www.australianmusiccentre.com.au/product/the-minotaur-trilogy" target="_blank">
+        <span class="link-type">Recording</span>
+        CD box set &mdash; Australian Music Centre
+      </a>
+      <a class="link-row" href="https://cynthiatroup.com/wordpress/wp-content/uploads/The-Minotaur-Trilogy-Chamber-Made-Opera-2012.pdf" target="_blank">
+        <span class="link-type">Programme</span>
+        Melbourne Festival programme notes, October 2012
+      </a>
+      <a class="link-row" href="http://theatrenotes.blogspot.com/2012/10/melbourne-festival-minotaur-trilogy.html" target="_blank">
+        <span class="link-type">Review</span>
+        Alison Croggon &mdash; Theatre Notes (Melbourne Festival, 2012)
+      </a>
+      <a class="link-row" href="http://theatrenotes.blogspot.com/2011/04/review-delectable-shelter-minotaur.html" target="_blank">
+        <span class="link-type">Review</span>
+        Alison Croggon &mdash; Theatre Notes (Living Room Opera, April 2011)
+      </a>
+      <a class="link-row" href="https://www.realtime.org.au/art-care-where-life-and-death-connect/" target="_blank">
+        <span class="link-type">Essay</span>
+        Margaret Cameron &mdash; 'Art &amp; care: where life and death connect', RealTime 2013
+      </a>
+      <a class="link-row" href="https://www.realtime.org.au/vale-margaret-cameron-1955-2014/" target="_blank">
+        <span class="link-type">Obituary</span>
+        Vale: Margaret Cameron &mdash; RealTime, 2014
+      </a>
+      <a class="link-row" href="https://chambermade.org/people/margaret-cameron/" target="_blank">
+        <span class="link-type">Tribute</span>
+        Margaret Cameron &mdash; Chamber Made Opera
+      </a>
+      <a class="link-row" href="https://riversideparramatta.com.au/show/minotaur-the-island/" target="_blank">
+        <span class="link-type">Season archive</span>
+        Minotaur The Island &mdash; Riverside Parramatta, May 2012
+      </a>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- PERFORMANCES -->
+    <p class="section-label appear">Performance history</p>
+
+    <div class="perf-list appear">
+      <div class="perf-row">
+        <strong>World premiere &mdash; Bruny Island, Tasmania</strong>
+        26&ndash;27 March 2011 &middot; Dennes Point Community Hall &middot; Ten Days on the Island<br>
+        <em>Minotaur: The Island</em>
+      </div>
+      <div class="perf-row">
+        <strong>Living Room Opera &mdash; Melbourne</strong>
+        April 2011 &middot; Private apartment, St Kilda Road<br>
+        <em>Minotaur: The Island</em>
+      </div>
+      <div class="perf-row">
+        <strong>Private venue &mdash; Mount Macedon, Victoria</strong>
+        12&ndash;13 November 2011<br>
+        <em>Minotaur: The Island &amp; The Labyrinth</em>
+      </div>
+      <div class="perf-row">
+        <strong>Riverside Parramatta &mdash; Sydney</strong>
+        9&ndash;11 May 2012 &middot; Lennox Theatre<br>
+        <em>Minotaur: The Island</em>
+      </div>
+      <div class="perf-row">
+        <strong>Melbourne Festival &mdash; world premiere of complete trilogy</strong>
+        18&ndash;21 October 2012 &middot; Melbourne Recital Centre, Primrose Potter Salon<br>
+        <em>The Minotaur Trilogy</em>
+      </div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- CREDITS -->
+    <p class="section-label appear">Credits</p>
+
+    <div class="credits-block appear">
+      <strong>Created by</strong> Margaret Cameron &amp; David Young<br>
+      <strong>Performed by</strong> Caroline Lee, Deborah Kayser, Hellen Sky<br>
+      <strong>Double bass</strong> Mark Cauvin<br>
+      <strong>Percussion</strong> Matthias Schack-Arnott<br>
+      <strong>Harpsichord</strong> Anastasia Russell-Head<br>
+      <strong>Architect</strong> Michael Roper<br>
+      <strong>Score design</strong> Henry Fuller, Sweet Design, St Kilda<br>
+      <strong>Photography</strong> Daisy Noyes, David Young<br>
+      <strong>Presented by</strong> Chamber Made Opera &amp; Melbourne Recital Centre<br>
+      <strong>In association with</strong> Melbourne Festival<br>
+      <strong>Co-commissioned by</strong> Ten Days on the Island, Dr Peta Gillingham,<br>
+      &emsp;Michael Bink, Helen &amp; Peter Murdoch, Fiona Sweet &amp; Paul Newcombe,<br>
+      &emsp;Meg Morris, Susan Pelka and anonymous donors
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- AWARD -->
+    <div class="margin-note appear">
+      <p><em>2013 Art Music Awards</em></p>
+      <p>Victorian Performance of the Year<br>Excellence by an Organisation</p>
+      <p class="note-sub">Australian Music Centre &amp; APRA AMCOS</p>
+    </div>
+
+  </div>
+
+  <div class="closing appear">
+    <div class="closing-name">David Young</div>
+    <div class="closing-links">
+      <a href="https://www.davidyoung.online/art">&#8592; art</a>
+      <a href="https://www.davidyoung.online">home</a>
+      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── IMAGES ──────────────────────────────────────────────────────────────────
+// Replace these src values with your actual photo URLs when you have them.
+// The featured grid shows the first 5; the gallery overlay shows all of them.
+
+const images = [
+  {
+    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0044-scaled.jpg',
+    caption: 'Melbourne Recital Centre, October 2012. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0023-scaled.jpg',
+    caption: 'The Minotaur Trilogy, 2012. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0067-scaled.jpg',
+    caption: 'The Minotaur Trilogy, 2012. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0089-scaled.jpg',
+    caption: 'The Minotaur Trilogy, 2012. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0102-scaled.jpg',
+    caption: 'The Minotaur Trilogy, 2012.'
+  },
+  {
+    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0115-scaled.jpg',
+    caption: 'Minotaur: The Island, Bruny Island, March 2011.'
+  },
+  {
+    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0130-scaled.jpg',
+    caption: 'Minotaur: The Island, Bruny Island, March 2011.'
+  },
+  {
+    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0145-scaled.jpg',
+    caption: 'The Minotaur Trilogy, 2012.'
+  },
+  {
+    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0001-scaled.jpg',
+    caption: 'The Minotaur Trilogy, 2012.'
+  }
+];
+
+// Build featured grid (first 5 images)
+const grid = document.getElementById('featuredGrid');
+images.slice(0, 5).forEach((img, i) => {
+  const item = document.createElement('div');
+  item.className = 'grid-item';
+  const el = document.createElement('img');
+  el.src = img.src;
+  el.alt = img.caption;
+  el.loading = 'lazy';
+  item.appendChild(el);
+  item.addEventListener('click', () => openLightbox(i, images));
+  grid.appendChild(item);
+  setTimeout(() => {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { item.classList.add('seen'); io.disconnect(); } });
+    }, { threshold: 0.05 });
+    io.observe(item);
+  }, i * 80);
+});
+
+// Build gallery thumbs (all images)
+const thumbsEl = document.getElementById('galleryThumbs');
+images.forEach((img, i) => {
+  const thumb = document.createElement('div');
+  thumb.className = 'gallery-thumb';
+  const el = document.createElement('img');
+  el.src = img.src;
+  el.alt = img.caption;
+  el.loading = 'lazy';
+  thumb.appendChild(el);
+  thumb.addEventListener('click', () => {
+    closeGallery();
+    setTimeout(() => openLightbox(i, images), 420);
+  });
+  thumbsEl.appendChild(thumb);
+});
+
+// Gallery
+function openGallery() {
+  document.getElementById('galleryOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGallery() {
+  document.getElementById('galleryOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Lightbox
+let lbImages = [], lbIndex = 0;
+
+function openLightbox(index, imgs) {
+  lbImages = imgs;
+  lbIndex = index;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  loadLbImage();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function loadLbImage() {
+  const el = document.getElementById('lbImg');
+  const cap = document.getElementById('lbCaption');
+  el.classList.remove('ready');
+  const d = lbImages[lbIndex];
+  cap.textContent = d.caption || '';
+  el.onload = () => el.classList.add('ready');
+  el.src = d.src;
+}
+
+function lbStep(dir) {
+  lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+  loadLbImage();
+}
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lbStep(1);
+  if (e.key === 'ArrowLeft')  lbStep(-1);
+  if (e.key === 'Escape')     closeLightbox();
+});
+
+// Click backdrop to close lightbox
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+// Escape closes gallery too
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('galleryOverlay').classList.contains('open')) {
+    closeGallery();
+  }
+});
+
+// Appear on scroll
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.disconnect(); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+// Photo slow-develop
+document.querySelectorAll('.photo').forEach(p => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { setTimeout(() => p.classList.add('seen'), 150); obs.disconnect(); } });
+  }, { threshold: 0.1 }).observe(p);
+});
+
+// Video fade-in
+document.querySelectorAll('.video-embed').forEach(v => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { v.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.15 }).observe(v);
+});
+</script>
+
+</body>
+</html>
