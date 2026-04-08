@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2a3f6e;
+    --ink-light: #4e6694;
+    --ink-faint: #7d93b8;
+    --ink-ghost: #adbdd6;
+    --paper: #f7f5f1;
+    --paper-dark: #edeae4;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 2rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 36vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.9;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 2rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+
+  .epigraph {
+    margin: 0 0 2.5rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+
+  .epigraph p {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--ink-light);
+    margin-bottom: 0;
+  }
+
+  .epigraph .epigraph-source {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    margin-top: 0.8rem;
+  }
+
+  .pause {
+    padding: 3.5rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+  }
+
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  /* PROJECT LIST */
+  .project-list {
+    margin: 0 0 1.5rem;
+  }
+
+  .project-item {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+
+  .project-item:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .project-item a {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.4s, padding-left 0.35s;
+    display: block;
+  }
+
+  .project-item a:hover { color: var(--ink-light); padding-left: 0.35rem; }
+
+  .project-item .unlinked {
+    color: var(--ink-faint);
+  }
+
+  .project-item .year {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-left: 0.3rem;
+  }
+
+  .section-note {
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-light);
+    line-height: 1.8;
+    margin-top: 1.2rem;
+  }
+
+  .section-note a {
+    color: var(--ink-light);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .section-note a:hover { border-bottom-color: var(--ink); }
+
+  /* VIDEO */
+  .video-item { margin: 2.2rem 0; }
+
+  .video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    background: var(--paper-dark);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .video-embed.seen { opacity: 1; }
+
+  .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* RESOURCE LINKS */
+  .resource-links {
+    margin: 1.5rem 0 0;
+    font-family: var(--serif);
+    font-size: 0.92rem;
+    line-height: 2.2;
+    color: var(--ink-light);
+  }
+
+  .resource-links a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .resource-links a:hover { border-bottom-color: var(--ink); }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    margin-right: 1.4rem;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  /* APPEAR */
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="https://www.davidyoung.online">&#8592; home</a></p>
+
+    <h1 class="page-title appear">Art</h1>
+
+    <p class="appear">
+      Art was my life for 25 years &mdash; composing, directing, building companies, collaborating &mdash; travelling from Australia to Asia, Europe, the US and Africa. The work was always new and always on the edge. I no longer compose or direct performances, but I still consider myself an artist.
+    </p>
+
+    <div class="epigraph appear">
+      <p>It is not a question of decisions and the willingness or fear to make them. It is that we are impermanently part and parcel of all. We are involved in a life that passes understanding and our highest business is our daily life.</p>
+      <p class="epigraph-source">John Cage</p>
+    </div>
+
+    <p class="appear">
+      This is a curated archive of that art which includes music composition, chamber opera, cross-art form collaboration and film.
+    </p>
+
+    <!-- ARTIST PROFILE FILM -->
+    <div class="video-item appear">
+      <div class="video-embed">
+        <iframe src="https://player.vimeo.com/video/39470453?title=0&byline=0&portrait=0"
+                title="David Young — artist profile by Peter Humble"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <div class="video-label">David Young &mdash; artist profile by Peter Humble</div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- CHAMBER MADE OPERA -->
+    <p class="section-label appear">Chamber Made Opera</p>
+
+    <p class="section-intro appear">
+      <a href="https://chambermade.org/">Chamber Made Opera</a> is Australia&rsquo;s oldest and most progressive chamber opera company. I was its artistic director from 2010 to 2013, commissioning and producing ten new living room operas. The Minotaur Trilogy made with Margaret Cameron was the artwork everything had been moving towards. We called it &lsquo;the art of everything.&rsquo;
+    </p>
+
+    <div class="project-list appear">
+      <div class="project-item"><a href="minotaur-trilogy.html">The Minotaur Trilogy</a></div>
+      <div class="project-item"><span class="unlinked">Opera for a Small Mammal</span></div>
+      <div class="project-item"><span class="unlinked">Turbulence</span></div>
+      <div class="project-item"><span class="unlinked">The Box</span></div>
+      <div class="project-item"><span class="unlinked">Ophelia Doesn&rsquo;t Live Here Anymore</span></div>
+    </div>
+
+    <p class="section-note appear">
+      Read the essay <a href="https://agileopera.com/desperate-measures/" target="_blank">Desperate Measures</a> about saving the company.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- APHIDS -->
+    <p class="section-label appear">Aphids</p>
+
+    <p class="section-intro appear">
+      <a href="https://aphids.net/">Aphids</a> was co-founded by myself, Cynthia Troup, Sarah Pirrie and Kath Banger in 1994. We made cross-artform collaborations with artists from every discipline we could find, taking it from Australia to Asia, Europe, the US and Africa. After more than 30 years Aphids is still running, still one of the most experimental companies in Australia.
+    </p>
+
+    <p class="section-intro appear">
+      I collaborated because composing was too solitary and lonely. I could ignite passion in a group and rush toward almost any goal with vision and conviction that was frightening at times. I wanted the previously unexperienced, the unfamiliar. Gentle adventures diving into unexplored domains, with paradigm shifts and perceptual transformations.
+    </p>
+
+    <div class="project-list appear">
+      <div class="project-item"><a href="ricefields.html">Ricefields</a></div>
+      <div class="project-item"><span class="unlinked">Scale</span></div>
+      <div class="project-item"><span class="unlinked">So You Think You Can Cow</span></div>
+      <div class="project-item"><span class="unlinked">Maps</span></div>
+      <div class="project-item"><span class="unlinked">Schallmachine 06</span></div>
+      <div class="project-item"><span class="unlinked">A Quarrelling Pair</span></div>
+      <div class="project-item"><span class="unlinked">Underground</span></div>
+      <div class="project-item"><span class="unlinked">Oribotics</span></div>
+      <div class="project-item"><span class="unlinked">Radio 1</span></div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- MUSIC -->
+    <p class="section-label appear">Music</p>
+
+    <p class="section-intro appear">
+      Composition was the thread that ran through everything. I studied with <a href="https://lizalimcomposer.com/" target="_blank">Liza Lim</a> at the University of Melbourne and completed a PhD in Music Composition at the University of Queensland. In the late 1990s I received the Mallesons Stephen Jacques City of Melbourne Young Artists Award which kickstarted my life as a composer.
+    </p>
+
+    <p class="section-intro appear">
+      My music was mostly chamber work for small ensembles for performance in Australia, Japan and Europe. Graphic notation became a preoccupation &mdash; scores that incorporated images, photographs, even animation, designed and printed as objects in their own right.
+    </p>
+
+    <p class="section-intro appear">
+      Composer Gordon Kerry described my <em>Thousands of Bundled Straw</em> as &lsquo;like seeing a world in a grain of sand.&rsquo; I was always attracted to the intricate, towards miniature detail, to complexity and precision, crystalline beauty and strangeness. I was painstaking and meticulous, but not thorough. I never revised or edited my music, rarely corrected mistakes. I composed all my music with ink on paper, drafting scores over hours and hours, calligraphically utter and impressive. I didn&rsquo;t really care what the music sounded like &mdash; I was more interested in the ideas and the relationships with the musicians, the listeners, what happens in between.
+    </p>
+
+    <div class="project-list appear">
+      <div class="project-item"><span class="unlinked">The Art of War<span class="year">2013</span></span></div>
+      <div class="project-item"><span class="unlinked">Thousands of Bundled Straw<span class="year">1996&ndash;2005</span></span></div>
+      <div class="project-item"><span class="unlinked">The Val Camonica Pieces<span class="year">1996&ndash;2003</span></span></div>
+      <div class="project-item"><span class="unlinked">Skin Quartet<span class="year">2003</span></span></div>
+      <div class="project-item"><span class="unlinked">To Keep Things Reasonable<span class="year">2007</span></span></div>
+      <div class="project-item"><span class="unlinked">Jasmine<span class="year">1991</span></span></div>
+      <div class="project-item"><span class="unlinked">Scant<span class="year">1993</span></span></div>
+      <div class="project-item"><span class="unlinked">Ninazu<span class="year">1993</span></span></div>
+    </div>
+
+    <div class="resource-links appear">
+      <a href="#">Download my list of music composition works</a><br>
+      <a href="https://www.australianmusiccentre.com.au/search?q=David+young" target="_blank">Browse the Australian Music Centre catalogue</a><br>
+      <a href="#">Download my PhD thesis about my compositional process</a>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- OTHER PROJECTS -->
+    <p class="section-label appear">Other projects</p>
+
+    <p class="section-intro appear">
+      One short film. <em>Deborah Hay: Alignment is everywhere</em>, made with Peter Humble. A portrait of the radical American choreographer.
+    </p>
+
+    <p class="section-intro appear">
+      <a href="#">Read about my Asialink residency with Bengkel Teater Rendra</a>
+    </p>
+
+    <p class="section-intro appear">
+      I was festival director of the <a href="https://nextwave.org.au/festivals/next-wave-festival-2002" target="_blank">Next Wave Festival</a> in 2002.
+    </p>
+
+    <div class="project-list appear">
+      <div class="project-item"><span class="unlinked">Overheard at Inveresk<span class="year">2001</span></span></div>
+      <div class="project-item"><span class="unlinked">Ereshkigal &mdash; Carnival of Darkness<span class="year">1993</span></span></div>
+    </div>
+
+  </div>
+
+  <div class="closing appear">
+    <div class="closing-name">David Young</div>
+    <div class="closing-links">
+      <a href="https://www.davidyoung.online">home</a>
+      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Appear on scroll
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.disconnect(); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+// Video fade-in
+document.querySelectorAll('.video-embed').forEach(v => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { v.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.15 }).observe(v);
+});
+</script>
+
+</body>
+</html>
