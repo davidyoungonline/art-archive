@@ -206,37 +206,33 @@
   /* IMAGE GRID */
   .image-grid {
     margin: 0 0 0.8rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
+    columns: 2;
+    column-gap: 5px;
   }
 
+  @media (max-width: 500px) { .image-grid { columns: 1; } }
+
   .grid-item {
-    overflow: hidden;
+    break-inside: avoid;
     cursor: pointer;
     background: var(--paper-dark);
     opacity: 0;
     transition: opacity 1.2s ease;
+    margin-bottom: 5px;
   }
 
   .grid-item.seen { opacity: 1; }
 
-  .grid-item:first-child { grid-column: 1 / -1; }
-
   .grid-item img {
     display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 4/3;
+    height: auto;
     filter: saturate(0.88) contrast(1.02);
     transition: transform 0.9s ease, filter 0.6s ease;
   }
 
-  .grid-item:first-child img { aspect-ratio: 16/9; }
-
   .grid-item:hover img {
-    transform: scale(1.04);
+    transform: scale(1.02);
     filter: saturate(1) contrast(1.02);
   }
 
@@ -394,30 +390,29 @@
   .gallery-close:hover { color: var(--ink); }
 
   .gallery-thumbs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+    columns: 3;
+    column-gap: 5px;
   }
 
-  @media (max-width: 600px) { .gallery-thumbs { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .gallery-thumbs { columns: 2; } }
 
   .gallery-thumb {
-    aspect-ratio: 1;
+    break-inside: avoid;
     overflow: hidden;
     cursor: pointer;
     background: var(--paper-dark);
+    margin-bottom: 5px;
   }
 
   .gallery-thumb img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
     filter: saturate(0.85) contrast(1.02);
     transition: transform 0.8s ease, filter 0.5s ease;
-    display: block;
   }
 
-  .gallery-thumb:hover img { transform: scale(1.05); filter: saturate(1) contrast(1.02); }
+  .gallery-thumb:hover img { transform: scale(1.03); filter: saturate(1) contrast(1.02); }
 
   /* VIDEO */
   .video-item { margin: 2.2rem 0; }
@@ -1017,47 +1012,81 @@
 
 <script>
 // ─── IMAGES ──────────────────────────────────────────────────────────────────
-// Replace these src values with your actual photo URLs when you have them.
-// The featured grid shows the first 5; the gallery overlay shows all of them.
+// First 5 entries appear in the featured grid on the page.
+// All 17 entries appear in the gallery overlay.
 
 const images = [
   {
-    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0044-scaled.jpg',
-    caption: 'Melbourne Recital Centre, October 2012. Photograph: Daisy Noyes.'
+    src: 'minotaur-caroline-staff.jpg',
+    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
   },
   {
-    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0023-scaled.jpg',
-    caption: 'The Minotaur Trilogy, 2012. Photograph: Daisy Noyes.'
+    src: 'minotaur-deborah-ladder.jpg',
+    caption: 'Deborah Kayser — The Minotaur Trilogy. Photograph: Daisy Noyes.'
   },
   {
-    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0067-scaled.jpg',
-    caption: 'The Minotaur Trilogy, 2012. Photograph: Daisy Noyes.'
+    src: 'minotaur-caroline-closeup.jpg',
+    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
   },
   {
-    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0089-scaled.jpg',
-    caption: 'The Minotaur Trilogy, 2012. Photograph: Daisy Noyes.'
+    src: 'minotaur-matthias-percussion.jpg',
+    caption: 'Matthias Schack-Arnott — The Minotaur Trilogy. Photograph: Daisy Noyes.'
   },
   {
-    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0102-scaled.jpg',
-    caption: 'The Minotaur Trilogy, 2012.'
+    src: 'minotaur-harpsichord-detail.jpg',
+    caption: 'Anastasia Russell-Head — The Minotaur Trilogy. Photograph: Daisy Noyes.'
+  },
+  // ── Gallery-only images ──
+  {
+    src: 'minotaur-hellen-mirror.jpg',
+    caption: 'Hellen Sky — The Minotaur Trilogy. Photograph: Daisy Noyes.'
   },
   {
-    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0115-scaled.jpg',
-    caption: 'Minotaur: The Island, Bruny Island, March 2011.'
+    src: 'minotaur-mark-bass-outdoor.jpg',
+    caption: 'Mark Cauvin — The Minotaur Trilogy. Photograph: Daisy Noyes.'
   },
   {
-    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0130-scaled.jpg',
-    caption: 'Minotaur: The Island, Bruny Island, March 2011.'
+    src: 'minotaur-caroline-boat.jpg',
+    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
   },
   {
-    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0145-scaled.jpg',
-    caption: 'The Minotaur Trilogy, 2012.'
+    src: 'minotaur-ensemble-hats.jpg',
+    caption: 'The Minotaur Trilogy. Photograph: Daisy Noyes.'
   },
   {
-    src: 'https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0001-scaled.jpg',
-    caption: 'The Minotaur Trilogy, 2012.'
-  }
+    src: 'minotaur-caroline-oval-mirror.jpg',
+    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'minotaur-caroline-deborah-wall.jpg',
+    caption: 'Caroline Lee and Deborah Kayser — The Minotaur Trilogy. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'minotaur-caroline-hellen-lantern.jpg',
+    caption: 'Caroline Lee and Hellen Sky — The Minotaur Trilogy. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'minotaur-mark-bass-text.jpg',
+    caption: 'Mark Cauvin — The Minotaur Trilogy. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'minotaur-matthias-gong.jpg',
+    caption: 'Matthias Schack-Arnott — The Minotaur Trilogy. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'minotaur-caroline-lanterns.jpg',
+    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'minotaur-hellen-column.jpg',
+    caption: 'Hellen Sky — The Minotaur Trilogy. Photograph: Daisy Noyes.'
+  },
+  {
+    src: 'minotaur-mark-red-thread.jpg',
+    caption: 'Mark Cauvin — The Minotaur Trilogy. Photograph: Daisy Noyes.'
+  },
 ];
+
 
 // Build featured grid (first 5 images)
 const grid = document.getElementById('featuredGrid');
