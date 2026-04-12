@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List of Works — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 2rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .intro {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--ink-light);
+    margin-bottom: 3rem;
+    font-style: italic;
+  }
+
+  .intro a {
+    color: var(--ink-light);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .intro a:hover { border-bottom-color: var(--ink-light); }
+
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+    scroll-margin-top: 2rem;
+  }
+
+  /* SECTION HERO IMAGE */
+  .section-hero {
+    margin: 0 0 1.8rem;
+  }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  .video-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* WORKS LIST */
+  .works-list {
+    margin: 0 0 0.5rem;
+  }
+
+  .work-item {
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    line-height: 1.55;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .work-item:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .work-name {
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .work-name a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease, color 0.4s;
+  }
+
+  .work-name a:hover {
+    color: var(--ink-light);
+    border-bottom-color: var(--ink);
+  }
+
+  .work-name em { font-style: italic; }
+
+  .work-year {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* PDF EMBED */
+  .pdf-container {
+    margin: 0.5rem 0 2rem;
+    position: relative;
+    padding-top: 133%;
+    background: var(--paper-dark);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .pdf-container.seen { opacity: 1; }
+
+  .pdf-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .pdf-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  /* APPEAR */
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+
+  /* SCROLL TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose" style="font-family:'EB Garamond','Georgia',serif;">
+
+    <p class="nav-back appear"><a href="art.html">&#8592;</a></p>
+
+    <h1 class="page-title appear">List of Works</h1>
+
+    <p class="intro appear">A complete list of musical works, 1990–2014. Scores and recordings for most of these works are held at the <a href="https://www.australianmusiccentre.com.au/artist/young-david" target="_blank">Australian Music Centre</a>.</p>
+
+    <div class="section-hero appear">
+      <img src="TBS_score_detail.jpg" alt="Thousands of Bundled Straw, song 1 — score detail">
+      <div class="video-label"><em>Thousands of Bundled Straw</em>, song 1 &mdash; score detail</div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- OPERA & MUSIC THEATRE -->
+    <p class="section-label appear">Opera &amp; Music Theatre</p>
+
+    <div class="works-list appear">
+      <div class="work-item">
+        <span class="work-name"><a href="minotaur-trilogy.html">The Minotaur Trilogy</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— with Margaret Cameron. Solo vocalists, double bass, harpsichord, mixed percussion. 147 min.</span></span>
+        <span class="work-year">2011/2012</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><span class="work-name">Overheard at Inveresk <span style="font-size:0.88rem;color:var(--ink-faint);">— miniature opera for soprano, percussion, choir, boy soprano, bicycles &amp; electronics. 50 min.</span></span></span>
+        <span class="work-year">2001</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Maps <span style="font-size:0.88rem;color:var(--ink-faint);">— music theatre collaboration for soprano, recorder, violin, violoncello, percussion, chef. 2 hours.</span></span>
+        <span class="work-year">2000</span>
+      </div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- CROSS-ARTFORM COLLABORATIONS -->
+    <p class="section-label appear">Cross-artform Collaborations</p>
+
+    <div class="works-list appear">
+      <div class="work-item">
+        <span class="work-name">So You Think You Can Cow <span style="font-size:0.88rem;color:var(--ink-faint);">— with Margaret Cameron &amp; Jethro Woodward</span></span>
+        <span class="work-year">2009</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Schallmachine 06 <span style="font-size:0.88rem;color:var(--ink-faint);">— architecture/miniature percussion collaboration with Fritz Hauser, Boa Baumann, Speak Percussion &amp; Rosemary Joy</span></span>
+        <span class="work-year">2006</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Oribotics [laboratory] <span style="font-size:0.88rem;color:var(--ink-faint);">— robotic origami installation for solo percussion &amp; electronics</span></span>
+        <span class="work-year">2005</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Scale: Abstracts 01–04 &amp; The Uninhabitable 01–07 <span style="font-size:0.88rem;color:var(--ink-faint);">— with Rosemary Joy &amp; Cynthia Troup. Miniature percussion, toy piano &amp; guitar. 30 min.</span></span>
+        <span class="work-year">2005</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Oribotics <span style="font-size:0.88rem;color:var(--ink-faint);">— robotic origami installation for solo percussion &amp; electronics. 21 min.</span></span>
+        <span class="work-year">2004</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="ricefields.html">Skin Quartet</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— with Louisa Bufardeci. 2 violins, viola, violoncello. 37 min.</span></span>
+        <span class="work-year">2003</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="ricefields.html">Ricefields</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— with Sarah Pirrie &amp; Rosemary Joy. Soprano, recorders, violin/viola, percussion &amp; electronics. 70 min.</span></span>
+        <span class="work-year">1998</span>
+      </div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- ORCHESTRA -->
+    <p class="section-label appear">Orchestra</p>
+
+    <div class="works-list appear">
+      <div class="work-item">
+        <span class="work-name">Enan <span style="font-size:0.88rem;color:var(--ink-faint);">— full orchestra. 6 min. 40 sec.</span></span>
+        <span class="work-year">1992</span>
+      </div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- CHAMBER ENSEMBLE -->
+    <p class="section-label appear">Chamber Ensemble</p>
+
+    <div class="works-list appear">
+      <div class="work-item">
+        <span class="work-name">Esaurita <span style="font-size:0.88rem;color:var(--ink-faint);">— flugelhorn &amp; prepared pianoforte. 16 min.</span></span>
+        <span class="work-year">2010</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Cryptonesia <span style="font-size:0.88rem;color:var(--ink-faint);">— violin &amp; percussion. 10 min.</span></span>
+        <span class="work-year">2007</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">I. A Leaf from the Book of Cities &amp; II. Cooling in a Garden of the Torrid Zone <span style="font-size:0.88rem;color:var(--ink-faint);">— clarinet, tuba, violin, viola, violoncello, percussion, pianoforte. 7 min.</span></span>
+        <span class="work-year">2006</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="thousands-of-bundled-straw.html">Thousands of Bundled Straw VII</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— voice, recorder, oboe, clarinet, trumpet, trombone, violin, viola, cello, bass, piano, percussion. 11 min.</span></span>
+        <span class="work-year">2005</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="val-camonica.html">Val Camonica Pieces: Roccia</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— violin, clarinet, percussion, pianoforte. 7 min.</span></span>
+        <span class="work-year">2003</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">In an Initial C <span style="font-size:0.88rem;color:var(--ink-faint);">— soprano, recorder &amp; guitar. 15 min.</span></span>
+        <span class="work-year">2000</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="thousands-of-bundled-straw.html">Thousands of Bundled Straw I</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— clarinet &amp; violoncello. 6 min.</span></span>
+        <span class="work-year">1999</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="val-camonica.html">Val Camonica Pieces: Inventario</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— flute, oboe, clarinets, horn, trombone, percussion, strings. 7 min.</span></span>
+        <span class="work-year">1999</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="val-camonica.html">Val Camonica Pieces: Sarcophagus</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— 2 violins, 2 violas, 2 cellos, 2 basses. 6 min. 45 sec.</span></span>
+        <span class="work-year">1999</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="thousands-of-bundled-straw.html">Thousands of Bundled Straw II</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— bass recorder, oboe, trumpet, violin, percussion. 5 min.</span></span>
+        <span class="work-year">1998</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="thousands-of-bundled-straw.html">Thousands of Bundled Straw III</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— voice, oboe, violoncello, piano. 9 min.</span></span>
+        <span class="work-year">1998</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="thousands-of-bundled-straw.html">Thousands of Bundled Straw IV, V, VI</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— various forces. 21 min.</span></span>
+        <span class="work-year">1997</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">rent <span style="font-size:0.88rem;color:var(--ink-faint);">— alto flute, oboe, clarinet, trumpet, trombone, violin, viola, contrabass, percussion. 10 min.</span></span>
+        <span class="work-year">1997</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="val-camonica.html">Val Camonica Pieces: Lexicon</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— 3 violoncelli. 8 min. 30 sec.</span></span>
+        <span class="work-year">1997</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="val-camonica.html">Val Camonica Pieces: Stile I, II, III</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— guitar &amp; violoncello.</span></span>
+        <span class="work-year">1996</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Algor <span style="font-size:0.88rem;color:var(--ink-faint);">— violin, clarinet, marimba. 9 min.</span></span>
+        <span class="work-year">1995</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Ara <span style="font-size:0.88rem;color:var(--ink-faint);">— guitar &amp; bass flute. 10 min.</span></span>
+        <span class="work-year">1995</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Spargere <span style="font-size:0.88rem;color:var(--ink-faint);">— 2 violins, 2 violas, 2 violoncellos. 7 min. 20 sec.</span></span>
+        <span class="work-year">1994</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">scant <span style="font-size:0.88rem;color:var(--ink-faint);">— violoncello &amp; ten-string guitar. 10 min.</span></span>
+        <span class="work-year">1993</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Escurial <span style="font-size:0.88rem;color:var(--ink-faint);">— violin &amp; clarinet. 6 min.</span></span>
+        <span class="work-year">1993</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Gilgamesh <span style="font-size:0.88rem;color:var(--ink-faint);">— voice, guitar, trombone, violin, clarinet, percussion. 30 min.</span></span>
+        <span class="work-year">1993</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Pale <span style="font-size:0.88rem;color:var(--ink-faint);">— flute, clarinet, viola, guitar. 10 min. 30 sec.</span></span>
+        <span class="work-year">1992</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Il modello di modelli <span style="font-size:0.88rem;color:var(--ink-faint);">— soprano, baroque flute, baroque guitar. 7 min.</span></span>
+        <span class="work-year">1992</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Maxim IV: these ensuing lines <span style="font-size:0.88rem;color:var(--ink-faint);">— soprano voice &amp; baroque flute. 3 min. 50 sec.</span></span>
+        <span class="work-year">1992</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Maxim <span style="font-size:0.88rem;color:var(--ink-faint);">— soprano &amp; baroque flute. 5 min. 30 sec.</span></span>
+        <span class="work-year">1991</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Alimentary <span style="font-size:0.88rem;color:var(--ink-faint);">— flute, violin, oboe, piano. Variable duration.</span></span>
+        <span class="work-year">1991</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Amyrran <span style="font-size:0.88rem;color:var(--ink-faint);">— violoncello &amp; percussion. 4 min.</span></span>
+        <span class="work-year">1991</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Music for Shared Timpani <span style="font-size:0.88rem;color:var(--ink-faint);">— 4 timpani, 8 performers. Variable duration.</span></span>
+        <span class="work-year">1991</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Partiality <span style="font-size:0.88rem;color:var(--ink-faint);">— chimes, glockenspiel, celeste, vibraphone, harp or piano, piano. 11 min.</span></span>
+        <span class="work-year">1990</span>
+      </div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- SOLO INSTRUMENTAL -->
+    <p class="section-label appear">Solo Instrumental</p>
+
+    <div class="works-list appear">
+      <div class="work-item">
+        <span class="work-name">Not Music Yet <span style="font-size:0.88rem;color:var(--ink-faint);">— solo pianoforte. 7 or 42 min.</span></span>
+        <span class="work-year">2012</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">No More Rock Groynes <span style="font-size:0.88rem;color:var(--ink-faint);">— solo double bass. 5 min.</span></span>
+        <span class="work-year">2009</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Natura Morta <span style="font-size:0.88rem;color:var(--ink-faint);">— solo percussion. 4 min.</span></span>
+        <span class="work-year">2009</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Schallmaschine 07 <span style="font-size:0.88rem;color:var(--ink-faint);">— solo miniature percussion. 7 hours 42 min.</span></span>
+        <span class="work-year">2007</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">16 Boxes <span style="font-size:0.88rem;color:var(--ink-faint);">— solo percussion with assistant origamist. 11 min.</span></span>
+        <span class="work-year">2005</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="val-camonica.html">Val Camonica Pieces: Incisioni Rupestri</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— solo pianoforte. 9 min.</span></span>
+        <span class="work-year">2004</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name"><a href="val-camonica.html">Val Camonica Pieces: Animali</a> <span style="font-size:0.88rem;color:var(--ink-faint);">— violin. 9 min.</span></span>
+        <span class="work-year">2002</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">In Search of Rare Grasshoppers <span style="font-size:0.88rem;color:var(--ink-faint);">— bass recorder &amp; electronics. 8 min. 30 sec.</span></span>
+        <span class="work-year">2002</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Travelling <span style="font-size:0.88rem;color:var(--ink-faint);">— viola. 5 min. 10 sec.</span></span>
+        <span class="work-year">1996</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Aphis 10, 33, 36 <span style="font-size:0.88rem;color:var(--ink-faint);">— flute. 3 min.</span></span>
+        <span class="work-year">1994</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Koris 4, 25, 35 <span style="font-size:0.88rem;color:var(--ink-faint);">— alto trombone. 3 min.</span></span>
+        <span class="work-year">1994</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Otturato <span style="font-size:0.88rem;color:var(--ink-faint);">— clarinet. 7 min. 30 sec.</span></span>
+        <span class="work-year">1992</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Jasmine <span style="font-size:0.88rem;color:var(--ink-faint);">— guitar. 5 min.</span></span>
+        <span class="work-year">1991</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Ta ch&rsquo;u (26) &mdash; ta chuang (34) <span style="font-size:0.88rem;color:var(--ink-faint);">— ocarina. 2 min. 30 sec.</span></span>
+        <span class="work-year">1991</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Oops <span style="font-size:0.88rem;color:var(--ink-faint);">— performer with vase of flowers. Variable duration.</span></span>
+        <span class="work-year">1991</span>
+      </div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- VOCAL -->
+    <p class="section-label appear">Vocal</p>
+
+    <div class="works-list appear">
+      <div class="work-item">
+        <span class="work-name">To Keep Things Reasonable <span style="font-size:0.88rem;color:var(--ink-faint);">— three voices, 2 percussion &amp; viola. Text: Cynthia Troup. 7 min.</span></span>
+        <span class="work-year">2007</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Lacrimae rerum <span style="font-size:0.88rem;color:var(--ink-faint);">— six voices. 7 min.</span></span>
+        <span class="work-year">2001</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Ereshkigal <span style="font-size:0.88rem;color:var(--ink-faint);">— 7 songs for soprano &amp; counter-tenor/flute. 30 min.</span></span>
+        <span class="work-year">1993</span>
+      </div>
+      <div class="work-item">
+        <span class="work-name">Alala &mdash; harvest song <span style="font-size:0.88rem;color:var(--ink-faint);">— tenor voice. 3 min. 7 sec.</span></span>
+        <span class="work-year">1993</span>
+      </div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- PDF DOWNLOAD -->
+    <p class="section-label appear">Document</p>
+
+    <p class="section-intro appear" style="font-family:'EB Garamond','Georgia',serif;font-size:1.02rem;line-height:1.65;color:var(--ink);margin-bottom:1.4rem;">
+      <a href="DY_List_of_Works_as_at_2014.pdf" target="_blank" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-ghost);transition:border-color 0.5s;">Download as PDF</a>
+    </p>
+
+    <div class="pdf-container appear">
+      <iframe src="https://drive.google.com/file/d/LIST_OF_WORKS_FILE_ID/preview"
+              title="David Young — List of Works"
+              allowfullscreen></iframe>
+    </div>
+    <div class="pdf-label appear">David Young &mdash; List of Works, as at 2014</div>
+
+  </div>
+
+  <div class="closing appear">
+    <div class="closing-name">David Young</div>
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
+      <a href="art.html">art</a>
+      <a href="https://www.davidyoung.online">home</a>
+      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <img src="rainbow_flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+</div>
+
+<script>
+// Toggle more/less on details elements
+document.querySelectorAll('details.more-list').forEach(details => {
+  const summary = details.querySelector('summary');
+  const moreText = summary.textContent.trim();
+  const lessText = moreText.replace(/^more/, 'less');
+  details.addEventListener('toggle', () => {
+    summary.textContent = details.open ? lessText : moreText;
+  });
+});
+
+// Appear on scroll
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.disconnect(); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+// Hero image fade-in
+document.querySelectorAll('.section-hero img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+});
+
+// PDF fade-in
+document.querySelectorAll('.pdf-container').forEach(v => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { v.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.05 }).observe(v);
+});
+
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  const atTop = window.scrollY < window.innerHeight * 0.9;
+  scrollBtn.classList.toggle('visible', !atTop);
+});
+</script>
+
+</body>
+</html>
