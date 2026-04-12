@@ -7,12 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #2a3f6e;
-    --ink-light: #4e6694;
-    --ink-faint: #7d93b8;
-    --ink-ghost: #adbdd6;
-    --paper: #f7f5f1;
-    --paper-dark: #edeae4;
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
     --serif: 'EB Garamond', 'Georgia', serif;
   }
 
@@ -35,7 +35,7 @@
   }
 
   .breath {
-    height: 36vh;
+    height: 62vh;
     display: flex;
     align-items: flex-end;
     padding-bottom: 4rem;
@@ -58,7 +58,7 @@
     font-family: var(--serif);
     font-size: 1.22rem;
     font-weight: 400;
-    line-height: 1.9;
+    line-height: 1.65;
     color: var(--ink);
   }
 
@@ -526,18 +526,211 @@
     margin-top: 1rem;
     font-family: var(--serif);
     font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
   }
 
   .closing-links a {
     color: var(--ink-ghost);
     text-decoration: none;
-    margin-right: 1.4rem;
     transition: color 0.4s;
   }
 
   .closing-links a:hover { color: var(--ink-light); }
 
-  /* APPEAR */
+  /* SCROLL TO TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  /* SECTION INTRO — smaller prose blocks, matching art.html */
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  /* SECTION HERO */
+  .section-hero {
+    margin: 0 0 2.2rem;
+  }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  /* SCENE DROPDOWN */
+  details.scene-list {
+    margin-top: 1.4rem;
+  }
+
+  details.scene-list summary {
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-light);
+    padding: 0.5rem 0 0.3rem;
+    transition: color 0.4s;
+    border-bottom: 1px solid var(--ink-ghost);
+    display: inline-block;
+  }
+
+  details.scene-list summary::-webkit-details-marker { display: none; }
+  details.scene-list summary:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  details.scene-list summary::after { content: '\00a0\00a0↓'; }
+  details.scene-list[open] summary::after { content: '\00a0\00a0↑'; }
+
+  .scene-grid {
+    margin-top: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) { .scene-grid { grid-template-columns: 1fr; } }
+
+  .scene-item .video-embed { padding-bottom: 68.57%; }
+  .scene-item .video-label { font-size: 0.75rem; }
+
+  /* AUDIO EMBED */
+  .audio-embed {
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    margin-bottom: 1rem;
+  }
+
+  .audio-embed.seen { opacity: 1; }
+
+  .audio-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* SCORE THUMBNAIL */
+  .score-thumb {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .score-thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: saturate(0.88) contrast(1.02);
+    transition: transform 0.9s ease, filter 0.6s ease;
+  }
+
+  .score-thumb:hover img {
+    transform: scale(1.02);
+    filter: saturate(1) contrast(1.02);
+  }
+
+  .score-thumb-label {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    font-style: italic;
+    color: rgba(173, 189, 214, 0.7);
+    transition: color 0.3s;
+  }
+
+  .score-thumb:hover .score-thumb-label { color: rgba(255,255,255,0.9); }
+
+  /* SCORE OVERLAY */
+  .score-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(14, 20, 38, 0.97);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 2rem;
+  }
+
+  .score-overlay.open { opacity: 1; pointer-events: all; }
+
+  .score-overlay-inner {
+    position: relative;
+    width: 90vw;
+    height: 85vh;
+  }
+
+  .score-close {
+    position: absolute;
+    top: -2rem;
+    right: 0;
+    background: none;
+    border: none;
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-ghost);
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: color 0.3s;
+    padding: 0;
+  }
+
+  .score-close:hover { color: #fff; }
+
+  .score-overlay-inner iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
   .appear {
     opacity: 0;
     transform: translateY(6px);
@@ -553,7 +746,7 @@
 <div class="gallery-overlay" id="galleryOverlay">
   <div class="gallery-inner">
     <div class="gallery-header">
-      <span class="gallery-title">The Minotaur Trilogy &mdash; photographs</span>
+      <span class="gallery-title">The Minotaur Trilogy — photographs</span>
       <button class="gallery-close" onclick="closeGallery()">close</button>
     </div>
     <div class="gallery-thumbs" id="galleryThumbs"></div>
@@ -571,6 +764,18 @@
   </div>
 </div>
 
+<!-- SCORE OVERLAY -->
+<div class="score-overlay" id="scoreOverlay">
+  <div class="score-overlay-inner">
+    <button class="score-close" onclick="closeScore()">close</button>
+    <iframe id="scoreFrame"
+            src=""
+            data-src="https://archive.org/embed/the-minotaur-trilogy-score"
+            title="The Minotaur Trilogy — score"
+            allowfullscreen></iframe>
+  </div>
+</div>
+
 <!-- PAGE -->
 <div class="page">
 
@@ -580,7 +785,7 @@
 
   <div class="prose">
 
-    <p class="nav-back appear"><a href="https://www.davidyoung.online/art">&#8592; art</a></p>
+    <p class="nav-back appear"><a href="/art">&#8592; art</a></p>
 
     <h1 class="work-title appear">The Minotaur Trilogy</h1>
     <p class="work-byline appear">
@@ -592,29 +797,27 @@
       A chamber opera made from two kinds of loss. The first: Monteverdi's <em>L'Arianna</em>, composed in 1608 and almost entirely vanished &mdash; only its lament survives. The second: the myth of the Minotaur, Ariadne, and the labyrinth, lifted out of linear time and reassembled in pieces. Together they make something that is less a narrative than a condition &mdash; the experience of being inside something you cannot see the shape of.
     </p>
 
-    <div class="photo wide">
-      <img src="https://chambermade.org/wp-content/uploads/2021/09/CMO_MinotaurTrilogy_0044-scaled.jpg"
-           alt="The Minotaur Trilogy, Melbourne Recital Centre, October 2012"
-           onerror="this.style.display='none'">
-      <div class="whisper">Melbourne Recital Centre, October 2012. Photograph by Daisy Noyes.</div>
+    <div class="section-hero appear">
+      <img src="Minotaur Hellen_resized.jpg" alt="The Minotaur Trilogy — Hellen Sky">
+      <div class="video-label">Hellen Sky &mdash; <em>The Minotaur Trilogy</em>, Melbourne Recital Centre, 2012.</div>
     </div>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
-    <p class="appear">
-      <em>The Minotaur Trilogy</em> began on an island. The first part, <em>The Island</em>, premiered on 26 March 2011 in a community hall on Bruny Island, Tasmania, as part of Ten Days on the Island. Chamber Made had spent time there as artists-in-residence, working with the community, making something that could only have come from that particular place and that particular silence. The hall held perhaps fifty people. It felt closer to ceremony than performance.
+    <p class="section-intro appear">
+      The Minotaur Trilogy began on an island. The first part, titled The Island, premiered on 26 March 2011 on Bruny Island, Tasmania, as part of Ten Days on the Island. The hall held perhaps a hundred people. It felt closer to ceremony than performance.
     </p>
 
-    <p class="appear">
-      The work grew outward from there &mdash; into private apartments in St Kilda, a house at Mount Macedon, the Lennox Theatre in Parramatta &mdash; before arriving at its full form in October 2012, when all three parts were presented together for the first time at the Melbourne Recital Centre as part of the Melbourne Festival. The complete trilogy ran 147 minutes, performed by Caroline Lee, Deborah Kayser and Hellen Sky, with Mark Cauvin on double bass, Matthias Schack-Arnott on percussion and Anastasia Russell-Head at the harpsichord. Michael Roper designed the space.
+    <p class="section-intro appear">
+      The work grew outward from there &mdash; into an apartment on St Kilda, Lowland Farm in Mount Macedon, the Lennox Theatre in Parramatta &mdash; before arriving at its full form in October 2012, when all three parts were presented together for the first time at the Melbourne Recital Centre as part of the Melbourne Festival. The complete trilogy runs 147 minutes, performed by Caroline Lee, Deborah Kayser and Hellen Sky, with Mark Cauvin on double bass, Matthias Schack-Arnott on percussion and Anastasia Russell-Head at the harpsichord.
     </p>
 
-    <p class="appear">
-      Margaret Cameron made the texts. I made the music. But those sentences are too clean for what the work actually was. We had been making things together for a long time, and the Minotaur Trilogy was the place we went furthest. The composition was a continuous negotiation between her language and my sound &mdash; between image and duration, between what is said and what is withheld. The score was designed by Henry Fuller at Sweet Design in St Kilda, printed as a limited edition: an object as well as a document.
+    <p class="section-intro appear">
+      Margaret Cameron and I both made or found everything: the music, the texts, the set design, the costumes. But that sounds too clean for what the work actually was. We had been artistic collaborators for a long time, but The Minotaur Trilogy was the place we went the furthest. The process was a continuous negotiation between language and sound &mdash; between image and duration, between what is said and what is withheld. We called it &lsquo;the art of everything&rsquo;.
     </p>
 
-    <p class="appear">
-      Margaret died on 20 October 2014 &mdash; two years, almost to the day, after the Melbourne Festival premiere. She was 59. The Minotaur Trilogy remains the clearest record of what we made together, and of what she was.
+    <p class="section-intro appear">
+      Margaret died on 20 October 2014 &mdash; two years, almost to the day, after the Melbourne Festival premiere. She was 59. The Minotaur Trilogy was our masterpiece.
     </p>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
@@ -627,18 +830,77 @@
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
-    <!-- VIDEO -->
-    <p class="section-label appear">Film</p>
+    <!-- SCENES -->
+    <p class="section-label appear">Scenes</p>
 
     <div class="video-item appear">
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/WuE9l9Cc55s"
-                title="The Minotaur Trilogy — documentation"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      <div class="video-embed" style="padding-bottom:68.57%">
+        <iframe src="https://archive.org/embed/minotaur-the-island-scene-1-v-1-360p"
+                title="Minotaur: The Island — Scene 1"
                 allowfullscreen></iframe>
       </div>
-      <div class="video-label">Documentation &mdash; Chamber Made Opera</div>
+      <div class="video-label">Scene 1 &mdash; <em>Minotaur: The Island</em></div>
     </div>
+
+    <details class="scene-list appear">
+      <summary>all scenes</summary>
+      <div class="scene-grid">
+        <div class="scene-item">
+          <div class="video-embed">
+            <iframe src="https://archive.org/embed/minotaur-the-island-scene-2-v-1-360p"
+                    title="Scene 2" allowfullscreen></iframe>
+          </div>
+          <div class="video-label">Scene 2</div>
+        </div>
+        <div class="scene-item">
+          <div class="video-embed">
+            <iframe src="https://archive.org/embed/minotaur-the-island-scene-3-v-1-360p"
+                    title="Scene 3" allowfullscreen></iframe>
+          </div>
+          <div class="video-label">Scene 3</div>
+        </div>
+        <div class="scene-item">
+          <div class="video-embed">
+            <iframe src="https://archive.org/embed/minotaur-the-island-scene-4-v-1-360p"
+                    title="Scene 4" allowfullscreen></iframe>
+          </div>
+          <div class="video-label">Scene 4</div>
+        </div>
+        <div class="scene-item">
+          <div class="video-embed">
+            <iframe src="https://archive.org/embed/minotaur-the-island-scene-5-v-1-360p"
+                    title="Scene 5" allowfullscreen></iframe>
+          </div>
+          <div class="video-label">Scene 5</div>
+        </div>
+        <div class="scene-item">
+          <div class="video-embed">
+            <iframe src="https://archive.org/embed/minotaur-the-island-scene-6-v-1-360p"
+                    title="Scene 6" allowfullscreen></iframe>
+          </div>
+          <div class="video-label">Scene 6</div>
+        </div>
+        <div class="scene-item">
+          <div class="video-embed">
+            <iframe src="https://archive.org/embed/minotaur-the-island-scene-7-v-1-360p"
+                    title="Scene 7" allowfullscreen></iframe>
+          </div>
+          <div class="video-label">Scene 7</div>
+        </div>
+        <div class="scene-item">
+          <div class="video-embed">
+            <iframe src="https://archive.org/embed/minotaur-the-island-scene-8-v-1-360p"
+                    title="Scene 8" allowfullscreen></iframe>
+          </div>
+          <div class="video-label">Scene 8</div>
+        </div>
+      </div>
+    </details>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- FILM -->
+    <p class="section-label appear">Film</p>
 
     <div class="video-item appear">
       <div class="video-embed">
@@ -652,12 +914,12 @@
 
     <div class="video-item appear">
       <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/8WjqM0g3QIE"
-                title="The Minotaur Trilogy — promotional trailer"
+        <iframe src="https://www.youtube.com/embed/WuE9l9Cc55s"
+                title="The Minotaur Trilogy — documentation"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
       </div>
-      <div class="video-label">Promotional trailer &mdash; Melbourne Festival, 2012</div>
+      <div class="video-label">Documentation &mdash; Chamber Made Opera</div>
     </div>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
@@ -677,10 +939,30 @@
       </p>
     </div>
 
+    <div class="audio-embed appear">
+      <iframe src="https://archive.org/embed/minotaur-the-island-canto-18"
+              title="The Minotaur Trilogy — Part One, Track 1"
+              allowfullscreen></iframe>
+    </div>
+    <p class="video-label appear" style="margin-bottom:1.2rem;"><em>Minotaur: The Island</em>, Canto 1 &mdash; <a href="https://archive.org/details/minotaur-the-island-canto-18" target="_blank" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-ghost);transition:border-color 0.5s;">all tracks on Archive.org</a></p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- SCORE -->
+    <p class="section-label appear">Score</p>
+
+    <div class="score-thumb appear" onclick="openScore()">
+      <img src="Screenshot_2026-04-12_at_18_44_26.png"
+           alt="The Minotaur Trilogy — score cover"
+           onerror="this.style.display='none'">
+      <div class="score-thumb-label">View score &rarr;</div>
+    </div>
+    <div class="video-label appear" style="margin-top:0.6rem;">The Minotaur Trilogy &mdash; score, limited edition. Designed by Henry Fuller, Sweet Design, St Kilda.</div>
+
     <div class="pause appear">&middot; &middot; &middot;</div>
 
     <!-- LINKS -->
-    <p class="section-label appear">Further reading &amp; listening</p>
+    <p class="section-label appear">Further reading &amp; links</p>
 
     <div class="links-list appear">
       <a class="link-row" href="https://chambermade.org/works/the-minotaur-trilogy/" target="_blank">
@@ -770,7 +1052,6 @@
       <strong>Percussion</strong> Matthias Schack-Arnott<br>
       <strong>Harpsichord</strong> Anastasia Russell-Head<br>
       <strong>Architect</strong> Michael Roper<br>
-      <strong>Score design</strong> Henry Fuller, Sweet Design, St Kilda<br>
       <strong>Photography</strong> Daisy Noyes, David Young<br>
       <strong>Presented by</strong> Chamber Made Opera &amp; Melbourne Recital Centre<br>
       <strong>In association with</strong> Melbourne Festival<br>
@@ -793,13 +1074,17 @@
   <div class="closing appear">
     <div class="closing-name">David Young</div>
     <div class="closing-links">
-      <a href="https://www.davidyoung.online/art">&#8592; art</a>
-      <a href="https://www.davidyoung.online">home</a>
-      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
+      <a href="/art">art</a>
+      <a href="/">home</a>
+      <a href="/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
     </div>
   </div>
 
 </div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
 // ─── IMAGES ──────────────────────────────────────────────────────────────────
@@ -857,6 +1142,7 @@ images.slice(0, 5).forEach((img, i) => {
   item.appendChild(el);
   item.addEventListener('click', () => openLightbox(i, images));
   grid.appendChild(item);
+  // stagger fade-in
   setTimeout(() => {
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { item.classList.add('seen'); io.disconnect(); } });
@@ -924,25 +1210,42 @@ function lbStep(dir) {
   loadLbImage();
 }
 
+// Score overlay
+function openScore() {
+  const frame = document.getElementById('scoreFrame');
+  if (!frame.src || frame.src === window.location.href) {
+    frame.src = frame.dataset.src;
+  }
+  document.getElementById('scoreOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeScore() {
+  document.getElementById('scoreOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('scoreOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeScore();
+});
+
 // Keyboard nav
 document.addEventListener('keydown', e => {
   const lb = document.getElementById('lightbox');
-  if (!lb.classList.contains('open')) return;
-  if (e.key === 'ArrowRight') lbStep(1);
-  if (e.key === 'ArrowLeft')  lbStep(-1);
-  if (e.key === 'Escape')     closeLightbox();
+  if (lb.classList.contains('open')) {
+    if (e.key === 'ArrowRight') lbStep(1);
+    if (e.key === 'ArrowLeft')  lbStep(-1);
+  }
+  if (e.key === 'Escape') {
+    closeLightbox();
+    closeScore();
+    closeGallery();
+  }
 });
 
 // Click backdrop to close lightbox
 document.getElementById('lightbox').addEventListener('click', function(e) {
   if (e.target === this) closeLightbox();
-});
-
-// Escape closes gallery too
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.getElementById('galleryOverlay').classList.contains('open')) {
-    closeGallery();
-  }
 });
 
 // Appear on scroll
@@ -964,6 +1267,34 @@ document.querySelectorAll('.video-embed').forEach(v => {
   new IntersectionObserver((entries, obs) => {
     entries.forEach(e => { if (e.isIntersecting) { v.classList.add('seen'); obs.disconnect(); } });
   }, { threshold: 0.15 }).observe(v);
+});
+
+// Scroll to top button
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY >= window.innerHeight * 0.9);
+});
+
+// Hero image fade-in
+document.querySelectorAll('.section-hero img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+});
+
+// Audio embed fade-in
+document.querySelectorAll('.audio-embed').forEach(a => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { a.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.1 }).observe(a);
+});
+
+// Scene list toggle label
+document.querySelectorAll('details.scene-list').forEach(d => {
+  const s = d.querySelector('summary');
+  d.addEventListener('toggle', () => {
+    s.childNodes[0].textContent = d.open ? 'fewer scenes' : 'all scenes';
+  });
 });
 </script>
 
