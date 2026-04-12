@@ -341,12 +341,14 @@
     color: var(--ink-light);
     padding: 0.5rem 0 0.3rem;
     transition: color 0.4s;
+    border-bottom: 1px solid var(--ink-ghost);
+    display: inline-block;
   }
 
   details.more-list summary::-webkit-details-marker { display: none; }
-  details.more-list summary:hover { color: var(--ink); }
-  details.more-list summary::after { content: ' →'; transition: transform 0.3s; display: inline-block; }
-  details.more-list[open] summary::after { content: ' ↑'; }
+  details.more-list summary:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  details.more-list summary::after { content: '\00a0\00a0\00a0\00a0\00a0↓'; display: inline-block; transition: transform 0.3s; }
+  details.more-list[open] summary::after { content: '\00a0\00a0\00a0\00a0\00a0↑'; }
 
   details.more-list .project-list { margin-top: 0.3rem; }
   details.more-list .project-list .project-item:first-child { border-top: 1px solid var(--paper-dark); }
@@ -588,7 +590,7 @@
   </div>
 
   <div class="closing appear">
-    <div class="closing-name">davidyoung.online</div>
+    <div class="closing-name"><a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a></div>
     <div class="closing-links">
       <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
       <a href="https://www.davidyoung.online">home</a>
