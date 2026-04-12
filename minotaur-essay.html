@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clews to the Unrepresentable — Cynthia Troup</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 2rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 2rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .work-byline {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    line-height: 1.9;
+    margin-bottom: 3rem;
+  }
+
+  .pause {
+    padding: 3.5rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  .margin-note {
+    margin: 1.5rem 0 3rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+
+  .margin-note p {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .margin-note .note-sub {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    margin-top: 0.5rem;
+    line-height: 1.9;
+  }
+
+  /* SECTION INTRO — smaller body text, matching Minotaur page */
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  /* SECTION HERO — single inline image, matching Minotaur page exactly */
+  .section-hero {
+    margin: 0 0 2.2rem;
+  }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  .video-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="minotaur-trilogy.html">&#8592; The Minotaur Trilogy</a></p>
+
+    <h1 class="work-title appear">Clews to the Unrepresentable,<br>the Impossible</h1>
+    <p class="work-byline appear">
+      Cynthia Troup &middot; programme essay &middot; October 2012<br>
+      <em>The Minotaur Trilogy</em>, Melbourne Recital Centre
+    </p>
+
+    <p class="appear">
+      Progeny of a white bull and Queen Pasiphaë, the fabled Minotaur is a creature without category, a haunting threat, a provocation. At once singular and composite, it is ultimately unrepresentable.
+    </p>
+
+    <div class="section-hero appear">
+      <img src="min_mt_999_10.jpg" alt="The Minotaur Trilogy. Melbourne Recital Centre, 2012.">
+      <div class="video-label">The Minotaur Trilogy &mdash; Melbourne Recital Centre, 2012.</div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <p class="section-intro appear">
+      <em>The Minotaur Trilogy</em> takes its imagery from two myths. It brings these into coincidence, lifting each in pieces from the realms of cultural history, lifting each out of linear time and narrative defense. One myth concerns the lost music for Claudio Monteverdi&rsquo;s opera <em>L&rsquo;Arianna</em>. Except for the exalted lamento, <em>L&rsquo;Arianna</em> is unknowable in its scored parts, yet remains a touchstone in the history of seventeenth-century opera, renowned for the splendour of its staging in 1608. The second myth concerns material traditionally &lsquo;proper&rsquo; to opera, that of ancient gods, goddesses and heroes from the poetic heritage of the classical world.
+    </p>
+
+    <p class="section-intro appear">
+      The three parts of <em>The Minotaur Trilogy</em> implode into spaces premised upon the existence of the Minotaur, Ovid&rsquo;s &lsquo;part man and part bull&rsquo;. The implosion, this bursting inward, is a kind of archaeological process of gathering, arranging and elevating fragments, sometimes holding them up to the light, literally, but a process of synthesis rather than analysis. We witness Monteverdi amongst the characters who divide the task of this archaeological enquiry; who share the role of orchestrating rich particulars, and abstracting them into the ritual of performance &mdash; the ritual by which we might recognise the unrepresentable.
+    </p>
+
+    <p class="section-intro appear">
+      The places evoked and explored by <em>The Minotaur Trilogy</em> are settings in which unutterable deeds have been done. In the manner of tragedy, each of these deeds is a source of suffering, loss, potential transformation. Hence Part One, &lsquo;Minotaur The Island&rsquo;: a place inhabited by the monstrous child of perverse love, or impossible love &mdash; so the island of this love, desolate and forbidding. Let the island be Naxos, too: the island on which Theseus abandoned Ariadne, the setting for Scene 6 of <em>L&rsquo;Arianna</em>, which culminated in Ariadne&rsquo;s lament. In a letter of 1620, Monteverdi described this music as &lsquo;the most essential part&rsquo; of his opera.
+    </p>
+
+    <p class="section-intro appear">
+      Hence Part Two, &lsquo;Minotaur The Labyrinth&rsquo;: a place of intricate, mystifying design, though constructed by a skilled craftsman, not a god. Made to conceal the Minotaur &mdash; to try to consign it to oblivion. The Minotaur&rsquo;s prison and slaying-place. Akin to the creaking, submerged darkness of a ship&rsquo;s hold that nurtures vermin; that permits the stowaway to elude capture, and to sleep &mdash; though every lucid dream may be a nightmare. The labyrinth is also the path trodden by those who are grieving, lit now and then by flashes of insight.
+    </p>
+
+    <p class="section-intro appear">
+      Hence Part Three, &lsquo;Minotaur The Boats&rsquo;: the boats of betrayal, by which Theseus deserted Ariadne &mdash; she who had helped him devise an escape from the labyrinth. The boats on which Theseus&rsquo;s failure to raise a white sail prompted the suicide of his father, King &AElig;geus. Boats turned toward the future of survival, which involves forgetting and fabrication. Or the boats in formation at the beginning of the voyage into war, or love, the crew an omniscient chorus in the black of mourning.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <p class="section-intro appear">
+      Inside The Salon at the Melbourne Recital Centre, free of a fixed proscenium, the audience forms the landscape in which <em>The Minotaur Trilogy</em> takes place. Naturally this terrain, locus of collective memory, reverberates with each foray into the symbolic realm.
+    </p>
+
+    <p class="section-intro appear">
+      &lsquo;After great pain a formal feeling comes &mdash;&rsquo; &hellip; Emily Dickinson. But as every artist knows, an expression of great pain takes power from a formal structure. The structure can seem comparatively open, such as that of the recitative composed by Monteverdi for Ariadne&rsquo;s lament, set forth on a stave so as to render Italian rhythms of speech with dramatic precision.
+    </p>
+
+    <p class="section-intro appear">
+      The three scores for <em>The Minotaur Trilogy</em> feature watercolour paintings in which white space abounds. They have an appearance of transparent texture, yet as a compositional language these pictures prove as exacting as notated recitative. A restricted palette &mdash; mostly shades of blue and grey-black &mdash; focuses attention on the chromaticism and faint lines of narrow washes. The scores also include written instructions, photographic tableaux, lists, literary quotations, and references to other paintings, constituting an integrated vision for the opera, in which instrumentation and sonic gesture, choreography, costuming, props and design are inseparable.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <p class="section-intro appear">
+      Together with the figures of D&aelig;dalus and his son Icarus, the Minotaur signifies the risks inherent to any creative act, including the act of interpretation. In the Prologue to <em>The Minotaur Trilogy</em>, Venus speaks of &lsquo;the weighted calculation of every interaction&rsquo;. By this line she points out the opera&rsquo;s aesthetic austerity and rigorous formalism. She also highlights the nature of the performers&rsquo; discipline.
+    </p>
+
+    <p class="section-intro appear">
+      The dedicated work of the ensemble involves, first and foremost, attunement to contingency: as the score of Part One acknowledges, &lsquo;certain stage actions, costumes, words, sounds, objects may not be possible. It is best to concede this. Then to continue to form relationships between what is and what is not possible&rsquo;. The atmosphere becomes taut, as when clouds are spreading at a great height. The performers&rsquo; concentration fosters in the audience an intensification of perception. We become aware of the fragility of thought and sense impressions, and of transcending this fragility from moment to moment. The effect can be visceral, strangely euphoric.
+    </p>
+
+    <p class="section-intro appear">
+      It elicits an intuitive desire to keep following the elusive clew &mdash; that is, the skein of Ariadne&rsquo;s thread, the origin of our word &lsquo;clue&rsquo;. Through <em>The Minotaur Trilogy</em>, the skein is before all else a thread of listening, audible through the whole body, tightly wound at times into a single note that is beautifully, dangerously suspended, like a smoke signal from a windless rise.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <div class="margin-note appear">
+      <p>Cynthia Troup, October 2012</p>
+      <p class="note-sub">
+        Programme essay for <em>The Minotaur Trilogy</em>, Chamber Made Opera &amp; Melbourne Recital Centre<br>
+        in association with Melbourne Festival, 18&ndash;21 October 2012.<br>
+        Reproduced with permission.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="closing appear">
+    <div class="closing-name"><a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a></div>
+    <div class="closing-links">
+      <a href="minotaur-trilogy.html">&#8592; The Minotaur Trilogy</a>
+      <a href="/art">art</a>
+      <a href="/">home</a>
+      <a href="/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Appear on scroll
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.disconnect(); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+// Hero image fade-in — matches Minotaur page exactly
+document.querySelectorAll('.section-hero img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+});
+</script>
+
+</body>
+</html>
