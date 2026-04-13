@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>davidyoung.online</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  /* BREATH */
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  /* PROSE */
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 1.8rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  /* INTRO */
+  .intro {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .intro strong {
+    font-weight: 500;
+  }
+
+  .intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    font-weight: 500;
+    transition: border-color 0.5s ease;
+  }
+
+  .intro a:hover { border-bottom-color: var(--ink); }
+
+  /* PAUSE */
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+    scroll-margin-top: 2rem;
+  }
+
+  /* SECTION INTRO */
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  .section-more {
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .section-more a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .section-more a:hover {
+    color: var(--ink-light);
+    border-bottom-color: var(--ink-ghost);
+  }
+
+  /* SECTION HERO IMAGE */
+  .section-hero {
+    margin: 0 0 1.8rem;
+  }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  .section-hero .caption {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* CONTACT FORM */
+  .contact-form {
+    margin: 0;
+  }
+
+  .contact-form .form-field {
+    margin-bottom: 1.2rem;
+  }
+
+  .contact-form label {
+    display: block;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.4rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink);
+    padding: 0.4rem 0;
+    outline: none;
+    transition: border-color 0.4s;
+    letter-spacing: 0.01em;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-bottom-color: var(--ink);
+  }
+
+  .contact-form textarea {
+    resize: none;
+    height: 5rem;
+    line-height: 1.5;
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: var(--ink-ghost);
+  }
+
+  .contact-form .name-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .contact-form button {
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    cursor: pointer;
+    padding: 0;
+    padding-bottom: 1px;
+    margin-top: 0.8rem;
+    transition: color 0.4s, border-color 0.4s;
+    letter-spacing: 0.01em;
+  }
+
+  .contact-form button:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  /* STUDIOS */
+  .studios {
+    margin-top: 2.5rem;
+  }
+
+  .studio-item {
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--ink-light);
+    margin-bottom: 1.4rem;
+  }
+
+  .studio-item strong {
+    display: block;
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  /* SCROLL TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
+
+  /* APPEAR */
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <!-- INTRO -->
+    <p class="intro appear">
+      I&rsquo;m <a href="https://www.davidyoung.online/david-young">David Young</a>, moving between <strong>Berlin</strong>, <strong>Andros</strong> and <strong>Melbourne</strong>, living a life of <a href="https://www.davidyoung.online/alexander-technique">Alexander Technique</a>, <a href="https://www.davidyoung.online/meditation">meditation</a> and <a href="https://www.davidyoung.online/art">art</a>.
+    </p>
+
+    <p class="intro appear">
+      You can contact me <a href="#contact">here</a>.
+    </p>
+
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/4ad614d4-a3c1-4050-ac88-931a95e3f9cb/david+young+-+on+the+see.jpg" alt="David Young">
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- WORKSHOP -->
+    <p class="section-label appear">Workshop</p>
+
+    <p class="section-intro appear">
+      There is a workshop coming: Writing &amp; Alexander Technique: &lsquo;resting simply &hellip; the Way of Haiku&rsquo; &mdash; Sunday 12 March 2026, with Cynthia Troup <span class="section-more">/ <a href="https://www.davidyoung.online/workshop">more</a></span>
+    </p>
+
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/899e3958-a0a3-4abb-bedb-78f570c0d199/david+young+-+alexandertechnique-68.jpg" alt="Workshop">
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- ALEXANDER TECHNIQUE -->
+    <p class="section-label appear">Alexander Technique</p>
+
+    <p class="section-intro appear">
+      Alexander Technique changed everything. I was addicted to work, and it taught me how to stop <span class="section-more">/ <a href="https://www.davidyoung.online/alexander-technique">more</a></span>
+    </p>
+
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/bd8bc6de-6e40-4d1f-996d-49e6a6eefef9/david+young+-+alexandertechnique-17.jpg" alt="Alexander Technique">
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- MEDITATION -->
+    <p class="section-label appear">Meditation</p>
+
+    <p class="section-intro appear">
+      Meditation came to me slowly, over years. And then all at once <span class="section-more">/ <a href="https://www.davidyoung.online/meditation">more</a></span>
+    </p>
+
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/3d9b2cbc-c9aa-483b-8718-8a456f3941ea/david+young+-+meditation-19.jpg" alt="Meditation">
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- ART -->
+    <p class="section-label appear">Art</p>
+
+    <p class="section-intro appear">
+      Art was my life for twenty-five years &mdash; music, cross-artform collaborations, chamber opera, film, made between Australia, Europe and Asia <span class="section-more">/ <a href="https://www.davidyoung.online/art">more</a></span>
+    </p>
+
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/b279d35e-9402-4861-9ad7-ac858cc73ead/david+young+-+art.jpg" alt="Art">
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- CONTACT -->
+    <p class="section-label appear" id="contact">Contact</p>
+
+    <div class="contact-form appear">
+      <div class="name-row">
+        <div class="form-field">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" name="first-name" autocomplete="given-name">
+        </div>
+        <div class="form-field">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" name="last-name" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email" autocomplete="email">
+      </div>
+      <div class="form-field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message"></textarea>
+      </div>
+      <button type="submit">Send</button>
+    </div>
+
+    <!-- STUDIOS -->
+    <div class="studios appear" style="margin-top: 5rem;">
+      <div class="studio-item">
+        <strong>Berlin studio</strong>
+        Praxis at Katzbachstrasse 14, 10965 Berlin-Kreuzberg, Germany
+      </div>
+      <div class="studio-item">
+        <strong>Melbourne studio</strong>
+        Room 2, upstairs at St Mark&rsquo;s Community Centre, 250 George Street, Fitzroy VIC 3065, Australia
+      </div>
+      <div class="studio-item">
+        <strong>Andros studio</strong>
+        Magazi in Paleopoli-Andros, 84500 Cyclades, Greece
+      </div>
+    </div>
+
+  </div>
+
+  <div class="closing appear">
+    <div class="closing-name"><a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a></div>
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
+      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/215d15ec-b1d7-4f82-9d66-22374aa06268/flag.jpg" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+</div>
+
+<script>
+// Hero image fade-in
+document.querySelectorAll('.section-hero img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+});
+
+// Appear on scroll
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+// Scroll top button
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY >= window.innerHeight * 0.9);
+});
+
+// Contact form — static mock (no backend)
+document.querySelector('.contact-form button').addEventListener('click', function() {
+  const first = document.getElementById('first-name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const msg = document.getElementById('message').value.trim();
+  if (!email && !msg) return;
+  this.textContent = 'Thank you';
+  this.style.pointerEvents = 'none';
+});
+</script>
+
+</body>
+</html>
