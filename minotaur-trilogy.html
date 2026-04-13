@@ -30,7 +30,7 @@
 
   .page {
     max-width: 600px;
-    padding: 0 2rem;
+    padding: 0 3.6rem;
     margin: 0 auto;
   }
 
@@ -54,15 +54,17 @@
     to   { opacity: 1; height: 50px; }
   }
 
+  /* PROSE */
   .prose {
     font-family: var(--serif);
     font-size: 1.22rem;
     font-weight: 400;
     line-height: 1.65;
+    letter-spacing: 0.015em;
     color: var(--ink);
   }
 
-  .prose p { margin-bottom: 2rem; }
+  .prose p { margin-bottom: 1.8rem; }
 
   .prose a {
     color: var(--ink);
@@ -73,6 +75,7 @@
 
   .prose a:hover { border-bottom-color: var(--ink); }
 
+  /* NAV BACK */
   .nav-back {
     font-family: var(--serif);
     font-size: 0.82rem;
@@ -89,6 +92,7 @@
 
   .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
 
+  /* TITLE / BYLINE */
   .work-title {
     font-family: var(--serif);
     font-size: 1.9rem;
@@ -104,6 +108,7 @@
     font-size: 0.9rem;
     color: var(--ink-faint);
     line-height: 1.9;
+    letter-spacing: 0.015em;
     margin-bottom: 3rem;
   }
 
@@ -116,47 +121,38 @@
 
   .work-byline a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
 
-  .photo {
-    margin: 4rem 0;
-    position: relative;
-  }
-
-  .photo img {
-    display: block;
-    width: 100%;
-    height: auto;
-    filter: saturate(0.88) contrast(1.02);
-    opacity: 0;
-    transform: scale(1.008);
-    transition: opacity 2s ease, transform 2.5s ease;
-  }
-
-  .photo.seen img { opacity: 1; transform: scale(1); }
-
-  .photo.drift-right { width: 130%; }
-  .photo.portrait    { width: 60%; margin-left: auto; margin-right: -12%; }
-  .photo.wide        { width: 140%; margin-left: -10%; }
-
-  @media (max-width: 900px) {
-    .photo.drift-right { width: 110%; }
-    .photo.portrait    { width: 70%; margin-right: -5%; }
-    .photo.wide        { width: 115%; margin-left: -5%; }
-  }
-
-  .photo .whisper {
-    margin-top: 0.8rem;
+  /* SECTION LABEL */
+  .section-label {
     font-family: var(--serif);
-    font-size: 0.75rem;
-    font-style: italic;
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--ink-faint);
-    opacity: 0;
-    transition: opacity 1.8s ease 0.8s;
+    margin-bottom: 1.4rem;
   }
 
-  .photo.seen .whisper { opacity: 1; }
+  /* SECTION INTRO */
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
 
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  /* PAUSE */
   .pause {
-    padding: 3.5rem 0;
+    padding: 3rem 0;
     color: var(--ink-ghost);
     font-family: var(--serif);
     font-size: 0.8rem;
@@ -164,8 +160,24 @@
     user-select: none;
   }
 
+  /* SECTION HERO */
+  .section-hero {
+    margin: 0 0 1.8rem;
+  }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  /* MARGIN NOTE */
   .margin-note {
-    margin: 1.5rem 0 3rem;
+    margin: 1.5rem 0 2.5rem;
     padding-left: 1.6rem;
     border-left: 1px solid var(--ink-ghost);
   }
@@ -174,6 +186,7 @@
     font-family: var(--serif);
     font-size: 1.05rem;
     line-height: 1.8;
+    letter-spacing: 0.015em;
     color: var(--ink);
     margin-bottom: 0.25rem;
   }
@@ -192,15 +205,6 @@
     color: var(--ink-light);
     margin-top: 0.5rem;
     line-height: 1.9;
-  }
-
-  .section-label {
-    font-family: var(--serif);
-    font-size: 0.76rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 1.4rem;
   }
 
   /* IMAGE GRID */
@@ -426,6 +430,7 @@
     transition: opacity 1.4s ease;
   }
 
+  .video-embed.ratio-dv { padding-bottom: 68.57%; }
   .video-embed.seen { opacity: 1; }
 
   .video-embed iframe {
@@ -445,6 +450,15 @@
     line-height: 1.5;
   }
 
+  .video-label a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .video-label a:hover { border-bottom-color: var(--ink); }
+
   /* LINKS */
   .links-list { margin: 0.5rem 0 2rem; }
 
@@ -454,6 +468,7 @@
     border-bottom: 1px solid var(--paper-dark);
     font-family: var(--serif);
     font-size: 1rem;
+    letter-spacing: 0.015em;
     color: var(--ink);
     text-decoration: none;
     line-height: 1.5;
@@ -477,6 +492,7 @@
     font-family: var(--serif);
     font-size: 0.95rem;
     line-height: 2.1;
+    letter-spacing: 0.015em;
     color: var(--ink-light);
   }
 
@@ -490,6 +506,7 @@
     border-bottom: 1px solid var(--paper-dark);
     font-family: var(--serif);
     font-size: 0.95rem;
+    letter-spacing: 0.015em;
     line-height: 1.7;
     color: var(--ink-light);
   }
@@ -502,129 +519,6 @@
     color: var(--ink);
     font-size: 1rem;
   }
-
-  /* CLOSING */
-  .closing {
-    margin-top: 5rem;
-    padding: 3rem 0 5rem;
-    border-top: 1px solid var(--paper-dark);
-  }
-
-  .closing-name {
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    font-style: italic;
-    color: var(--ink-faint);
-  }
-
-  .closing-links {
-    margin-top: 1rem;
-    font-family: var(--serif);
-    font-size: 0.78rem;
-    display: flex;
-    align-items: center;
-    gap: 1.4rem;
-    flex-wrap: wrap;
-  }
-
-  .closing-links a {
-    color: var(--ink-ghost);
-    text-decoration: none;
-    transition: color 0.4s;
-  }
-
-  .closing-links a:hover { color: var(--ink-light); }
-
-  /* SCROLL TO TOP */
-  .scroll-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    font-family: var(--serif);
-    font-size: 1rem;
-    color: var(--ink-ghost);
-    background: none;
-    border: none;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.6s ease, color 0.4s;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .scroll-top.visible { opacity: 1; pointer-events: auto; }
-  .scroll-top:hover { color: var(--ink-light); }
-
-  .rainbow-flag {
-    display: inline-block;
-    width: 42px;
-    height: 28px;
-    border-radius: 2px;
-    opacity: 0.7;
-    object-fit: cover;
-    transition: opacity 0.4s;
-    vertical-align: middle;
-  }
-
-  .rainbow-flag:hover { opacity: 0.9; }
-
-  /* SECTION INTRO — smaller prose blocks, matching art.html */
-  .section-intro {
-    font-family: var(--serif);
-    font-size: 1.08rem;
-    line-height: 1.5;
-    color: var(--ink);
-    margin-bottom: 1.8rem;
-  }
-
-  /* SECTION HERO */
-  .section-hero {
-    margin: 0 0 2.2rem;
-  }
-
-  .section-hero img {
-    width: 100%;
-    display: block;
-    opacity: 0;
-    transition: opacity 1.4s ease;
-  }
-
-  .section-hero img.seen { opacity: 1; }
-
-  /* SCENE DROPDOWN */
-  details.scene-list {
-    margin-top: 1.4rem;
-  }
-
-  details.scene-list summary {
-    list-style: none;
-    cursor: pointer;
-    font-family: var(--serif);
-    font-size: 0.88rem;
-    font-style: italic;
-    color: var(--ink-light);
-    padding: 0.5rem 0 0.3rem;
-    transition: color 0.4s;
-    border-bottom: 1px solid var(--ink-ghost);
-    display: inline-block;
-  }
-
-  details.scene-list summary::-webkit-details-marker { display: none; }
-  details.scene-list summary:hover { color: var(--ink); border-bottom-color: var(--ink); }
-  details.scene-list summary::after { content: '\00a0\00a0↓'; }
-  details.scene-list[open] summary::after { content: '\00a0\00a0↑'; }
-
-  .scene-grid {
-    margin-top: 1.2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  @media (max-width: 600px) { .scene-grid { grid-template-columns: 1fr; } }
-
-  .scene-item .video-embed { padding-bottom: 68.57%; }
-  .scene-item .video-label { font-size: 0.75rem; }
 
   /* AUDIO EMBED */
   .audio-embed {
@@ -726,6 +620,72 @@
     display: block;
   }
 
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  /* SCROLL TO TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
+
+  /* APPEAR */
   .appear {
     opacity: 0;
     transform: translateY(6px);
@@ -780,12 +740,13 @@
 
   <div class="prose">
 
-    <p class="nav-back appear"><a href="/art.html">&#8592; art</a></p>
+    <p class="nav-back appear"><a href="art.html">&#8592; art</a></p>
 
     <h1 class="work-title appear">The Minotaur Trilogy</h1>
     <p class="work-byline appear">
-      Margaret Cameron &amp; David Young &middot; chamber opera in three parts &middot; 2011&ndash;2012<br>
-      Presented by <a href="https://www.chambermade.org/index/work/eb23e">Chamber Made Opera</a>
+      by Margaret Cameron &amp; David Young<br>
+      a chamber opera in three parts &middot; 2011&ndash;2012<br>
+      Presented by <a href="https://www.chambermade.org/index/work/eb23e" target="_blank">Chamber Made Opera</a>
     </p>
 
     <p class="appear">
@@ -817,24 +778,16 @@
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
-    <!-- PHOTOGRAPHS -->
-    <p class="section-label appear">Photographs</p>
-
-    <div class="image-grid appear" id="featuredGrid"></div>
-    <button class="view-all-btn appear" onclick="openGallery()">View all photographs &rarr;</button>
-
-    <div class="pause appear">&middot; &middot; &middot;</div>
-
     <!-- VIDEO -->
     <p class="section-label appear">Video</p>
 
     <div class="video-item appear">
-      <div class="video-embed" style="padding-bottom:68.57%">
+      <div class="video-embed ratio-dv">
         <iframe src="https://archive.org/embed/minotaur-the-island-scene-1-v-1-360p"
                 title="Minotaur: The Island — Scene 1"
                 allowfullscreen></iframe>
       </div>
-      <div class="video-label">Scene 1 &mdash; Minotaur: The Island &mdash; <a href="https://archive.org/search?query=minotaur+the+island+scene" target="_blank" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid var(--ink-ghost);transition:border-color 0.5s;">all scenes on Archive.org</a></div>
+      <div class="video-label">Scene 1 &mdash; Minotaur: The Island &mdash; <a href="https://archive.org/search?query=minotaur+the+island+scene" target="_blank">all scenes on Archive.org</a></div>
     </div>
 
     <div class="video-item appear">
@@ -860,7 +813,7 @@
         Chamber Made Opera Records, 2013<br>
         Produced by Haig Burnell (disc 1) and Duncan Yardley (discs 2&ndash;3)<br>
         Photography by Daisy Noyes and David Young<br><br>
-        <a href="https://www.australianmusiccentre.com.au/product/the-minotaur-trilogy">Available from the Australian Music Centre< target="_blank" /a>
+        <a href="https://www.australianmusiccentre.com.au/product/the-minotaur-trilogy" target="_blank">Available from the Australian Music Centre</a>
       </p>
     </div>
 
@@ -869,7 +822,7 @@
               title="The Minotaur Trilogy — Part Two, Track 1"
               allowfullscreen></iframe>
     </div>
-    <p class="video-label appear" style="margin-bottom:1.2rem;"><em>Minotaur: The Labyrinth</em>, Canto 1 &mdash; <a href="https://archive.org/details/minotaur-the-island-canto-18" target="_blank" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-ghost);transition:border-color 0.5s;">all tracks on Archive.org</a></p>
+    <p class="video-label appear" style="margin-bottom:1.2rem;"><em>Minotaur: The Labyrinth</em>, Canto 1 &mdash; <a href="https://archive.org/details/minotaur-the-island-canto-18" target="_blank">all tracks on Archive.org</a></p>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -877,11 +830,18 @@
     <p class="section-label appear">Score</p>
 
     <div class="score-thumb appear" onclick="openScore()">
-      <img src="score-cover.png"
-           alt="The Minotaur Trilogy — score cover">
+      <img src="score-cover.png" alt="The Minotaur Trilogy — score cover">
       <div class="score-thumb-label">View score &rarr;</div>
     </div>
     <div class="video-label appear" style="margin-top:0.6rem;">The Minotaur Trilogy &mdash; score, limited edition. Designed by Henry Fuller, Sweet Design, St Kilda. &nbsp;<button onclick="openScore()" style="background:none;border:none;padding:0;font-family:var(--serif);font-size:0.8rem;font-style:italic;color:var(--ink-light);cursor:pointer;border-bottom:1px solid var(--ink-ghost);">View score &rarr;</button></div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- PHOTOGRAPHS -->
+    <p class="section-label appear">Photographs</p>
+
+    <div class="image-grid appear" id="featuredGrid"></div>
+    <button class="view-all-btn appear" onclick="openGallery()">View all photographs &rarr;</button>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -915,7 +875,7 @@
       </a>
       <a class="link-row" href="https://www.realtime.org.au/art-care-where-life-and-death-connect/" target="_blank">
         <span class="link-type">Essay</span>
-        Margaret Cameron &mdash; 'Art &amp; care: where life and death connect', RealTime 2013
+        Margaret Cameron &mdash; &lsquo;Art &amp; care: where life and death connect&rsquo;, RealTime 2013
       </a>
       <a class="link-row" href="https://www.realtime.org.au/vale-margaret-cameron-1955-2014/" target="_blank">
         <span class="link-type">Obituary</span>
@@ -971,9 +931,9 @@
       <strong>Photography</strong> Daisy Noyes, David Young<br>
       <strong>Presented by</strong> Chamber Made Opera &amp; Melbourne Recital Centre<br>
       <strong>In association with</strong> Melbourne Festival<br>
-      <strong>Co-commissioned by</strong> Ten Days on the Island, Dr Peta Gillingham,<br>
-      &emsp;Michael Bink, Helen &amp; Peter Murdoch, Fiona Sweet &amp; Paul Newcombe,<br>
-      &emsp;Meg Morris, Susan Pelka and anonymous donors
+      <strong>Co-commissioned by</strong> Ten Days on the Island, Dr Peta Gillingham,
+      Michael Bink, Helen &amp; Peter Murdoch, Fiona Sweet &amp; Paul Newcombe,
+      Meg Morris, Susan Pelka and anonymous donors
     </div>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
@@ -991,10 +951,10 @@
     <div class="closing-name"><a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a></div>
     <div class="closing-links">
       <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
-      <a href="/art">art</a>
-      <a href="/">home</a>
-      <a href="/impressum-datenschutz">Impressum &amp; Datenschutz</a>
-      <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+      <a href="art.html">art</a>
+      <a href="https://www.davidyoung.online">home</a>
+      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <img src="rainbow-flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
     </div>
   </div>
 
@@ -1003,84 +963,27 @@
 <button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-// ─── IMAGES ──────────────────────────────────────────────────────────────────
-// First 5 entries appear in the featured grid on the page.
-// All 17 entries appear in the gallery overlay.
-
 const images = [
-  {
-    src: 'minotaur-caroline-staff.jpg',
-    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-deborah-ladder.jpg',
-    caption: 'Deborah Kayser — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-caroline-closeup.jpg',
-    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-matthias-percussion.jpg',
-    caption: 'Matthias Schack-Arnott — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-harpsichord-detail.jpg',
-    caption: 'Anastasia Russell-Head — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  // ── Gallery-only images ──
-  {
-    src: 'minotaur-hellen-mirror.jpg',
-    caption: 'Hellen Sky — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-mark-bass-outdoor.jpg',
-    caption: 'Mark Cauvin — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-caroline-boat.jpg',
-    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-ensemble-hats.jpg',
-    caption: 'The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-caroline-oval-mirror.jpg',
-    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-caroline-deborah-wall.jpg',
-    caption: 'Caroline Lee and Deborah Kayser — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-caroline-hellen-lantern.jpg',
-    caption: 'Caroline Lee and Hellen Sky — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-mark-bass-text.jpg',
-    caption: 'Mark Cauvin — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-matthias-gong.jpg',
-    caption: 'Matthias Schack-Arnott — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-caroline-lanterns.jpg',
-    caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-hellen-column.jpg',
-    caption: 'Hellen Sky — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
-  {
-    src: 'minotaur-mark-red-thread.jpg',
-    caption: 'Mark Cauvin — The Minotaur Trilogy. Photograph: Daisy Noyes.'
-  },
+  { src: 'minotaur-caroline-staff.jpg',        caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-deborah-ladder.jpg',         caption: 'Deborah Kayser — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-caroline-closeup.jpg',       caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-matthias-percussion.jpg',    caption: 'Matthias Schack-Arnott — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-harpsichord-detail.jpg',     caption: 'Anastasia Russell-Head — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-hellen-mirror.jpg',          caption: 'Hellen Sky — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-mark-bass-outdoor.jpg',      caption: 'Mark Cauvin — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-caroline-boat.jpg',          caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-ensemble-hats.jpg',          caption: 'The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-caroline-oval-mirror.jpg',   caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-caroline-deborah-wall.jpg',  caption: 'Caroline Lee and Deborah Kayser — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-caroline-hellen-lantern.jpg',caption: 'Caroline Lee and Hellen Sky — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-mark-bass-text.jpg',         caption: 'Mark Cauvin — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-matthias-gong.jpg',          caption: 'Matthias Schack-Arnott — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-caroline-lanterns.jpg',      caption: 'Caroline Lee — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-hellen-column.jpg',          caption: 'Hellen Sky — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
+  { src: 'minotaur-mark-red-thread.jpg',        caption: 'Mark Cauvin — The Minotaur Trilogy. Photograph: Daisy Noyes.' },
 ];
 
-
-// Build featured grid (first 5 images)
+// Build featured grid (first 5)
 const grid = document.getElementById('featuredGrid');
 images.slice(0, 5).forEach((img, i) => {
   const item = document.createElement('div');
@@ -1092,16 +995,14 @@ images.slice(0, 5).forEach((img, i) => {
   item.appendChild(el);
   item.addEventListener('click', () => openLightbox(i, images));
   grid.appendChild(item);
-  // stagger fade-in
   setTimeout(() => {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { item.classList.add('seen'); io.disconnect(); } });
-    }, { threshold: 0.05 });
-    io.observe(item);
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting) { item.classList.add('seen'); obs.disconnect(); } });
+    }, { threshold: 0.05 }).observe(item);
   }, i * 80);
 });
 
-// Build gallery thumbs (all images)
+// Build gallery thumbs (all)
 const thumbsEl = document.getElementById('galleryThumbs');
 images.forEach((img, i) => {
   const thumb = document.createElement('div');
@@ -1123,7 +1024,6 @@ function openGallery() {
   document.getElementById('galleryOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeGallery() {
   document.getElementById('galleryOverlay').classList.remove('open');
   document.body.style.overflow = '';
@@ -1133,18 +1033,15 @@ function closeGallery() {
 let lbImages = [], lbIndex = 0;
 
 function openLightbox(index, imgs) {
-  lbImages = imgs;
-  lbIndex = index;
+  lbImages = imgs; lbIndex = index;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
   loadLbImage();
 }
-
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 function loadLbImage() {
   const el = document.getElementById('lbImg');
   const cap = document.getElementById('lbCaption');
@@ -1154,7 +1051,6 @@ function loadLbImage() {
   el.onload = () => el.classList.add('ready');
   el.src = d.src;
 }
-
 function lbStep(dir) {
   lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
   loadLbImage();
@@ -1163,18 +1059,14 @@ function lbStep(dir) {
 // Score overlay
 function openScore() {
   const frame = document.getElementById('scoreFrame');
-  if (!frame.src || frame.src === window.location.href) {
-    frame.src = frame.dataset.src;
-  }
+  if (!frame.src || frame.src === window.location.href) frame.src = frame.dataset.src;
   document.getElementById('scoreOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeScore() {
   document.getElementById('scoreOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 document.getElementById('scoreOverlay').addEventListener('click', function(e) {
   if (e.target === this) closeScore();
 });
@@ -1186,14 +1078,9 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') lbStep(1);
     if (e.key === 'ArrowLeft')  lbStep(-1);
   }
-  if (e.key === 'Escape') {
-    closeLightbox();
-    closeScore();
-    closeGallery();
-  }
+  if (e.key === 'Escape') { closeLightbox(); closeScore(); closeGallery(); }
 });
 
-// Click backdrop to close lightbox
 document.getElementById('lightbox').addEventListener('click', function(e) {
   if (e.target === this) closeLightbox();
 });
@@ -1205,13 +1092,6 @@ document.querySelectorAll('.appear').forEach(el => {
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
 });
 
-// Photo slow-develop
-document.querySelectorAll('.photo').forEach(p => {
-  new IntersectionObserver((entries, obs) => {
-    entries.forEach(e => { if (e.isIntersecting) { setTimeout(() => p.classList.add('seen'), 150); obs.disconnect(); } });
-  }, { threshold: 0.1 }).observe(p);
-});
-
 // Video fade-in
 document.querySelectorAll('.video-embed').forEach(v => {
   new IntersectionObserver((entries, obs) => {
@@ -1219,11 +1099,10 @@ document.querySelectorAll('.video-embed').forEach(v => {
   }, { threshold: 0.15 }).observe(v);
 });
 
-// Scroll to top button
-const scrollBtn = document.getElementById('scrollTop');
-window.addEventListener('scroll', () => {
-  scrollBtn.classList.toggle('visible', window.scrollY >= window.innerHeight * 0.9);
-});
+// Fallback: ensure videos visible after 3s
+setTimeout(() => {
+  document.querySelectorAll('.video-embed:not(.seen)').forEach(v => v.classList.add('seen'));
+}, 3000);
 
 // Hero image fade-in
 document.querySelectorAll('.section-hero img').forEach(img => {
@@ -1239,12 +1118,10 @@ document.querySelectorAll('.audio-embed').forEach(a => {
   }, { threshold: 0.1 }).observe(a);
 });
 
-// Scene list toggle label
-document.querySelectorAll('details.scene-list').forEach(d => {
-  const s = d.querySelector('summary');
-  d.addEventListener('toggle', () => {
-    s.childNodes[0].textContent = d.open ? 'fewer scenes' : 'all scenes';
-  });
+// Scroll to top
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY >= window.innerHeight * 0.9);
 });
 </script>
 
