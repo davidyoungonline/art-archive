@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Death &amp; Alexander Technique — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 1.8rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .work-byline {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    letter-spacing: 0.015em;
+    color: var(--ink-faint);
+    margin-bottom: 2.5rem;
+  }
+
+  .programme-note {
+    margin: 0 0 2.8rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+
+  .programme-note .part-link {
+    display: block;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.9;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .programme-note .part-link:hover { color: var(--ink); }
+
+  .programme-note .programme-meta {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-top: 0.9rem;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+    scroll-margin-top: 3rem;
+  }
+
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  .slide { margin: 0 0 1.2rem; }
+
+  .slide img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .slide img.seen { opacity: 1; }
+
+  .slide-caption {
+    margin-top: 0.5rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  .exercise {
+    margin: 2rem 0 2.5rem;
+    padding: 1.4rem 1.6rem 1.6rem;
+    border-left: 2px solid var(--ink-ghost);
+    background: var(--paper-dark);
+  }
+
+  .exercise-label {
+    font-family: var(--serif);
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+  }
+
+  .exercise p {
+    font-family: var(--serif);
+    font-size: 1.0rem;
+    line-height: 1.65;
+    letter-spacing: 0.012em;
+    color: var(--ink);
+    margin-bottom: 0.9rem;
+  }
+
+  .exercise p:last-child { margin-bottom: 0; }
+
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
+
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="alexander-technique.html">&#8592; Alexander Technique</a></p>
+
+    <h1 class="work-title appear">Death &amp; Alexander Technique</h1>
+
+    <div class="work-byline appear">
+      Three presentations<br>
+      Berlin, 2016&ndash;2017
+    </div>
+
+    <div class="programme-note appear">
+      <a href="#part-1" class="part-link">1. Who Wants to Live Forever</a>
+      <a href="#part-2" class="part-link">2. Slow Death</a>
+      <a href="#part-3" class="part-link">3. Beyond the Grave</a>
+      <p class="programme-meta">Presented to colleagues at the Alexander-Technik-Schule Berlin<br>
+      Dedicated to Margaret Cameron, 1955&ndash;2014</p>
+    </div>
+
+    <p class="appear">
+      In October 2014, six months into my training as an Alexander Technique teacher, my dear friend and artistic collaborator Margaret Cameron died of complications during surgery and a virulent form of bowel cancer. She was 59.
+    </p>
+
+    <p class="appear">
+      I had accompanied her closely during the eighteen months preceding her death &mdash; through chemotherapy, through more than ten major operations, through the slow, painful work of dying. These three presentations, given over two years to colleagues at the Alexander-Technik-Schule Berlin, were my attempt to think through what the Alexander Technique has to say about death &mdash; and what death has to say about the Alexander Technique.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- PART ONE -->
+    <p class="section-label appear" id="part-1">1. Who Wants to Live Forever</p>
+
+    <p class="section-intro appear">
+      The first presentation poses the simplest question: can Alexander Technique cure cancer? What are its limits? And &mdash; since it clearly cannot prevent death &mdash; what is it actually for?
+    </p>
+
+    <div class="slide appear">
+      <img src="p1-02-forever.jpg" alt="Who wants to live forever?">
+    </div>
+
+    <div class="slide appear">
+      <img src="p1-03-margaret-59.jpg" alt="Margaret Cameron, 59">
+      <div class="slide-caption">Margaret Cameron &mdash; Indented Head, Victoria</div>
+    </div>
+
+    <div class="slide appear">
+      <img src="p1-04-how-long.jpg" alt="How long is long?">
+    </div>
+
+    <p class="section-intro appear">
+      Alexander rarely mentions death in his writings. The word appears only a handful of times, and not at all in his most famous work, <em>The Use of the Self</em>. But clearly Alexander believed that a poor use of the self could lead to suffering, injury and death. In <em>Man&rsquo;s Supreme Inheritance</em> he argues that incorrect habits of mind and body &mdash; the false poise, the laboured breathing, the degeneration of the muscular system &mdash; combine to cause debility, disease, and death. The implication being that through correct and beneficial habits we could theoretically avoid all three. Does that mean the Alexander Technique, applied perfectly, leads to eternal life?
+    </p>
+
+    <div class="slide appear">
+      <img src="p1-05-chart.jpg" alt="Life spans — Margaret, Alexander, Jung, Freud, Feldenkrais, Einstein, Huxley, Steiner, Flynn">
+      <div class="slide-caption">Margaret alongside Alexander and his contemporaries</div>
+    </div>
+
+    <div class="slide appear">
+      <img src="p1-06-tasmania.jpg" alt="Life expectancy in Tasmania: 46 — Errol Flynn">
+    </div>
+
+    <p class="section-intro appear">
+      Probably not. And who wants to live forever anyway? But perhaps one of the uses of the Alexander Technique is to prolong life. Margaret lived for 59 years. Not long enough, in my opinion and hers. She was a poet, and in her final poem, <em>Death Bed</em>, she wrote: &ldquo;I don&rsquo;t want to die. Sorry to say the obvious.&rdquo;
+    </p>
+
+    <p class="section-intro appear">
+      Of course most of us will say it is all about quality, not quantity anyway. The question is not so much who wants to live forever, but: who wants to live better?
+    </p>
+
+    <div class="slide appear">
+      <img src="p1-07-live-better.jpg" alt="Who wants to live better?">
+    </div>
+
+    <p class="section-intro appear">
+      And then there is Alexander&rsquo;s more troubling observation: that some habits are life-threatening, and yet even when we know this we sometimes cling to the habit rather than change. We would rather die than change.
+    </p>
+
+    <div class="slide appear">
+      <img src="p1-08-habit.jpg" alt="&ldquo;the attachment to it is so strong that the enfeebled objective mind prefers to hold to the habit and risk death&rdquo;">
+    </div>
+
+    <div class="exercise appear">
+      <p class="exercise-label">Exercise</p>
+      <p>In small groups, discuss the question: when do you think you are going to die? What age?</p>
+      <p>When everyone has thought about it, each person writes down a number. Then compare and discuss.</p>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- PART TWO -->
+    <p class="section-label appear" id="part-2">2. Slow Death</p>
+
+    <p class="section-intro appear">
+      The second presentation traces Margaret&rsquo;s illness in five stages: emergency, chemotherapy, complications, palliative care, death. And asks what the Alexander Technique can offer someone who is dying &mdash; and to those who accompany them.
+    </p>
+
+    <div class="slide appear">
+      <img src="p2-01-emergency.jpg" alt="Stage 1: Emergency — January 2013">
+    </div>
+
+    <div class="slide appear">
+      <img src="p2-02-curtain.jpg" alt="">
+    </div>
+
+    <div class="slide appear">
+      <img src="p2-03-chemo.jpg" alt="Stage 2: Chemotherapy — April to September 2013">
+    </div>
+
+    <div class="slide appear">
+      <img src="p2-04-margaret-forest.jpg" alt="Margaret Cameron">
+    </div>
+
+    <div class="slide appear">
+      <img src="p2-05-painful.jpg" alt="&ldquo;I knew cancer killed you, but no-one told me it was so painful.&rdquo; — Margaret Cameron, December 2013">
+    </div>
+
+    <p class="section-intro appear">
+      During Margaret&rsquo;s illness, her dear friend Jane Refshauge &mdash; my first Alexander Technique teacher &mdash; regularly visited her in hospital and worked with her. Three things Jane did made a deep impression on me.
+    </p>
+
+    <p class="section-intro appear">
+      Unwavering positivity. Jane was unwaveringly positive throughout the process. She often said she was going for a cure. Amidst a situation that was frequently overwhelming and discouraging, Jane&rsquo;s optimism, this positive direction, was a great source of strength and hope.
+    </p>
+
+    <div class="slide appear">
+      <img src="p2-06-positivity.jpg" alt="Unwavering positivity — paper statue of F.M. Alexander, Wyndham, Tasmania">
+      <div class="slide-caption">Paper statue of F.M. Alexander &mdash; Wyndham, Tasmania</div>
+    </div>
+
+    <p class="section-intro appear">
+      Upfacing palms. Margaret was usually in so much pain that she didn&rsquo;t want anyone to touch her. However she found it most helpful and comforting when Jane simply placed her hands under her torso with the palms facing upward.
+    </p>
+
+    <p class="section-intro appear">
+      Useful and practical. With doctors and nurses and specialists and friends and family all vying for attention, with advice and suggestions and opinions, the environment around the sick can be very bewildering. Jane was always a clear voice of practical and useful ideas, problem-solving and reorganising in a simple and easy way. Her seemingly trivial actions were often extremely powerful in the contribution they made to Margaret&rsquo;s wellbeing.
+    </p>
+
+    <div class="slide appear">
+      <img src="p2-07-palliative.jpg" alt="Stage 4: Palliative care — August 2014">
+    </div>
+
+    <p class="section-intro appear">
+      In August 2014 Margaret&rsquo;s cancer returned. Her body was riddled with tumours. She started a palliative course of chemo- and radio-therapy and was given access to addictive levels of pain killers. Aldous Huxley&rsquo;s soma &mdash; the happiness drug of <em>Brave New World</em> that shortens life in one sense while lengthening it in another &mdash; began to feel less like science fiction.
+    </p>
+
+    <div class="slide appear">
+      <img src="p2-08-soma.jpg" alt="Brave New World — &ldquo;But aren&rsquo;t you shortening her life by giving her so much?&rdquo; &ldquo;In one sense, yes, but in another we&rsquo;re actually lengthening it.&rdquo;">
+      <div class="slide-caption">Still from the 1980 film version of <em>Brave New World</em></div>
+    </div>
+
+    <p class="section-intro appear">
+      On October 20th 2014, Margaret died at home in her son&rsquo;s arms. She had just finished writing her last poem.
+    </p>
+
+    <div class="slide appear">
+      <img src="p2-09-dont-want-to-die.jpg" alt="&ldquo;I don&rsquo;t want to die. Sorry to say the obvious.&rdquo; — Margaret Cameron reading her final poem, Lay Me Out">
+    </div>
+
+    <div class="exercise appear">
+      <p class="exercise-label">Exercise</p>
+      <p>In pairs. One person lies on the floor on their back, head on a book, knees bent, feet flat. The other person kneels or sits beside them and gently slides both hands, palms upward, under their partner&rsquo;s torso.</p>
+      <p>The touching person attends to themselves: their own contact with the floor, their own organisation, their own state. The task is not to do anything to the other person, but to remain present to yourself without being pulled away.</p>
+      <p>Once settled, the touching person asks quietly: <em>&lsquo;What would you like to have happen?&rsquo;</em> Then simply listens. After five to ten minutes, swap.</p>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- PART THREE -->
+    <p class="section-label appear" id="part-3">3. Beyond the Grave</p>
+
+    <p class="section-intro appear">
+      The third presentation asks what continues after death &mdash; what is passed on, what persists, what the Alexander Technique might have to say about human evolution and the universal constant in living. It begins in Rome.
+    </p>
+
+    <div class="slide appear">
+      <img src="p3-01-beyond.jpg" alt="Beyond the Grave">
+    </div>
+
+    <p class="section-intro appear">
+      In 2011 I took a puppet show on tour to Rome with Margaret. We visited the Pantheon &mdash; the 2000-year-old temple to all the gods, later turned into a church by Pope Boniface IV in 609 AD. Whenever you step across the threshold of the Pantheon, you automatically receive a plenary indulgence: all your sins are immediately forgiven and you go straight to heaven. I like to think this was a comfort to Margaret as she approached her death, even though she had long ago lapsed as a Catholic.
+    </p>
+
+    <p class="section-intro appear">
+      Rome, the Eternal City, is the kind of place that lends itself to pondering time. And that brings me to the nocciolata.
+    </p>
+
+    <p class="section-intro appear">
+      I lived in Rome in 1995&ndash;96 and used to frequent a <em>pasticceria</em> called Valzani, famous amongst other things for its homemade chocolate with whole hazelnuts &mdash; <em>nocciolata</em>. It was made in big slabs, and you would buy it by weight. The 80-year-old signora behind the counter would break off chunks to weigh. Some crumbs would always fall on the counter, and the signora would reflexively eat them. Needless to say, she was rather rotund.
+    </p>
+
+    <p class="section-intro appear">
+      In 2011, when I tried to take Margaret for <em>nocciolata</em>, the shop was closed. But earlier in 2017, when visiting Rome again, to my surprise and delight the shop was open. The signora is no longer with us. But a woman &mdash; perhaps her niece or granddaughter &mdash; broke off chunks of <em>nocciolata</em> for me, and absentmindedly ate the crumbs. The <em>nocciolata</em> recipe was not the only thing the signora had passed on to the next generation.
+    </p>
+
+    <div class="slide appear">
+      <img src="p3-02-nocciolata.jpg" alt="Nocciolata — Valzani pasticceria, Rome">
+      <div class="slide-caption">Valzani <em>pasticceria</em>, Rome</div>
+    </div>
+
+    <p class="section-intro appear">
+      These memories led me to thinking about what does continue on after death. For help I turned to the Dalai Lama and his conversations with neuroscientists, psychoanalysts and western philosophers at the 4th Mind and Life Conference on Sleeping, Dreaming and Dying. In a discussion about the self and how to conceptualise its continuation beyond consciousness, the analogy of a wooden ship was used. If you change a plank on a ship every year, at the end of many years you can still say this is the same ship, even though all the pieces of wood are different. A is not B, B is not C &mdash; and yet there is a ship all along. The universal of the ship.
+    </p>
+
+    <div class="slide appear">
+      <img src="p3-03-ship.jpg" alt="Ship-shape">
+    </div>
+
+    <p class="section-intro appear">
+      Like the <em>nocciolata</em>, there is something that remains constant and universal despite particular details changing. It makes me think of Alexander&rsquo;s title: <em>The Universal Constant in Living</em>. And of what John Dewey wrote in his introduction to <em>Man&rsquo;s Supreme Inheritance</em>: that Alexander believes man&rsquo;s evolution will never be complete until conscious control of himself has replaced the instinctive or subconscious.
+    </p>
+
+    <div class="slide appear">
+      <img src="p3-04-potentialities.jpg" alt="Strange Potentialities">
+    </div>
+
+    <p class="section-intro appear">
+      Between 1.9 and 1.8 million years ago there was a dramatic evolutionary change in the physiology of primates which led to the emergence of <em>Homo erectus</em>. One theory is that this coincided with the control of fire and the discovery of cooking. <em>Homo erectus</em> had a smaller jaw, smaller teeth, a smaller gut, and a much larger brain. Cooking speeds up digestion and delivers nutrition far more efficiently than raw food. Perhaps non-doing is the new cooking.
+    </p>
+
+    <div class="slide appear">
+      <img src="p3-05-gifts.jpg" alt="Gifts from the after-life">
+    </div>
+
+    <p class="section-intro appear">
+      While Margaret was sick, she bought a massage table to help with her care. Before dying she told me she wanted me to have it. In the exhaustion and confusion of packing things up after her death, I left it behind. It had too many bad memories. It was too much to carry.
+    </p>
+
+    <p class="section-intro appear">
+      Earlier in 2017, for no particular reason, I started thinking about that table. It was the only tangible thing Margaret had left me, and now, after everything that had happened, I felt that I did want it after all. The very next day I received an email from Margaret&rsquo;s relative: they were clearing out Indented Head and wanted to know if there was anything there that belonged to me &mdash; particularly, two very large paintings and what they thought was a massage table. The next day it was delivered to my sister in Melbourne, where she is storing it with my only other possessions still in Australia: five boxes of books and a mirror.
+    </p>
+
+    <div class="slide appear">
+      <img src="p3-06-table.jpg" alt="Alexander Technique session on Margaret's table — Berlin">
+      <div class="slide-caption">On Margaret&rsquo;s table &mdash; Berlin</div>
+    </div>
+
+    <div class="exercise appear">
+      <p class="exercise-label">Exercise</p>
+      <p>In pairs. One person moves &mdash; dances, walks, gestures, whatever feels possible. The other witnesses.</p>
+      <p>The choreography for the moving person is a single instruction: <em>leave the room without appearing to do so.</em></p>
+      <p>After five to ten minutes, swap.</p>
+    </div>
+
+    <div class="slide appear">
+      <img src="p3-07-dedication.jpg" alt="Margaret Cameron 1955–2014">
+    </div>
+
+  </div><!-- .prose -->
+
+  <div class="closing appear">
+    <div class="closing-name">
+      <a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a>
+    </div>
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">↑</a>
+      <a href="art.html">art</a>
+      <a href="https://www.davidyoung.online">home</a>
+      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <img src="rainbow%20flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+</div>
+
+<script>
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+document.querySelectorAll('.slide img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('seen'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+});
+
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY >= window.innerHeight * 0.9);
+});
+</script>
+
+</body>
+</html>
