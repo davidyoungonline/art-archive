@@ -164,6 +164,36 @@
     display: block;
   }
 
+  /* EXPLORE NAV */
+  .explore {
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .explore a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .explore a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink-ghost);
+  }
+
+  .explore-dot {
+    color: var(--ink-ghost);
+    user-select: none;
+  }
+
   /* CLOSING */
   .closing {
     margin-top: 5rem;
@@ -310,6 +340,14 @@
            alt="David Young">
     </div>
 
+  </div>
+
+  <div class="explore appear">
+    <a href="alexander-technique.html">Alexander Technique</a>
+    <span class="explore-dot">&middot;</span>
+    <a href="meditation.html">Meditation</a>
+    <span class="explore-dot">&middot;</span>
+    <a href="art.html">Art</a>
   </div>
 
   <div class="closing appear">
