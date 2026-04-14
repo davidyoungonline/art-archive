@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 1.8rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 2.5rem;
+  }
+
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  /* HERO IMAGE */
+  .section-hero { margin: 0 0 1.8rem; }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  /* EPIGRAPH */
+  .epigraph {
+    margin: 0 0 2.2rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+
+  .epigraph p {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--ink-light);
+    margin-bottom: 0;
+  }
+
+  .epigraph .epigraph-source {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-style: normal;
+    margin-top: 0.6rem;
+    display: block;
+  }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
+
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="https://www.davidyoung.online">&#8592;</a></p>
+
+    <h1 class="page-title appear">David Young</h1>
+
+    <!-- First paragraph: full prose size -->
+    <p class="appear">
+      I first remember playing the piano at the age of four. I had a piece I called &lsquo;Butterfly,&rsquo; and I would play it over and over again, no doubt delighting and infuriating my family and neighbours.
+    </p>
+
+    <p class="appear">
+      Around the same time I began climbing trees to alarming heights, swinging from bars and ropes. I was called &lsquo;Monkey,&rsquo; which I kind of liked and kind of didn&rsquo;t. What I knew is that I loved exploring what my body could do.
+    </p>
+
+    <p class="appear">
+      I also loved exploring the world. At age five my parents took us in a camper van around the UK and Europe. It was a vivid and powerful expansion of my reality which has influenced me to this day.
+    </p>
+
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/90e75ebe-9dc5-4163-8eda-36b2ac6726ae/david+young+-+far+from+home.jpg"
+           alt="David Young — far from home">
+    </div>
+
+    <!-- Remaining paragraphs: smaller font -->
+    <p class="section-intro appear">
+      Upon returning to Melbourne, I trained to an elite level as a gymnast, and my first career was as a gymnastics coach, apprenticed to the former Chinese national coach Yu Ting. Plato said that too much sport makes you violent, and too much music makes you neurotic. I attempted to steer a course somewhere between these extremes.
+    </p>
+
+    <p class="section-intro appear">
+      For 25 years I made art between Australia, Asia and Europe &mdash; composing, directing, building companies. At one stage I lived in Java for three months with Indonesia&rsquo;s foremost poet and activist playwright, W. S. Rendra. His Bengkel Teater Rendra taught me how to be on standby, and that shamans do exist. These stories and more live in the <a href="art.html">art archive</a>.
+    </p>
+
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/cdc66c2f-9fa3-4aeb-be87-7dac7da9746d/david+-+vert.jpg"
+           alt="David Young">
+    </div>
+
+    <p class="section-intro appear">
+      Alongside the art I was making, I worked for many years in psychosocial rehabilitation and employment support for people with serious mental illness and disabilities. With my colleague Caroline Crosse we founded Social Firms Australia based on an Italian model, setting up businesses that employ people with and without disabilities. We established the first social firm in Australia, a wholesale bonsai nursery that is still running. This work changed government policy on disability employment nationally.
+    </p>
+
+    <p class="section-intro appear">
+      Gradually and circuitously, the artist-self, the body-self, the Buddhist-gay-nomadic self settled into more coherence. After all those years of generating and pushing, I discovered <a href="alexander-technique.html">Alexander Technique</a> &mdash; and was finally able to crack apart the rigid habits which had given me great drive and discipline but lacked self-care and kindness. I&rsquo;m sure had I not stopped as I did, my work would have eventually killed me.
+    </p>
+
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/84717ac0-ce0a-4d71-8b67-acdf162169f0/david+young+-+bow+-237.jpg"
+           alt="David Young">
+    </div>
+
+    <p class="section-intro appear">
+      Once I had retrained as an Alexander Technician &mdash; as my architect friend Michael Roper likes to say &mdash; it was a smaller leap to <a href="meditation.html">meditation</a>. With more calm and concentration I could begin undoing ingrained patterns of mind and body, revealing more lightness, freedom and equanimity. Three months living as a monk in a Sri Lankan forest monastery was one of the toughest yet most rewarding times of my life. Running a marathon in Iceland came a close second.
+    </p>
+
+    <div class="epigraph appear">
+      <p>Just as a fletcher straightens an arrow shaft, so the wise straighten the trembling mind.</p>
+      <span class="epigraph-source">Dhammapada 33</span>
+    </div>
+
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/c281d77a-4d1d-4ce6-ba55-08c6836b524b/tmp.jpg"
+           alt="David Young">
+    </div>
+
+  </div>
+
+  <div class="closing appear">
+    <div class="closing-name"><a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a></div>
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
+      <a href="https://www.davidyoung.online">home</a>
+      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+</div>
+
+<script>
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+document.querySelectorAll('.section-hero img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+});
+
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY >= window.innerHeight * 0.9);
+});
+</script>
+
+</body>
+</html>
