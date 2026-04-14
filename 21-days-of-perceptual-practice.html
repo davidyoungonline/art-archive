@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21 Days of Perceptual Practice — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 1.8rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+
+  .work-byline {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    letter-spacing: 0.015em;
+    color: var(--ink-faint);
+    margin-bottom: 2.5rem;
+  }
+
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  /* HERO IMAGE */
+  .section-hero { margin: 0 0 1.8rem; }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  .video-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* AUDIO PROGRAMME */
+  .audio-list { margin: 0; }
+
+  .audio-item {
+    border-bottom: 1px solid var(--paper-dark);
+    padding: 0.65rem 0 0.8rem;
+  }
+
+  .audio-item:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .audio-header {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0 0.8rem;
+    align-items: baseline;
+    margin-bottom: 0.45rem;
+  }
+
+  .audio-day {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    color: var(--ink-ghost);
+    letter-spacing: 0.06em;
+  }
+
+  .audio-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* Native audio player */
+  .audio-player {
+    margin: 0 0 0.55rem 2.8rem;
+  }
+
+  .audio-player audio {
+    width: 100%;
+    height: 28px;
+    accent-color: var(--ink);
+    opacity: 0.75;
+    transition: opacity 0.3s;
+  }
+
+  .audio-player audio:hover,
+  .audio-player audio:focus { opacity: 1; }
+
+  /* Reading / exercise below player */
+  .audio-meta {
+    margin-left: 2.8rem;
+  }
+
+  .audio-exercise {
+    font-family: var(--serif);
+    font-size: 0.92rem;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 0.15rem;
+  }
+
+  .audio-source {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
+
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="alexander-technique.html">&#8592; Alexander Technique</a></p>
+
+    <h1 class="work-title appear">21 Days of Perceptual Practice</h1>
+    <div class="work-byline appear">
+      David Young<br>
+      Audio series &mdash; August 2020
+    </div>
+
+    <p class="appear">
+      What if perception &mdash; the very way we see and experience the world &mdash; was something that we could decide and change? What if perception were a lever for creating freedom and movement in one&rsquo;s life?
+    </p>
+
+    <div class="section-hero appear">
+      <img src="valentin.jpg" alt="A person sitting in meditation, Brandenburg 2020">
+      <div class="video-label">Brandenburg 2020</div>
+    </div>
+
+    <p class="section-intro appear">
+      Over three weeks in August 2020, I sent a daily audio meditation and a short practical exercise to a group of practitioners around the world &mdash; delivered each evening by WhatsApp. Each audio runs around twelve minutes and is designed for lying down, on the floor or a bed, with a book under your head and your knees bent toward the ceiling. You will need a notebook.
+    </p>
+
+    <p class="section-intro appear">
+      The series moves through three weeks: the first grounded in <a href="alexander-technique.html">Alexander Technique</a> and the body&rsquo;s perceptual habits; the second opening outward through art, movement and the work of Deborah Hay; the third turning toward stillness, chance and the Buddhist tradition.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <p class="section-label appear" id="programme">Programme</p>
+
+    <div class="audio-list appear">
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">0</span>
+          <span class="audio-title">Introduction &amp; Housekeeping</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2000%20Introduction.ogg" type="audio/ogg">
+          </audio>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">1</span>
+          <span class="audio-title">Stopping</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2001%20Stopping.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">To Not-Do List</p>
+          <p class="audio-source"><em>The Use of the Self</em>, F. M. Alexander, 1932</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">2</span>
+          <span class="audio-title">Habits</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2002%20Habits.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Identify three habits</p>
+          <p class="audio-source"><em>Constructive Conscious Control of the Individual</em>, F. M. Alexander, 1923</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">3</span>
+          <span class="audio-title">Mirror, mirror</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2003%20Mirror%2C%20mirror.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Look in the mirror without judging</p>
+          <p class="audio-source"><em>The Alexander Technique As I See It</em>, Patrick Macdonald, 1989</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">4</span>
+          <span class="audio-title">Relationships</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2004%20Relationships.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Relationship diagram</p>
+          <p class="audio-source"><em>Principis Humanitas</em>, Abhijit Naskar, 2017</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">5</span>
+          <span class="audio-title">Brain</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2005%20Brain.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Relationship diagram with qualities</p>
+          <p class="audio-source"><em>What is Mind?</em>, Abhijit Naskar, 2016</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">6</span>
+          <span class="audio-title">Meditation</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2006%20Meditation.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Relationship diagram with the most important quality in the centre</p>
+          <p class="audio-source"><em>A Push in Perception</em>, Abhijit Naskar, 2017</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">7</span>
+          <span class="audio-title">Fun</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2007%20Fun.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Ten instructions (e.g. with big love&hellip;)</p>
+          <p class="audio-source">Cynthia Troup, <em>Ready, Fire, Aim</em> &mdash; interview with Margaret Cameron and David Young, 2005</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">8</span>
+          <span class="audio-title">Cow</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2008%20Cow.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Perform &lsquo;Outside Cow 1&rsquo;</p>
+          <p class="audio-source">Margaret Cameron &amp; David Young, <em>So You Think You Can Cow</em> (performance work), 2009</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">9</span>
+          <span class="audio-title">See Yourself Seeing</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2009%20See%20Yourself%20Seeing.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Writing impulses: forest, water, wall</p>
+          <p class="audio-source">Margaret Cameron, <em>I Shudder To Think</em>, 2014</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">10</span>
+          <span class="audio-title">The Art of War</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2010%20The%20Art%20of%20War.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">List places where you are not expected</p>
+          <p class="audio-source">Sun Tzu, <em>The Art of War</em>, ancient Chinese text</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">11</span>
+          <span class="audio-title">Nothing</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2011%20Nothing.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-source">Ursula K. Le Guin (translator), Lao Tzu, <em>Tao Te Ching</em>, 1997</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">12</span>
+          <span class="audio-title">A Simple Life</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2012%20A%20Simple%20Life.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">A Simple Life checklist</p>
+          <p class="audio-source">John Heider (translator), <em>The Tao of Leadership</em>, 1985</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">13</span>
+          <span class="audio-title">The Perception is the Dance</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2013%20The%20Perception%20is%20the%20Dance.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Write choreographic instructions for how to do something you love</p>
+          <p class="audio-source">Deborah Hay, <em>My Body The Buddhist</em>, 2000</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">14</span>
+          <span class="audio-title">What if</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2014%20What%20if.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Choose &amp; refine 3&ndash;10 choreographic instructions; add &lsquo;What if&rsquo;</p>
+          <p class="audio-source">Deborah Hay, <em>seeing seeing seeing</em> (solo performance work), 2009</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">15</span>
+          <span class="audio-title">Why not?</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2015%20Why%20not%3F.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Refine, reduce, enhance and/or perform your choreography</p>
+          <p class="audio-source">Peter Humble &amp; David Young, <em>Deborah Hay: Alignment is Everywhere</em> (short film), 2019</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">16</span>
+          <span class="audio-title">Serendipity</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2016%20Serendipity.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">What is next to your passion in the dictionary?</p>
+          <p class="audio-source">John Cage, <em>Silence</em>, 1968</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">17</span>
+          <span class="audio-title">Silence</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2017%20Silence.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Six gamechangers</p>
+          <p class="audio-source">John Cage, <em>4&prime;33&Prime;</em>, 1952</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">18</span>
+          <span class="audio-title">Chance</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2018%20Chance.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Roll the dice</p>
+          <p class="audio-source">John Cage, <em>Music of Changes</em> (solo piano), 1951</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">19</span>
+          <span class="audio-title">Concentration</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2019%20Concentration.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Look over, complete and/or revise all previous exercises</p>
+          <p class="audio-source">Webu Sayadaw, <em>The Way to Ultimate Calm</em>, 2001</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">20</span>
+          <span class="audio-title">Insight</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2020%20Insight.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Writing reflection on the forest, water and wall visualisations</p>
+          <p class="audio-source">Thomas Cleary (translator), <em>The Secret of the Golden Flower</em>, 1991</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">21</span>
+          <span class="audio-title">Enlightenment</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2021%20Enlightenment.ogg" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-exercise">Create your own 21 days</p>
+          <p class="audio-source">Nyanaponika Thera, <em>The City of the Mind</em>, 1974</p>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">21b</span>
+          <span class="audio-title">Gratitude</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/21-days-of-perceptual-practice-19-concentration/21%20Days%20of%20Perceptual%20Practice%20-%2021b%20Gratitude.ogg" type="audio/ogg">
+          </audio>
+        </div>
+      </div>
+
+    </div><!-- end .audio-list -->
+
+  </div><!-- end .prose -->
+
+  <div class="closing appear">
+    <div class="closing-name"><a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a></div>
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
+      <a href="alexander-technique.html">Alexander Technique</a>
+      <a href="https://www.davidyoung.online">home</a>
+      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+</div>
+
+<script>
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+document.querySelectorAll('.section-hero img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+});
+
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY >= window.innerHeight * 0.9);
+});
+</script>
+
+</body>
+</html>
