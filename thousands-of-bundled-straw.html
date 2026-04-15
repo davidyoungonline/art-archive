@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thousands of Bundled Straw — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 1.8rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .work-byline {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    line-height: 1.9;
+    letter-spacing: 0.015em;
+    margin-bottom: 3rem;
+  }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  /* HERO */
+  .section-hero { margin: 0 0 1.8rem; }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  /* CD COVER — square, sits above audio list */
+  .cd-cover {
+    margin: 0 0 2rem;
+  }
+
+  .cd-cover img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .cd-cover img.seen { opacity: 1; }
+
+  .video-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  .video-label a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .video-label a:hover { border-bottom-color: var(--ink); }
+
+  /* VIDEO / THESIS / PROGRAMME EMBED */
+  .video-item { margin: 2.2rem 0; }
+
+  .video-embed {
+    position: relative;
+    width: 100%;
+    height: 0;
+    background: var(--paper-dark);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .video-embed.ratio-dv   { padding-bottom: 68.57%; }
+  .video-embed.ratio-pdf  { padding-bottom: 133%; }
+  .video-embed.seen { opacity: 1; }
+
+  .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* AUDIO LIST — 21 days style */
+  .audio-list { margin: 0 0 2rem; }
+
+  .audio-item {
+    border-bottom: 1px solid var(--paper-dark);
+    padding: 0.65rem 0 0.8rem;
+  }
+
+  .audio-item:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .audio-header {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr auto;
+    gap: 0 0.8rem;
+    align-items: baseline;
+    margin-bottom: 0.45rem;
+  }
+
+  .audio-num {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    color: var(--ink-ghost);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  .audio-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .audio-dur {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-ghost);
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .audio-player {
+    margin: 0 0 0.4rem 3.2rem;
+  }
+
+  .audio-player audio {
+    width: 100%;
+    height: 28px;
+    accent-color: var(--ink);
+    opacity: 0.75;
+    transition: opacity 0.3s;
+  }
+
+  .audio-player audio:hover,
+  .audio-player audio:focus { opacity: 1; }
+
+  .audio-meta {
+    margin-left: 3.2rem;
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .audio-meta a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .audio-meta a:hover {
+    color: var(--ink-light);
+    border-bottom-color: var(--ink-ghost);
+  }
+
+  /* MARGIN NOTE */
+  .margin-note {
+    margin: 1.5rem 0 2.5rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+
+  .margin-note p {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .margin-note a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .margin-note a:hover { border-bottom-color: var(--ink); }
+
+  .margin-note .note-sub {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    margin-top: 0.5rem;
+    line-height: 1.9;
+  }
+
+  /* LINKS LIST — minotaur style */
+  .links-list { margin: 0.5rem 0 2rem; }
+
+  .link-row {
+    display: block;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 1rem;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.4s, padding-left 0.35s;
+  }
+
+  .link-row:first-child { border-top: 1px solid var(--paper-dark); }
+  .link-row:hover { color: var(--ink-light); padding-left: 0.35rem; }
+
+  .link-row .link-type {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  }
+
+  /* PERFORMANCE LIST — minotaur style */
+  .perf-list { margin: 0.5rem 0 2rem; }
+
+  .perf-row {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    letter-spacing: 0.015em;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+
+  .perf-row:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .perf-row strong {
+    display: block;
+    font-weight: 400;
+    color: var(--ink);
+    font-size: 1rem;
+  }
+
+  /* CREDITS — minotaur style */
+  .credits-block {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    line-height: 2.1;
+    letter-spacing: 0.015em;
+    color: var(--ink-light);
+    margin-bottom: 2rem;
+  }
+
+  .credits-block strong { font-weight: 500; color: var(--ink); }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
+
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="art.html">&#8592; art</a></p>
+
+    <h1 class="work-title appear">Thousands of Bundled Straw</h1>
+    <p class="work-byline appear">
+      a song cycle in seven movements &middot; 1997&ndash;2005<br>
+      Libra Ensemble &middot; Deborah Kayser, soprano &middot; Mark Knoop, conductor<br>
+      presented by Aphids
+    </p>
+
+    <p class="appear">
+      This song cycle began in a fishing village near Hiroshima, where I was staying with a young Japanese composer I had met at the Akiyoshidai Contemporary Music Festival in 1997. Each morning I awoke to the sound of drumming and cicadas coming from the local Shinto temple (you can hear this in Movement IV). At night I wandered through ricefields and saw glinting fireflies appearing and disappearing behind the blades of rice. The song cycle replicates the structure of over-packaged Japanese cookies &mdash; boxes within boxes, each movement a sealed world inside the whole.
+    </p>
+
+    <div class="section-hero appear">
+      <img src="thousands-of-bundled-straw.jpg" alt="Deborah Kayser — Thousands of Bundled Straw">
+      <div class="video-label">Deborah Kayser &mdash; <em>Thousands of Bundled Straw</em>. Photograph: Yatzek.</div>
+    </div>
+
+    <p class="section-intro appear">
+      The title is Japlish and comes from a tourist brochure for <a href="https://ichibata.jp/e/?page_id=68" target="_blank">Ichibata Yakushi</a>, the Temple of the Healing Eyes on Lake Shinji-ko, in far-western Japan. According to myth, the fisherman Yoichi discovered a statue of the Buddha floating in the sea. In a dream it told him to wrap himself in bundles of straw and throw himself from a cliff. This way his blind mother&rsquo;s eyes would be opened. He did as instructed and his mother could see. He founded the temple. The statue was placed inside a box within a box within a box behind the temple altar. It is displayed once every hundred years.
+    </p>
+
+    <p class="section-intro appear">
+      The cycle took ten years to finish, each movement commissioned and composed for different musicians. Movements were performed separately around the world before the whole was assembled.
+    </p>
+
+    <p class="section-intro appear">
+      Song 4 in Movement V was written first in that fishing village, for soprano Deborah Kayser and guitarist Geoffrey Morris, both of whom I worked with for 20 years.
+    </p>
+
+    <p class="section-intro appear">
+      The final movement &mdash; for the largest forces, the whole ensemble &mdash; was created last, and became a process of stripping back, reducing, clearing. How little I needed to insert or force or do. There is a moment in this movement where everything stops and Deborah&rsquo;s voice sails over a static yet shifting texture in the ensemble. I had planned Song 5 in Movement V to be the vanishing point of the work. Instead, this floating moment &mdash; like the impossible statue floating on the sea &mdash; turned out to be the still point in my composing life. After it, I no longer wrote formally notated music.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- RECORDING -->
+    <p class="section-label appear" id="recording">Recording</p>
+
+    <div class="margin-note appear">
+      <p><em>Thousands of Bundled Straw: a song cycle in seven movements</em></p>
+      <p class="note-sub">
+        David Young / Libra Ensemble<br>
+        Live and studio recordings &mdash; Iwaki Auditorium, ABC Southbank Centre, Melbourne, 18&ndash;19 October 2005<br>
+        &copy; 2005 Libra Ensemble / Aphids<br>
+        Sound engineer: Jim Atkins
+      </p>
+    </div>
+
+    <div class="cd-cover appear">
+      <img src="thousands-cd-cover.jpg" alt="Thousands of Bundled Straw — CD cover, David Young / Libra Ensemble">
+    </div>
+
+    <!-- Replace each empty src="" with Archive.org download URL once CD is uploaded.
+         Format: https://archive.org/download/ITEM-IDENTIFIER/filename.mp3 -->
+    <div class="audio-list appear">
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-num">I</span>
+          <span class="audio-title">clarinet &amp; cello</span>
+          <span class="audio-dur">6&prime;00</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">commissioned by Ensemble 2000, Denmark &middot; first performed by Libra Ensemble (Carl Rosman &amp; Geoffrey Gartner), 2001, Melbourne</div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-num">II</span>
+          <span class="audio-title">bass recorder, oboe, trumpet, violin &amp; percussion</span>
+          <span class="audio-dur">5&prime;00</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">commissioned by Tosiya Suzuki, Amsterdam &middot; first performed 2nd International Recorder Festival, 1998 &middot; subsequently performed as part of <a href="ricefields.html">Ricefields</a>, 1998</div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-num">III</span>
+          <span class="audio-title">soprano, oboe, cello &amp; piano</span>
+          <span class="audio-dur">9&prime;00</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">commissioned by &AElig;quatuor (Matthias Arter, Ingrid Karlen, Tobias Moster &amp; Sylvia Nopper), Zurich &middot; first performed 1998</div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-num">IV</span>
+          <span class="audio-title">cor anglais, bass clarinet, tenor trombone, viola &amp; double bass</span>
+          <span class="audio-dur">4&prime;00</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">commissioned by Libra Ensemble &middot; first performed 1997, Melbourne</div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-num">V</span>
+          <span class="audio-title">soprano (with five eggs) &amp; guitar in quarter-tones</span>
+          <span class="audio-dur">10&prime;00</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">seven songs &middot; commissioned by Libra Ensemble &middot; first performed 1997, Melbourne &middot; broadcast on Radio Bremen and ABC Classic FM</div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-num">VI</span>
+          <span class="audio-title">soprano, oboe, clarinet, alto trombone, violin, viola, cello, double bass &amp; piano</span>
+          <span class="audio-dur">9&prime;00</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">commissioned by Libra Ensemble &middot; first performed 1997, Melbourne</div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-num">VII</span>
+          <span class="audio-title">soprano, bass recorder, oboe, clarinet, trumpet, tenor trombone, violin, viola, cello, double bass, percussion &amp; piano</span>
+          <span class="audio-dur">11&prime;00</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">commissioned by Libra Ensemble &middot; world premiere, Melbourne International Arts Festival, October 2005</div>
+      </div>
+
+    </div><!-- .audio-list -->
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- SCORE -->
+    <p class="section-label appear" id="score">Score</p>
+
+    <p class="section-intro appear">
+      The score is a handwritten facsimile in seven parts, 260 pages. Duration 54&prime;32&Prime;. Individual movements can be performed separately.
+    </p>
+
+    <div class="video-item appear">
+      <div class="video-embed ratio-pdf">
+        <iframe src="https://archive.org/embed/thousands-of-bundled-straw-score_202604"
+                title="Thousands of Bundled Straw — score"
+                allowfullscreen
+                loading="lazy"></iframe>
+      </div>
+      <div class="video-label"><a href="https://archive.org/details/thousands-of-bundled-straw-score_202604" target="_blank">archive.org/details/thousands-of-bundled-straw-score_202604</a></div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- FURTHER READING & LINKS -->
+    <p class="section-label appear" id="links">Further reading &amp; links</p>
+
+    <div class="video-item appear">
+      <iframe src="https://archive.org/embed/09-the-fool-and-the-opera-david-young"
+              title="David Young — Joy FM radio interview, 2009"
+              style="width:100%;height:30px;border:none;display:block;opacity:0.85;"
+              loading="lazy"></iframe>
+      <div class="video-label" style="margin-top:0.5rem;">Joy FM radio interview &mdash; 2009 &middot; <a href="https://archive.org/details/09-the-fool-and-the-opera-david-young" target="_blank">archive.org</a></div>
+    </div>
+
+    <div class="links-list appear">
+      <a class="link-row" href="https://www.realtime.org.au/composer-metamorphosis/" target="_blank">
+        <span class="link-type">Interview</span>
+        Keith Gallasch, &lsquo;Composer metamorphosis&rsquo; &mdash; <em>RealTime</em> 69, Oct&ndash;Nov 2005
+      </a>
+      <a class="link-row" href="https://www.realtime.org.au/songs-beyond-words/" target="_blank">
+        <span class="link-type">Review</span>
+        Chris Reid, &lsquo;Songs beyond words&rsquo; &mdash; <em>RealTime</em> 70, Dec&ndash;Jan 2005&ndash;06
+      </a>
+      <a class="link-row" href="https://archive.org/details/thousands-of-bundled-straw-programme-2005" target="_blank">
+        <span class="link-type">Programme</span>
+        Concert programme &mdash; Melbourne International Arts Festival, 2005
+      </a>
+      <a class="link-row" href="https://ia600707.us.archive.org/26/items/09-the-fool-and-the-opera-david-young/Thousands%20of%20Bundled%20Straw%20concert%20programme%202009.pdf" target="_blank">
+        <span class="link-type">Programme</span>
+        Concert programme &mdash; Melbourne Recital Centre, 2009
+      </a>
+      <a class="link-row" href="https://aphids.net/projects/thousands-of-bundled-straw/" target="_blank">
+        <span class="link-type">Archive</span>
+        Thousands of Bundled Straw &mdash; Aphids
+      </a>
+      <a class="link-row" href="https://ichibata.jp/e/?page_id=68" target="_blank">
+        <span class="link-type">Source</span>
+        The story of Ichibata Yakushi &mdash; Temple of the Healing Eyes, Japan
+      </a>
+      <a class="link-row" href="https://archive.org/details/dy-thesis" target="_blank">
+        <span class="link-type">PhD thesis</span>
+        David Young &mdash; University of Queensland
+      </a>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- PERFORMANCE HISTORY -->
+    <p class="section-label appear" id="performances">Performance history</p>
+
+    <div class="perf-list appear">
+      <div class="perf-row">
+        <strong>RMIT Storey Hall, Melbourne &mdash; Mallesons Stephen Jacques City of Melbourne Young Artists Award</strong>
+        May 1997 &middot; Libra Ensemble<br>
+        Movements IV, V &amp; VI &mdash; first performances
+      </div>
+      <div class="perf-row">
+        <strong>2nd International Recorder Festival, Amsterdam</strong>
+        July 1998 &middot; Tosiya Suzuki &amp; ensemble<br>
+        Movement II &mdash; first performance
+      </div>
+      <div class="perf-row">
+        <strong>&AElig;quatuor, Zurich</strong>
+        July 1998<br>
+        Movement III &mdash; first performance
+      </div>
+      <div class="perf-row">
+        <strong>North Melbourne Town Hall</strong>
+        July 2001 &middot; Libra Ensemble (Carl Rosman &amp; Geoffrey Gartner)<br>
+        Movement I &mdash; first performance
+      </div>
+      <div class="perf-row">
+        <strong>Iwaki Auditorium, ABC Southbank Centre &mdash; Melbourne International Arts Festival</strong>
+        18 October 2005 &middot; Libra Ensemble &middot; Deborah Kayser, soprano &middot; Mark Knoop, conductor<br>
+        Complete cycle &mdash; world premiere &middot; Movement VII world premiere
+      </div>
+      <div class="perf-row">
+        <strong>The Salon, Melbourne Recital Centre &mdash; opening season</strong>
+        12 February 2009 &middot; Libra Ensemble &middot; Deborah Kayser, soprano &middot; Mark Knoop, conductor<br>
+        Complete cycle
+      </div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- CREDITS — 2009 -->
+    <p class="section-label appear" id="credits-2009">Credits &mdash; Melbourne Recital Centre, 2009</p>
+
+    <div class="credits-block appear">
+      <strong>Soprano</strong> Deborah Kayser<br>
+      <strong>Conductor</strong> Mark Knoop<br>
+      <strong>Recorder</strong> Tosiya Suzuki<br>
+      <strong>Oboe</strong> Adam Yee<br>
+      <strong>Clarinets</strong> Carl Rosman<br>
+      <strong>Trumpet</strong> Ben O&rsquo;Callaghan<br>
+      <strong>Trombone</strong> Ben Marks<br>
+      <strong>Percussion</strong> Peter Neville<br>
+      <strong>Piano</strong> Timothy Young<br>
+      <strong>Guitar</strong> Geoffrey Morris<br>
+      <strong>Violin</strong> Elizabeth Sellars<br>
+      <strong>Viola</strong> Jason Bunn<br>
+      <strong>Violoncello</strong> Geoffrey Gartner<br>
+      <strong>Double bass</strong> Dorit Herskovits<br>
+      <strong>Presented by</strong> Aphids<br>
+      <strong>Photography</strong> Yatzek
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- CREDITS — 2005 -->
+    <p class="section-label appear" id="credits-2005">Credits &mdash; Melbourne International Arts Festival, 2005</p>
+
+    <div class="credits-block appear">
+      <strong>Soprano</strong> Deborah Kayser<br>
+      <strong>Conductor</strong> Mark Knoop<br>
+      <strong>Recorder</strong> Natasha Anderson<br>
+      <strong>Oboe / cor anglais</strong> Matthew Tighe<br>
+      <strong>Clarinets</strong> Carl Rosman<br>
+      <strong>Trumpet</strong> Tristram Williams<br>
+      <strong>Trombone</strong> Ben Marks<br>
+      <strong>Percussion</strong> Peter Neville<br>
+      <strong>Piano</strong> Mark Kruger<br>
+      <strong>Guitar</strong> Geoffrey Morris<br>
+      <strong>Violin</strong> Elizabeth Sellars<br>
+      <strong>Viola</strong> Jason Bunn<br>
+      <strong>Violoncello</strong> Rosanne Hunt<br>
+      <strong>Contrabass</strong> Dorit Herskovits<br>
+      <strong>Sound engineer</strong> Jim Atkins<br>
+      <strong>Presented by</strong> Libra Ensemble in association with Aphids and Melbourne International Arts Festival<br>
+      <strong>Photography</strong> Yatzek
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- AWARDS -->
+    <div class="margin-note appear">
+      <p><em>2006 APRA Music Awards</em></p>
+      <p>Nominated &mdash; Vocal or Choral Work of the Year</p>
+      <p class="note-sub">APRA AMCOS</p>
+    </div>
+
+    <div class="margin-note appear">
+      <p><em>1999 Paul Lowin Song Cycle Prize</em></p>
+      <p>Highly Commended</p>
+    </div>
+
+  </div><!-- .prose -->
+
+  <div class="closing appear">
+    <div class="closing-name">
+      <a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a>
+    </div>
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">&#8593;</a>
+      <a href="art.html">art</a>
+      <a href="https://www.davidyoung.online">home</a>
+      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+</div><!-- .page -->
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<script>
+  document.querySelectorAll('.appear').forEach(el => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+  });
+
+  // Hero + CD cover fade-in
+  document.querySelectorAll('.section-hero img, .cd-cover img').forEach(img => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('seen'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 }).observe(img);
+  });
+
+  // Embed fade-in
+  document.querySelectorAll('.video-embed').forEach(v => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { v.classList.add('seen'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 }).observe(v);
+  });
+  setTimeout(() => {
+    document.querySelectorAll('.video-embed:not(.seen)').forEach(v => v.classList.add('seen'));
+  }, 3000);
+
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY >= window.innerHeight * 0.9);
+  });
+</script>
+
+</body>
+</html>
