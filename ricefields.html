@@ -7,12 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #2a3f6e;
-    --ink-light: #4e6694;
-    --ink-faint: #7d93b8;
-    --ink-ghost: #adbdd6;
-    --paper: #f7f5f1;
-    --paper-dark: #edeae4;
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
     --serif: 'EB Garamond', 'Georgia', serif;
   }
 
@@ -30,12 +30,12 @@
 
   .page {
     max-width: 600px;
-    padding: 0 2rem;
+    padding: 0 3.6rem;
     margin: 0 auto;
   }
 
   .breath {
-    height: 36vh;
+    height: 62vh;
     display: flex;
     align-items: flex-end;
     padding-bottom: 4rem;
@@ -54,15 +54,17 @@
     to   { opacity: 1; height: 50px; }
   }
 
+  /* PROSE */
   .prose {
     font-family: var(--serif);
     font-size: 1.22rem;
     font-weight: 400;
-    line-height: 1.9;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
     color: var(--ink);
   }
 
-  .prose p { margin-bottom: 2rem; }
+  .prose p { margin-bottom: 1.8rem; }
 
   .prose a {
     color: var(--ink);
@@ -73,6 +75,7 @@
 
   .prose a:hover { border-bottom-color: var(--ink); }
 
+  /* NAV BACK */
   .nav-back {
     font-family: var(--serif);
     font-size: 0.82rem;
@@ -89,6 +92,7 @@
 
   .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
 
+  /* TITLE / BYLINE */
   .work-title {
     font-family: var(--serif);
     font-size: 1.9rem;
@@ -104,6 +108,7 @@
     font-size: 0.9rem;
     color: var(--ink-faint);
     line-height: 1.9;
+    letter-spacing: 0.015em;
     margin-bottom: 3rem;
   }
 
@@ -116,47 +121,38 @@
 
   .work-byline a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
 
-  .photo {
-    margin: 4rem 0;
-    position: relative;
-  }
-
-  .photo img {
-    display: block;
-    width: 100%;
-    height: auto;
-    filter: saturate(0.88) contrast(1.02);
-    opacity: 0;
-    transform: scale(1.008);
-    transition: opacity 2s ease, transform 2.5s ease;
-  }
-
-  .photo.seen img { opacity: 1; transform: scale(1); }
-
-  .photo.drift-right { width: 130%; }
-  .photo.portrait    { width: 60%; margin-left: auto; margin-right: -12%; }
-  .photo.wide        { width: 140%; margin-left: -10%; }
-
-  @media (max-width: 900px) {
-    .photo.drift-right { width: 110%; }
-    .photo.portrait    { width: 70%; margin-right: -5%; }
-    .photo.wide        { width: 115%; margin-left: -5%; }
-  }
-
-  .photo .whisper {
-    margin-top: 0.8rem;
+  /* SECTION LABEL */
+  .section-label {
     font-family: var(--serif);
-    font-size: 0.75rem;
-    font-style: italic;
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--ink-faint);
-    opacity: 0;
-    transition: opacity 1.8s ease 0.8s;
+    margin-bottom: 1.4rem;
   }
 
-  .photo.seen .whisper { opacity: 1; }
+  /* SECTION INTRO */
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
 
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  /* PAUSE */
   .pause {
-    padding: 3.5rem 0;
+    padding: 3rem 0;
     color: var(--ink-ghost);
     font-family: var(--serif);
     font-size: 0.8rem;
@@ -164,8 +160,24 @@
     user-select: none;
   }
 
+  /* SECTION HERO */
+  .section-hero {
+    margin: 0 0 1.8rem;
+  }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  /* MARGIN NOTE */
   .margin-note {
-    margin: 1.5rem 0 3rem;
+    margin: 1.5rem 0 2.5rem;
     padding-left: 1.6rem;
     border-left: 1px solid var(--ink-ghost);
   }
@@ -174,6 +186,7 @@
     font-family: var(--serif);
     font-size: 1.05rem;
     line-height: 1.8;
+    letter-spacing: 0.015em;
     color: var(--ink);
     margin-bottom: 0.25rem;
   }
@@ -194,49 +207,36 @@
     line-height: 1.9;
   }
 
-  .section-label {
-    font-family: var(--serif);
-    font-size: 0.76rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 1.4rem;
-  }
-
   /* IMAGE GRID */
   .image-grid {
     margin: 0 0 0.8rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
+    columns: 2;
+    column-gap: 5px;
   }
 
+  @media (max-width: 500px) { .image-grid { columns: 1; } }
+
   .grid-item {
-    overflow: hidden;
+    break-inside: avoid;
     cursor: pointer;
     background: var(--paper-dark);
     opacity: 0;
     transition: opacity 1.2s ease;
+    margin-bottom: 5px;
   }
 
   .grid-item.seen { opacity: 1; }
 
-  .grid-item:first-child { grid-column: 1 / -1; }
-
   .grid-item img {
     display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 4/3;
+    height: auto;
     filter: saturate(0.88) contrast(1.02);
     transition: transform 0.9s ease, filter 0.6s ease;
   }
 
-  .grid-item:first-child img { aspect-ratio: 16/9; }
-
   .grid-item:hover img {
-    transform: scale(1.04);
+    transform: scale(1.02);
     filter: saturate(1) contrast(1.02);
   }
 
@@ -343,94 +343,19 @@
     .lb-next { right: -1.8rem; }
   }
 
-  /* GALLERY OVERLAY */
-  .gallery-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--paper);
-    z-index: 1000;
-    overflow-y: auto;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-  }
-
-  .gallery-overlay.open { opacity: 1; pointer-events: all; }
-
-  .gallery-inner {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 3.5rem 2rem 6rem;
-  }
-
-  .gallery-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    padding-bottom: 1.2rem;
-    border-bottom: 1px solid var(--paper-dark);
-  }
-
-  .gallery-title {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--ink);
-  }
-
-  .gallery-close {
-    background: none;
-    border: none;
-    font-family: var(--serif);
-    font-size: 0.82rem;
-    color: var(--ink-light);
-    cursor: pointer;
-    letter-spacing: 0.05em;
-    transition: color 0.3s;
-    padding: 0;
-  }
-
-  .gallery-close:hover { color: var(--ink); }
-
-  .gallery-thumbs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-  }
-
-  @media (max-width: 600px) { .gallery-thumbs { grid-template-columns: repeat(2, 1fr); } }
-
-  .gallery-thumb {
-    aspect-ratio: 1;
-    overflow: hidden;
-    cursor: pointer;
-    background: var(--paper-dark);
-  }
-
-  .gallery-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: saturate(0.85) contrast(1.02);
-    transition: transform 0.8s ease, filter 0.5s ease;
-    display: block;
-  }
-
-  .gallery-thumb:hover img { transform: scale(1.05); filter: saturate(1) contrast(1.02); }
-
   /* VIDEO */
   .video-item { margin: 2.2rem 0; }
 
   .video-embed {
     position: relative;
-    padding-bottom: 68.57%; /* 384/560 aspect ratio for Archive.org embed */
+    padding-bottom: 56.25%;
     background: var(--paper-dark);
     overflow: hidden;
     opacity: 0;
     transition: opacity 1.4s ease;
   }
 
+  .video-embed.ratio-dv { padding-bottom: 68.57%; }
   .video-embed.seen { opacity: 1; }
 
   .video-embed iframe {
@@ -450,6 +375,35 @@
     line-height: 1.5;
   }
 
+  .video-label a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .video-label a:hover { border-bottom-color: var(--ink); }
+
+  /* AUDIO */
+  .audio-embed {
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    margin-bottom: 1rem;
+  }
+
+  .audio-embed.seen { opacity: 1; }
+
+  .audio-embed audio {
+    width: 100%;
+    height: 40px;
+    display: block;
+    filter: saturate(0);
+    opacity: 0.8;
+  }
+
   /* LINKS */
   .links-list { margin: 0.5rem 0 2rem; }
 
@@ -459,6 +413,7 @@
     border-bottom: 1px solid var(--paper-dark);
     font-family: var(--serif);
     font-size: 1rem;
+    letter-spacing: 0.015em;
     color: var(--ink);
     text-decoration: none;
     line-height: 1.5;
@@ -477,11 +432,19 @@
     margin-bottom: 0.1rem;
   }
 
+  .link-row.pending {
+    color: var(--ink-faint);
+    cursor: default;
+  }
+
+  .link-row.pending:hover { padding-left: 0; color: var(--ink-faint); }
+
   /* CREDITS */
   .credits-block {
     font-family: var(--serif);
     font-size: 0.95rem;
     line-height: 2.1;
+    letter-spacing: 0.015em;
     color: var(--ink-light);
   }
 
@@ -495,6 +458,7 @@
     border-bottom: 1px solid var(--paper-dark);
     font-family: var(--serif);
     font-size: 0.95rem;
+    letter-spacing: 0.015em;
     line-height: 1.7;
     color: var(--ink-light);
   }
@@ -526,16 +490,52 @@
     margin-top: 1rem;
     font-family: var(--serif);
     font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
   }
 
   .closing-links a {
     color: var(--ink-ghost);
     text-decoration: none;
-    margin-right: 1.4rem;
     transition: color 0.4s;
   }
 
   .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  /* SCROLL TO TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
 
   /* APPEAR */
   .appear {
@@ -548,17 +548,6 @@
 </style>
 </head>
 <body>
-
-<!-- GALLERY OVERLAY -->
-<div class="gallery-overlay" id="galleryOverlay">
-  <div class="gallery-inner">
-    <div class="gallery-header">
-      <span class="gallery-title">Ricefields &mdash; photographs</span>
-      <button class="gallery-close" onclick="closeGallery()">close</button>
-    </div>
-    <div class="gallery-thumbs" id="galleryThumbs"></div>
-  </div>
-</div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
@@ -580,12 +569,13 @@
 
   <div class="prose">
 
-    <p class="nav-back appear"><a href="https://www.davidyoung.online/art">&#8592; art</a></p>
+    <p class="nav-back appear"><a href="art.html">&#8592; art</a></p>
 
     <h1 class="work-title appear">Ricefields</h1>
     <p class="work-byline appear">
-      David Young with Sarah Pirrie &amp; Rosemary Joy &middot; installation / performance &middot; 1998&ndash;1999<br>
-      Presented by <a href="https://aphids.net/projects/ricefields/">Aphids</a>
+      David Young with Sarah Pirrie &amp; Rosemary Joy<br>
+      installation / performance &middot; 1998&ndash;1999<br>
+      Presented by <a href="https://aphids.net/projects/ricefields/" target="_blank">Aphids</a>
     </p>
 
     <p class="appear">
@@ -593,40 +583,29 @@
     </p>
 
     <p class="appear">
-      I had been composing chamber music for years &mdash; notation on paper, performers reading from stands. The music was experimental, dense, alive to me, but it lived inside a convention that kept audiences at a distance. With <em>Ricefields</em>, the score became the room. Working with visual artists Sarah Pirrie and Rosemary Joy, we built a sculptural installation inspired by the rural and urban landscape of Matsue, Japan. I added graphic scores and performance instructions directly onto the installation elements &mdash; printed on a t-shirt, painted on a pole, embedded in the objects that surrounded the performers and the audience alike.
+      Collaborating with visual artists Sarah Pirrie and Rosemary Joy, we created a sculptural installation, inspired in part by the rural and urban landscape of Matsue, Japan. Graphic scores and performance instructions were added directly onto the installation elements &mdash; printed on a t-shirt, painted on a pole, embedded in the objects that surrounded the performers and the audience.
     </p>
 
-    <div class="photo wide">
-      <img src="https://aphids.net/assets/files/2020/05/Ricefields-8-1600x1095.jpeg"
-           alt="Ricefields installation"
-           onerror="this.style.display='none'">
-      <div class="whisper">Photograph by David Young.</div>
+    <p class="appear">
+      I had been composing chamber music for some years &mdash; notation on paper, performers reading from stands. The music was experimental, dense, alive to me, but it lived inside a convention that kept audiences at a distance. With <em>Ricefields</em>, the score became the room.
+    </p>
+
+    <div class="section-hero appear">
+      <img src="ricefields-ensemble.jpg" alt="Ricefields — Natasha Anderson, David Young, Yasutaka Hemmi, Rosemary Joy, Shimane, Japan, 1999">
+      <div class="video-label">Natasha Anderson, David Young, Yasutaka Hemmi, Rosemary Joy &mdash; Shimane, Japan, 1999. Photograph by David Young.</div>
     </div>
 
-    <p class="appear">
-      Four musicians interpreted this sculptural score live: Deborah Kayser on voice, Natasha Anderson on recorders, Peter Humble on percussion, and Yasutaka Hemmi &mdash; a violinist from Matsue &mdash; on violin and viola. Each came from a different musical background, from classical contemporary to jazz and improvisation. Michael Hewes processed their sound in real time, amplifying and transforming the acoustic material through live electronics &mdash; something that felt genuinely new at the time. Lisa Trewin lit the space. The audience moved through the installation, touching sushi-shaped sponges embedded with microphones, becoming part of the sounding environment.
+    <p class="section-intro appear">
+      Four musicians interpreted this sculptural score live: soprano Deborah Kayser, recorder player Natasha Anderson, percussionist Peter Humble and Yasutaka Hemmi &mdash; a violinist from Matsue. Michael Hewes processed the sound in real time. Lisa Trewin lit the space. The audience inhabited the installation, touching sushi-shaped sponges embedded with microphones, becoming part of the score.
     </p>
 
-    <p class="appear">
-      What I discovered was that we had opened a door. The music I cared about most &mdash; experimental, challenging, uncompromising &mdash; could be presented in a way that invited people in rather than holding them at arm&rsquo;s length. Audiences could enter the work, move through it, and trust their own experience of what they heard and felt. This was the breakthrough. It resonated through the next thirty years of Aphids projects, and it began here, at La Mama, in October 1998.
+    <p class="section-intro appear">
+      <em>Ricefields</em> began at La Mama in October 1998, then travelled first to Le Centre Chor&eacute;graphique in Belfort, France, in May 1999. Then to Yumeshuraku in Shimane and Gallery 21 in Ginza, Tokyo &mdash; before returning to Australia for seasons at MetroArts in Brisbane and the Performance Space in Sydney.
     </p>
 
-    <div class="pause appear">&middot; &middot; &middot;</div>
-
-    <p class="appear">
-      <em>Ricefields</em> then travelled. First to Le Centre Chor&eacute;graphique in Belfort, France, in May 1999. Then, in October, to Japan &mdash; to Yumeshuraku in Shimane and Gallery 21 in Ginza, Tokyo &mdash; before returning to Australia for seasons at MetroArts in Brisbane and the Performance Space in Sydney. Each venue was different: a gallery, a theatre, a dance studio, a hall. The work evolved as it moved, absorbing the particular qualities of each space, adding new visual elements, adjusting the lighting to fit.
+    <p class="section-intro appear">
+      Yasutaka Hemmi had come to Melbourne to perform with us; now we travelled to his country and performed in his landscape &mdash; the landscape that had inspired the work in the first place. This model of artist-to-artist exchange, built on personal connection rather than institutional arrangement, became one of the defining patterns of Aphids. It was repeated with Juliana Hodkinson in Copenhagen for <em>Maps</em>. It only worked because it was personal.
     </p>
-
-    <p class="appear">
-      The Japan leg mattered most. Yasutaka Hemmi had come to Melbourne to perform with us; now we travelled to his country and performed in his landscape &mdash; the landscape that had inspired the work in the first place. This model of artist-to-artist exchange, built on personal connection rather than institutional arrangement, became one of the defining patterns of Aphids. I repeated it with Juliana Hodkinson in Copenhagen for <em>Maps</em>, and with Fritz Hauser and Boa in Basel for <em>Schallmachine</em>. It was a way of working that was simultaneously a business model, an artistic methodology, and a form of cultural exchange. It only worked because it was personal. Aphids could do it because Aphids wasn&rsquo;t an institution &mdash; it was a set of deep, specific relationships between artists.
-    </p>
-
-    <div class="photo drift-right">
-      <img src="https://aphids.net/assets/files/2020/05/Ricefields-3-1600x1110.jpeg"
-           alt="Ricefields, sculptural score detail"
-           onerror="this.style.display='none'">
-      <div class="whisper">Photograph by David Young.</div>
-    </div>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -634,7 +613,6 @@
     <p class="section-label appear">Photographs</p>
 
     <div class="image-grid appear" id="featuredGrid"></div>
-    <button class="view-all-btn appear" onclick="openGallery()">View all photographs &rarr;</button>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -642,13 +620,25 @@
     <p class="section-label appear">Film</p>
 
     <div class="video-item appear">
-      <div class="video-embed">
+      <div class="video-embed ratio-dv">
         <iframe src="https://archive.org/embed/ricefields-mini-dv"
                 title="Ricefields — documentation (Mini DV)"
                 allowfullscreen></iframe>
       </div>
-      <div class="video-label">Documentation footage &mdash; digitised from Mini DV</div>
+      <div class="video-label">Excerpts from the Ricefields premiere performance, La Mama Melbourne 1998</div>
     </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- RECORDING -->
+    <p class="section-label appear">Recording</p>
+
+    <div class="audio-embed appear">
+      <audio controls>
+        <source src="https://dn720600.ca.archive.org/0/items/ricefields-movement-1-thousands-of-bundled-straw/Ricefields%20-%20Movement%204%20-%20Recycling.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <p class="video-label appear" style="margin-bottom:1.2rem;">Recycling from Ricefields, Melbourne 1998 &mdash; <a href="https://archive.org/details/ricefields-movement-1-thousands-of-bundled-straw" target="_blank">all movements on Archive.org</a></p>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -660,20 +650,7 @@
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
-    <!-- PUBLICATION -->
-    <p class="section-label appear">Publication</p>
-
-    <div class="margin-note appear">
-      <p><em>Sonorities of Site</em></p>
-      <p>Edited by Cynthia Troup &middot; Aphids, St Kilda, 2012</p>
-      <p class="note-sub">
-        A5 sketchbook format. Ricefields is one of five Aphids projects discussed in depth, with images, score samples, sketches and handwritten notes. Contributors include Rosemary Joy, Deborah Kayser, David Young, Anna Tweeddale, Juliana Hodkinson and Bronwyn Stocks. Designed by Paul Ducco and Jacob Thompson.
-      </p>
-    </div>
-
-    <div class="pause appear">&middot; &middot; &middot;</div>
-
-    <!-- LINKS -->
+    <!-- FURTHER READING -->
     <p class="section-label appear">Further reading</p>
 
     <div class="links-list appear">
@@ -685,15 +662,23 @@
         <span class="link-type">Artist profile</span>
         David Young &mdash; Australian Music Centre
       </a>
-      <a class="link-row" href="https://www.resonate.com.au/2012/08/sonorities-of-site/" target="_blank">
-        <span class="link-type">Review</span>
-        Boni Cairncross on <em>Sonorities of Site</em> &mdash; Resonate Magazine, August 2012
+      <a class="link-row" href="https://archive.org/details/sonorities-of-site-aphids-publication" target="_blank">
+        <span class="link-type">Publication</span>
+        <em>Sonorities of Site</em> &mdash; edited by Cynthia Troup, Aphids, 2012
       </a>
+      <a class="link-row" href="https://www.australianmusiccentre.com.au/article/extending-the-recent-past-em-sonorities-of-site-em-aphids" target="_blank">
+        <span class="link-type">Review</span>
+        Boni Cairncross on <em>Sonorities of Site</em> &mdash; Resonate Magazine, 2012
+      </a>
+      <span class="link-row pending">
+        <span class="link-type">Essay</span>
+        Juliana Hodkinson &mdash; Essay on Ricefields &nbsp;[not yet digitised]
+      </span>
     </div>
 
     <div class="pause appear">&middot; &middot; &middot;</div>
 
-    <!-- PERFORMANCES -->
+    <!-- PERFORMANCE HISTORY -->
     <p class="section-label appear">Performance history</p>
 
     <div class="perf-list appear">
@@ -711,7 +696,7 @@
       </div>
       <div class="perf-row">
         <strong>Gallery 21, Ginza &mdash; Tokyo</strong>
-        10 October 1999
+        12 October 1999
       </div>
       <div class="perf-row">
         <strong>MetroArts &mdash; Brisbane</strong>
@@ -739,69 +724,42 @@
       <strong>Sound design</strong> Michael Hewes<br>
       <strong>Lighting</strong> Lisa Trewin<br>
       <strong>Photography</strong> David Young<br><br>
-      <strong>Supported by</strong> Australia Council for the Arts, Arts Victoria,<br>
-      &emsp;City of Melbourne, Shimane Prefecture Government Japan,<br>
-      &emsp;Australian Embassy in Tokyo, The Performance Space,<br>
-      &emsp;MetroArts, La Mama
+      <strong>Supported by</strong> Australia Council for the Arts, Arts Victoria,
+      City of Melbourne, Shimane Prefecture Government Japan,
+      Australian Embassy in Tokyo, The Performance Space,
+      MetroArts, La Mama
     </div>
 
   </div>
 
   <div class="closing appear">
-    <div class="closing-name">David Young</div>
+    <div class="closing-name"><a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a></div>
     <div class="closing-links">
-      <a href="https://www.davidyoung.online/art">&#8592; art</a>
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
+      <a href="art.html">art</a>
       <a href="https://www.davidyoung.online">home</a>
       <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
     </div>
   </div>
 
 </div>
 
+<button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 <script>
-// ─── IMAGES ──────────────────────────────────────────────────────────────────
 const images = [
-  {
-    src: 'https://aphids.net/assets/files/2020/05/Ricefields-8-1600x1095.jpeg',
-    caption: 'Ricefields. Photograph by David Young.'
-  },
-  {
-    src: 'https://aphids.net/assets/files/2020/05/Ricefields-1600x1098.jpeg',
-    caption: 'Ricefields. Photograph by David Young.'
-  },
-  {
-    src: 'https://aphids.net/assets/files/2020/05/Ricefields-9-1600x1063.jpeg',
-    caption: 'Ricefields. Photograph by David Young.'
-  },
-  {
-    src: 'https://aphids.net/assets/files/2020/05/Ricefields-3-1600x1110.jpeg',
-    caption: 'Ricefields, sculptural score detail. Photograph by David Young.'
-  },
-  {
-    src: 'https://aphids.net/assets/files/2020/05/Ricefields-2-1600x1098.jpeg',
-    caption: 'Ricefields. Photograph by David Young.'
-  },
-  {
-    src: 'https://aphids.net/assets/files/2020/05/Ricefields-1-1600x1110.jpeg',
-    caption: 'Ricefields. Photograph by David Young.'
-  },
-  {
-    src: 'https://aphids.net/assets/files/2020/05/Ricefields-6-1600x1095.jpeg',
-    caption: 'Ricefields. Photograph by David Young.'
-  },
-  {
-    src: 'https://aphids.net/assets/files/2020/05/Ricefields-7-1600x1063.jpeg',
-    caption: 'Ricefields. Photograph by David Young.'
-  },
-  {
-    src: 'https://aphids.net/assets/files/2020/05/Ricefields-4-1100x1600.jpeg',
-    caption: 'Ricefields. Photograph by David Young.'
-  }
+  { src: 'ricefields-tour-invite.jpg',       caption: 'Tour invitation — 出圃 [Ricefields], Japan / Australia tour, October 1999.' },
+  { src: 'ricefields-installation.jpg',      caption: 'Ricefields installation. Photograph by David Young.' },
+  { src: 'ricefields-natasha-anderson-2.jpg',caption: 'Ricefields installation detail. Photograph by David Young.' },
+  { src: 'ricefields-yasutaka-hemmi.jpg',    caption: 'Yasutaka Hemmi — Ricefields. Photograph by David Young.' },
+  { src: 'ricefields-invitation.jpg',        caption: 'Ricefields teabag rocket — Aphids invitation.' },
+  { src: 'ricefields-ensemble.jpg',          caption: 'Natasha Anderson, David Young, Yasutaka Hemmi, Rosemary Joy — Shimane, Japan, 1999. Photograph by David Young.' },
 ];
 
-// Build featured grid (first 5 images)
+// Build grid — all 6 images
 const grid = document.getElementById('featuredGrid');
-images.slice(0, 5).forEach((img, i) => {
+images.forEach((img, i) => {
   const item = document.createElement('div');
   item.className = 'grid-item';
   const el = document.createElement('img');
@@ -812,47 +770,16 @@ images.slice(0, 5).forEach((img, i) => {
   item.addEventListener('click', () => openLightbox(i, images));
   grid.appendChild(item);
   setTimeout(() => {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { item.classList.add('seen'); io.disconnect(); } });
-    }, { threshold: 0.05 });
-    io.observe(item);
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting) { item.classList.add('seen'); obs.disconnect(); } });
+    }, { threshold: 0.05 }).observe(item);
   }, i * 80);
 });
 
-// Build gallery thumbs (all images)
-const thumbsEl = document.getElementById('galleryThumbs');
-images.forEach((img, i) => {
-  const thumb = document.createElement('div');
-  thumb.className = 'gallery-thumb';
-  const el = document.createElement('img');
-  el.src = img.src;
-  el.alt = img.caption;
-  el.loading = 'lazy';
-  thumb.appendChild(el);
-  thumb.addEventListener('click', () => {
-    closeGallery();
-    setTimeout(() => openLightbox(i, images), 420);
-  });
-  thumbsEl.appendChild(thumb);
-});
-
-// Gallery
-function openGallery() {
-  document.getElementById('galleryOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeGallery() {
-  document.getElementById('galleryOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// Lightbox
 let lbImages = [], lbIndex = 0;
 
 function openLightbox(index, imgs) {
-  lbImages = imgs;
-  lbIndex = index;
+  lbImages = imgs; lbIndex = index;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
   loadLbImage();
@@ -878,44 +805,51 @@ function lbStep(dir) {
   loadLbImage();
 }
 
-// Keyboard nav
 document.addEventListener('keydown', e => {
   const lb = document.getElementById('lightbox');
   if (lb.classList.contains('open')) {
     if (e.key === 'ArrowRight') lbStep(1);
     if (e.key === 'ArrowLeft')  lbStep(-1);
     if (e.key === 'Escape')     closeLightbox();
-    return;
-  }
-  if (e.key === 'Escape' && document.getElementById('galleryOverlay').classList.contains('open')) {
-    closeGallery();
   }
 });
 
-// Click backdrop to close lightbox
 document.getElementById('lightbox').addEventListener('click', function(e) {
   if (e.target === this) closeLightbox();
 });
 
-// Appear on scroll
+// Scroll-reveal
 document.querySelectorAll('.appear').forEach(el => {
   new IntersectionObserver((entries, obs) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.disconnect(); } });
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
 });
 
-// Photo slow-develop
-document.querySelectorAll('.photo').forEach(p => {
+// Hero image fade
+document.querySelectorAll('.section-hero img').forEach(img => {
   new IntersectionObserver((entries, obs) => {
-    entries.forEach(e => { if (e.isIntersecting) { setTimeout(() => p.classList.add('seen'), 150); obs.disconnect(); } });
-  }, { threshold: 0.1 }).observe(p);
+    entries.forEach(e => { if (e.isIntersecting) { img.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.1 }).observe(img);
 });
 
-// Video fade-in
+// Video fade
 document.querySelectorAll('.video-embed').forEach(v => {
   new IntersectionObserver((entries, obs) => {
     entries.forEach(e => { if (e.isIntersecting) { v.classList.add('seen'); obs.disconnect(); } });
   }, { threshold: 0.15 }).observe(v);
+});
+
+// Audio fade
+document.querySelectorAll('.audio-embed').forEach(a => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { a.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.15 }).observe(a);
+});
+
+// Scroll-to-top button
+const scrollTopBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
 });
 </script>
 
