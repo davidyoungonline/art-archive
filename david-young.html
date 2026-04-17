@@ -197,15 +197,8 @@
   /* CLOSING */
   .closing {
     margin-top: 5rem;
-    padding: 3rem 0 5rem;
+    padding: 3rem 0 16rem;
     border-top: 1px solid var(--paper-dark);
-  }
-
-  .closing-name {
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    font-style: italic;
-    color: var(--ink-faint);
   }
 
   .closing-links {
@@ -214,7 +207,7 @@
     font-size: 0.78rem;
     display: flex;
     align-items: center;
-    gap: 1.4rem;
+    gap: 0.8rem;
     flex-wrap: wrap;
   }
 
@@ -238,25 +231,6 @@
   }
 
   .rainbow-flag:hover { opacity: 0.9; }
-
-  .scroll-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    font-family: var(--serif);
-    font-size: 1rem;
-    color: var(--ink-ghost);
-    background: none;
-    border: none;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.6s ease, color 0.4s;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .scroll-top.visible { opacity: 1; pointer-events: auto; }
-  .scroll-top:hover { color: var(--ink-light); }
 
   .appear {
     opacity: 0;
@@ -350,17 +324,16 @@
     <a href="art.html">Art</a>
   </div>
 
-  <div class="closing appear">
-    <div class="closing-name"><a href="https://www.davidyoung.online" style="color:var(--ink-faint);text-decoration:none;border-bottom:1px solid transparent;transition:color 0.4s,border-color 0.4s;">davidyoung.online</a></div>
+    <div class="closing appear">
     <div class="closing-links">
       <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
       <a href="index.html">home</a>
-      <a href="https://www.davidyoung.online/impressum-datenschutz">Impressum &amp; Datenschutz</a>
+      <a href="impressum.html">Impressum</a>
       <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
     </div>
   </div>
 
-  <button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+</div>
 
 </div>
 
