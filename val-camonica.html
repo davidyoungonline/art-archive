@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Val Camonica Pieces — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  /* BREATH — opening vertical line */
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  /* NAV BACK */
+  .nav-back {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    text-decoration: none;
+    margin-bottom: 3rem;
+    display: inline-block;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+  .nav-back:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  /* TITLE */
+  .work-title {
+    font-size: 1.9rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.35;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+
+  .work-byline {
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    line-height: 1.9;
+    letter-spacing: 0.015em;
+    margin-bottom: 3rem;
+  }
+
+  /* PROSE */
+  .prose {
+    font-size: 1.22rem;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-intro {
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .prose a, .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+  .prose a:hover, .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  .prose em, .section-intro em { font-style: italic; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
+  }
+
+  /* PAUSE */
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+    text-align: left;
+  }
+
+  /* APPEAR / SCROLL REVEAL */
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+  .appear.visible { opacity: 1; transform: translateY(0); }
+
+  /* HERO IMAGE */
+  .section-hero { margin: 0 0 1.8rem; }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  /* VIDEO / IMAGE CAPTION */
+  .video-label {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* MARGIN NOTE */
+  .margin-note {
+    margin: 1.5rem 0 2.5rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+  .margin-note p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+  .margin-note .note-sub {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.9;
+  }
+  .margin-note em { font-style: italic; }
+  .margin-note a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink-ghost); transition: border-color 0.5s ease; }
+  .margin-note a:hover { border-bottom-color: var(--ink); }
+
+  /* PULL QUOTE (Cynthia, etc.) */
+  .pull-quote {
+    margin: 2.2rem 0 2.4rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+    font-style: italic;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    letter-spacing: 0.015em;
+    color: var(--ink-light);
+  }
+  .pull-quote .attrib {
+    display: block;
+    margin-top: 0.8rem;
+    font-style: normal;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.015em;
+  }
+
+  /* PIECE BLOCK — one per movement */
+  .piece {
+    margin: 2.5rem 0 1.5rem;
+  }
+  .piece-title {
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
+  }
+  .piece-meta {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.015em;
+    line-height: 1.7;
+    margin-bottom: 1.4rem;
+  }
+  .piece-meta em { font-style: italic; }
+
+  /* AUDIO PLAYER — native HTML5 */
+  .audio-player {
+    width: 100%;
+    margin: 0.8rem 0 0.4rem;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+  .audio-player.seen { opacity: 1; }
+  .audio-player audio {
+    width: 100%;
+    height: 36px;
+    display: block;
+    filter: saturate(0.6);
+  }
+  .audio-unavailable {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    padding: 0.6rem 0 0.2rem;
+    border-top: 1px dashed var(--ink-ghost);
+    border-bottom: 1px dashed var(--ink-ghost);
+    margin: 0.8rem 0 0.4rem;
+    text-align: center;
+    letter-spacing: 0.015em;
+  }
+  .audio-note {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+  .audio-note a { color: var(--ink-faint); text-decoration: none; border-bottom: 1px solid var(--ink-ghost); }
+  .audio-note a:hover { color: var(--ink-light); border-bottom-color: var(--ink); }
+
+  /* PER-PIECE PERFORMANCES — small block under each piece */
+  .piece-performances {
+    margin: 1.6rem 0 0.6rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+  .piece-performances .pp-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .piece-performances .pp-row {
+    font-size: 0.86rem;
+    line-height: 1.65;
+    color: var(--ink-light);
+    margin-bottom: 0.45rem;
+    letter-spacing: 0.01em;
+  }
+  .piece-performances .pp-row em { color: var(--ink-faint); font-style: italic; }
+
+  /* LINK ROWS — for Further reading */
+  .links-list { margin: 0.5rem 0 1.5rem; }
+
+  .link-row {
+    display: block;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 1rem;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.4s, padding-left 0.35s;
+  }
+  .link-row:first-child { border-top: 1px solid var(--paper-dark); }
+  .link-row:hover { color: var(--ink-light); padding-left: 0.35rem; }
+
+  .link-row .link-type {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  }
+
+  /* CREDITS */
+  .credits-block {
+    font-size: 0.95rem;
+    line-height: 2;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+  .credits-block strong {
+    font-weight: 500;
+    color: var(--ink-light);
+    letter-spacing: 0.02em;
+  }
+  .credits-block .credits-sub {
+    display: block;
+    margin-top: 1.2rem;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* PERFORMANCE HISTORY */
+  .perf-list { margin-top: 0.5rem; }
+  .perf-row {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 1.1rem;
+    letter-spacing: 0.01em;
+  }
+  .perf-row strong {
+    display: block;
+    font-weight: 500;
+    color: var(--ink-light);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.15rem;
+  }
+  .perf-row em { font-style: italic; color: var(--ink-faint); }
+
+  /* FOOTER */
+  .closing {
+    max-width: 600px;
+    margin: 6rem auto 4rem;
+    padding: 0 3.6rem;
+    text-align: center;
+  }
+  .closing-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+    font-size: 0.85rem;
+  }
+  .closing-links a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+  .closing-links a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+  .rainbow-flag {
+    width: 42px;
+    height: 28px;
+    opacity: 0.7;
+    border-radius: 2px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 640px) {
+    html { font-size: 17px; }
+    .page { padding: 0 1.6rem; }
+    .closing { padding: 0 1.6rem; }
+    .work-title { font-size: 1.6rem; }
+    .piece-title { font-size: 1.15rem; }
+    .closing-links { gap: 0.9rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div class="breath">
+  <div class="breath-mark"></div>
+</div>
+
+<div class="page">
+
+  <a href="art.html" class="nav-back">&larr; art</a>
+
+  <!-- TITLE -->
+  <h1 class="work-title">Val Camonica Pieces</h1>
+  <div class="work-byline">
+    a series of seven chamber works &middot; 1995&ndash;2004<br>
+    solos, duo, trio, quartet, octet, ensemble of fifteen<br>
+    after the rock carvings of the Camonica Valley, northern Italy
+  </div>
+
+  <!-- INTRO -->
+  <p class="prose appear">
+    Seven works composed over nine years, each drawing on the prehistoric rock carvings
+    of Val Camonica in northern Italy &mdash; and on the work of the archaeologist
+    Emmanuel Anati, who has spent his life cataloguing them. The pieces move across
+    the continuum from conventional to graphic notation, gradually relinquishing the
+    stave until, in the later works, the rock carvings themselves are transcribed
+    directly onto the page.
+  </p>
+
+  <p class="section-intro appear">
+    The series began with books and illustrations. Some of the music was composed
+    before I had ever seen the valley. I first went there in 2002, and it was standing
+    above the Mappa di Bedolina at Capo di Ponte, with the roads and river below
+    lining up with the scratched lines in the rock, that the work found its ground.
+  </p>
+
+  <!-- HERO IMAGE (placeholder — needs uploading) -->
+  <!--
+  <div class="section-hero appear">
+    <img src="val-camonica-rockface.jpg" alt="A carved rock surface at Capo di Ponte">
+    <div class="video-label">Roccia 1, Parco Nazionale delle Incisioni Rupestri, Capo di Ponte.</div>
+  </div>
+  -->
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- CHRIS REID PULL QUOTE (RealTime 79, 2007) -->
+  <div class="pull-quote appear">
+    The reinterpretation of the cultural history and imagery of Val Camonica through
+    a suite of music, text and video is an ambitious project artistically, one which
+    itself forms part of the cultural lineage that the site has generated.
+    <span class="attrib">Chris Reid, <em>RealTime</em> #79, 2007</span>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- RECORDING -->
+  <p class="section-label appear">Recording</p>
+
+  <div class="margin-note appear">
+    <p><em>Val Camonica Pieces</em></p>
+    <p>Libra Ensemble &middot; Yasutaka Hemmi &middot; Mark Knoop</p>
+    <p class="note-sub">
+      Recorded for ABC Classic FM, 2007<br>
+      First broadcast 13 October 2007<br>
+      Produced by Duncan Yardley<br><br>
+      <a href="https://archive.org/details/val-camonica-pieces-inventario" target="_blank">All tracks on Archive.org</a>
+    </p>
+  </div>
+
+  <p class="section-intro appear">
+    The pieces can be performed in any order and in any combination &mdash; as one
+    might encounter individual rock carvings or sweeping scenes wandering through
+    the Parco Nazionale. They are presented here in the order they were composed.
+  </p>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- CYNTHIA PULL QUOTE — introduces the Anati framework as the first piece begins -->
+  <div class="pull-quote appear">
+    Where Anati's archaeology has pursued the Val Camonica motifs as signs with a
+    universal, narrative meaning, Young's interest lies in their capacity and interest
+    as signs for musical performance. With titles that quote from the archaeologist's
+    analytical frameworks, the compositions draw variously on Anati's schematic
+    representations &mdash; redacting, abstracting, charting yet again the stylised
+    human and animal forms, the weathered lines and designs.
+    <span class="attrib">Cynthia Troup, program note, 1999</span>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- STILE I, II, III -->
+  <div class="piece appear">
+    <h2 class="piece-title">Stile I, II &amp; III</h2>
+    <div class="piece-meta">
+      guitar &amp; violoncello &middot; 1995<br>
+      <em>first performance:</em> Rosanne Hunt &amp; Geoffrey Morris, North Melbourne Town Hall, 16 July 1999, as part of <em>Radio 1</em> (Aphids)
+    </div>
+  </div>
+
+  <p class="section-intro appear">
+    The titles do not refer to three styles of rock carving themselves, but to
+    Anati's attempt to sort the chaos of varying designs into three distinct styles
+    by chronology and complexity. Each movement has its own character and tempo.
+    The three can be played in any order.
+  </p>
+
+  <p class="section-intro appear">
+    <em>Stile&nbsp;I</em> takes its material from the Cemmo masses &mdash; huge boulders just outside
+    Capo di Ponte covered in repetitions of animals and tools, like an inventory or a list
+    of property. The cello plays a regular semi-quaver rhythm, interrupted and elaborated
+    by the guitar. A subtle quarter-tone scordatura on the guitar's A and B strings creates
+    a slight discordance with the cello &mdash; something of the Oglio River winding down
+    the valley, periodically traversed by bridges.
+  </p>
+
+  <div class="audio-player appear">
+    <audio controls preload="none"
+      src="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/Val%20Camonica%20pieces%20-%20Stile%20I.mp3">
+    </audio>
+  </div>
+  <p class="audio-note appear"><em>Stile I</em> &middot; guitar &amp; cello</p>
+
+  <p class="section-intro appear">
+    <em>Stile&nbsp;II</em> is slower, more spacious, with Bart&oacute;k pizzicati and
+    constantly shifting bowing positions. The movement attempts to render in music
+    the process of carving the rock itself &mdash; densely packed detail in the small
+    spaces between rests and long-decaying notes.
+  </p>
+
+  <div class="audio-player appear">
+    <audio controls preload="none"
+      src="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/Val%20Camonica%20Pieces%20-%20Stile%20II.mp3">
+    </audio>
+  </div>
+  <p class="audio-note appear"><em>Stile II</em></p>
+
+  <p class="section-intro appear">
+    <em>Stile&nbsp;III</em> is a direct transcription from Roccia 1 in the Parco Nazionale
+    &mdash; the scene of a tribal procession that Anati describes, in his Italian, with such
+    abandon. The cello plays the upward-inclining spear of a hunter as an ascending glissando.
+    When the spear reaches the hand that holds it, the guitar enters with a tremolo, taken up
+    by the cello in a down-bow glissando that follows the hunter's arm. The feet of hunters
+    become spiccati; the feathery headdresses become tremolo gestures; dots are played pizzicato;
+    the empty space between figures becomes rest.
+  </p>
+
+  <div class="audio-player appear">
+    <audio controls preload="none"
+      src="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/Val%20Camonica%20Pieces%20-%20Stile%20III.mp3">
+    </audio>
+  </div>
+  <p class="audio-note appear"><em>Stile III</em></p>
+
+  <div class="piece-performances appear">
+    <div class="pp-label">Other performances</div>
+    <div class="pp-row">Libra Ensemble, Fairfax Studio, Arts Centre Melbourne, 10&ndash;11 May 2007 <em>&mdash; complete series</em></div>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- LEXICON -->
+  <div class="piece appear">
+    <h2 class="piece-title">Lexicon</h2>
+    <div class="piece-meta">
+      three violoncelli &middot; 1997<br>
+      <em>first performance:</em> Clare Brassil, Fiona Furphy, Jane Tallon &middot; La Mama Theatre, Melbourne, 1997<br>
+      as part of <em>Travelling</em> (Aphids), with Sarah Pirrie, Kath Armour, Rosemary Joy
+    </div>
+  </div>
+
+  <p class="section-intro appear">
+    Anati organises the rock carvings into seven categories: figures, animals, structures,
+    tools, symbols, maps and shrouds. <em>Lexicon</em> is in seven sections corresponding
+    to these categories &mdash; a literal list of symbols transcribed onto musical staves.
+    The three cellists gradually develop a consistent vocabulary of articulations: spiccato
+    feet, tremolo headdresses, ricochet decorations, microtonal vibrati. At the end of each
+    of the seven sections, all three musicians turn the page simultaneously. Twenty audible
+    page-turns: Anati's persistence leaving no stone unturned.
+  </p>
+
+  <div class="audio-unavailable appear">Recording to be added</div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- SARCOPHAGUS -->
+  <div class="piece appear">
+    <h2 class="piece-title">Sarcophagus</h2>
+    <div class="piece-meta">
+      string octet &mdash; 2 violins, 2 violas, 2 cellos, 2 basses &middot; 1999 &middot; 6&prime; 45&Prime;<br>
+      <em>commissioned by</em> the Australian Youth Orchestra (Youth Music Australia)<br>
+      <em>first performance:</em> with members of Elision Ensemble, Brisbane, October 1999, conductor Denis Cohen
+    </div>
+  </div>
+
+  <p class="section-intro appear">
+    <em>Sarcophagus</em> is a monument. The word is from the Latin, and before that the Greek,
+    for <em>flesh-consuming</em>. The rock carvings of Val Camonica are monuments to a series
+    of now-dead civilisations &mdash; the coercive power of the rock has consumed the bodies
+    and left only signs.
+  </p>
+
+  <p class="section-intro appear">
+    The piece is built on the Mappa di Bedolina, an ancient rock carving high above Capo di Ponte
+    that is sometimes described as the first extant example of a map. The two violins, two violas,
+    two cellos, two basses &mdash; pairs everywhere &mdash; echo the doubling of map and landscape.
+    The lines weave around and overlap, like a weathered map superimposed over the now-altered
+    course of the river. Glacial shards of sound &mdash; scratching the surface &mdash; encase
+    something less reachable below.
+  </p>
+
+  <p class="section-intro appear">
+    <em>Sarcophagus</em> is dedicated to my grandmother, Marie Burnett, who died not long
+    before I wrote it. She was a steady encouragement through my early years of composing,
+    and the piece carries her.
+  </p>
+
+  <div class="audio-player appear">
+    <audio controls preload="none"
+      src="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/Val%20Camonica%20pieces%20-%20Sarcophagus.mp3">
+    </audio>
+  </div>
+  <p class="audio-note appear"><em>Sarcophagus</em> &middot; string octet</p>
+
+  <div class="piece-performances appear">
+    <div class="pp-label">Other performances</div>
+    <div class="pp-row">Libra Ensemble, Fairfax Studio, Arts Centre Melbourne, 10&ndash;11 May 2007 <em>&mdash; complete series</em></div>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- INVENTARIO -->
+  <div class="piece appear">
+    <h2 class="piece-title">Inventario</h2>
+    <div class="piece-meta">
+      fifteen instruments &middot; 1999<br>
+      flute, oboe, clarinet, bass clarinet, horn, trombone, 2 percussion, and string octet<br>
+      <em>commissioned by</em> the Australian Youth Orchestra<br>
+      <em>first performance:</em> with Elision Ensemble, Brisbane, October 1999, conductor Denis Cohen
+    </div>
+  </div>
+
+  <p class="section-intro appear">
+    <em>Inventario</em> is a list of musical objects, all drawn from Anati's transcriptions of
+    La Grande Roccia di Naquane &mdash; the largest and most florid of the rock carving scenes.
+    The piece is in three sections, each with its own notation. The first establishes a repeating
+    metric pattern (2, 5, 5, 3, 8) and builds an inventory of precisely notated gestures:
+    interlocking demi-semi-quavers, microtonal clusters, glissandi, bisbigliando on timbral
+    fingerings, bowed cymbal, resonant ceramic bell. Each line, like a line in Anati's
+    archaeological inventory.
+  </p>
+
+  <p class="section-intro appear">
+    The second section shifts to graphic notation &mdash; noteheads followed by lines, the line
+    indicating duration and movement of pitch. In the final sixty bars, the rock carvings
+    themselves are transcribed directly onto the staves: figures, animals, tools, abstract symbols,
+    scattered across the score much as they appear on the rockfaces. By this point, the ensemble
+    has learned how to read them.
+  </p>
+
+  <p class="section-intro appear">
+    This was the piece where I first let go of conventional notation and trusted graphic symbols
+    to carry the music. At the first performance, when the score dropped the notes and the
+    pictographs took over, I could hear the liberty in the air &mdash; a ripple of electricity
+    through the ensemble and through the room. It confirmed the direction.
+  </p>
+
+  <div class="audio-player appear">
+    <audio controls preload="none"
+      src="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/Val%20Camonica%20Pieces%20-%20Inventario.mp3">
+    </audio>
+  </div>
+  <p class="audio-note appear"><em>Inventario</em> &middot; fifteen instruments</p>
+
+  <div class="piece-performances appear">
+    <div class="pp-label">Other performances</div>
+    <div class="pp-row">Libra Ensemble, Fairfax Studio, Arts Centre Melbourne, 10&ndash;11 May 2007 <em>&mdash; complete series</em></div>
+  </div>
+
+  <!-- CYNTHIA PULL QUOTE 2 -->
+  <div class="pull-quote appear">
+    Still open to the alpine air, so exhuberantly confounding historical time, the
+    Val Camonica imagery also resists definitive interpretation, and Young's compositions
+    celebrate this resilient variety and intricacy. Over the final 60 bars of <em>inventario</em>,
+    the &lsquo;originary calligraphy&rsquo; of the rock art is literally transcribed onto
+    instrumental parts. With pictographs layered over the score, the neatness and formality
+    of the composer's own schema are undone, as emblems, creatures and figures break through
+    and boldly enliven the strata of the stave.
+    <span class="attrib">Cynthia Troup, 1999</span>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- ANIMALI -->
+  <div class="piece appear">
+    <h2 class="piece-title">Animali</h2>
+    <div class="piece-meta">
+      solo violin &middot; 2002 &middot; 9&prime;<br>
+      <em>commissioned &amp; recorded by</em> Yasutaka Hemmi, 2002&ndash;03<br>
+      <em>published by</em> Australian Music Centre &middot; recorded on Megadisc Classics, <em>Violin Encounters</em>, 2004
+    </div>
+  </div>
+
+  <p class="section-intro appear">
+    Unlike Anati's attempt to encompass a universal inventory, <em>Animali</em> takes one
+    category only &mdash; the animals &mdash; and examines it in detail. The score opens with
+    an intricate array of indications (staccato, tenuto, accent, ricochet, glissando, artificial
+    harmonic, col legno, lefthand pizzicato) all to be played <em>molto pianissimo</em>.
+    The work could only have been imagined with the cooperation of a musician not daunted
+    by such demands.
+  </p>
+
+  <p class="section-intro appear">
+    I met Yasutaka at the Akiyoshidai Contemporary Music Festival in Japan in 1997. He has
+    played my music for more than twenty years now &mdash; most recently a watercolour score
+    I wrote for him. <em>Animali</em> is my gift to him, and my thanks for his passion, his
+    skill, and his friendship.
+  </p>
+
+  <p class="section-intro appear">
+    The energy in the piece aims to generate a sense of the music leaping into life, just as
+    the rock carving animals seem to be leaping on the stone. Whimsical graphic interpolations
+    between the notes prepare the reader for the final page, which is simply the rock carvings
+    themselves, superimposed on an otherwise blank stave. As the clarinettist Carl Rosman put it:
+    in a relatively unusual act of compositional humility, I write myself out of the piece.
+  </p>
+
+  <div class="pull-quote appear">
+    The listener gains the impression that Young has painstakingly decrypted and translated
+    every detail of the site into note-by-note musical ideas, as if creating new words and
+    phrases from a novel alphabet.
+    <span class="attrib">Chris Reid, on <em>Animali</em></span>
+  </div>
+
+  <div class="audio-player appear">
+    <audio controls preload="none"
+      src="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/Val%20Camonica%20Pieces%20-%20Animali.mp3">
+    </audio>
+  </div>
+  <p class="audio-note appear"><em>Animali</em> &middot; Yasutaka Hemmi, violin</p>
+
+  <div class="piece-performances appear">
+    <div class="pp-label">Other performances</div>
+    <div class="pp-row">Yasutaka Hemmi studio recording, Tokyo, 2003 <em>&mdash; Violin Encounters (Megadisc Classics)</em></div>
+    <div class="pp-row">Libra Ensemble, Fairfax Studio, Arts Centre Melbourne, 10&ndash;11 May 2007 <em>&mdash; complete series</em></div>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- ROCCIA -->
+  <div class="piece appear">
+    <h2 class="piece-title">Roccia</h2>
+    <div class="piece-meta">
+      clarinet, violin, pianoforte, percussion &middot; 2003 &middot; 7&prime;<br>
+      <em>commissioned by</em> Champ d'Action, Antwerp<br>
+      <em>first performance:</em> Logos Foundation, Ghent, 19 June 2003
+    </div>
+  </div>
+
+  <p class="section-intro appear">
+    <em>Roccia</em> &mdash; <em>rock</em> &mdash; was my first score in colour. It uses a
+    simple time&ndash;space notation: pitch runs vertically, duration horizontally, measured
+    in seconds. Each instrument reads markings in a different colour. Orange for clarinet,
+    green for violin, brown for percussion, black for piano. Everyone can see everyone.
+    Conventional marks remain for dynamics and pedalling. Descriptive instructions scatter
+    across the pages &mdash; <em>con calma</em>, <em>con sorpresa</em>,
+    <em>fuori controllo</em> &mdash; always with an edge of irony.
+  </p>
+
+  <p class="section-intro appear">
+    The notation is deceptively exacting. Despite the appearance of freedom, the relative
+    position of noteheads and lines leaves surprisingly little room for choice. <em>Roccia</em>
+    was performed twice in close succession &mdash; once in Ghent from printed parts, once in
+    Melbourne with the score projected large for the audience to see. Different cities, different
+    musicians, different projection contexts. It sounded the same on both occasions.
+  </p>
+
+  <div class="audio-player appear">
+    <audio controls preload="none"
+      src="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/Val%20Camonica%20Pieces%20-%20Roccia.mp3">
+    </audio>
+  </div>
+  <p class="audio-note appear"><em>Roccia</em> &middot; clarinet, violin, piano, percussion</p>
+
+  <div class="piece-performances appear">
+    <div class="pp-label">Other performances</div>
+    <div class="pp-row">Melbourne, 2003 <em>&mdash; performed with the score projected for the audience</em></div>
+    <div class="pp-row">Libra Ensemble, Fairfax Studio, Arts Centre Melbourne, 10&ndash;11 May 2007 <em>&mdash; complete series</em></div>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- INCISIONI RUPESTRI -->
+  <div class="piece appear">
+    <h2 class="piece-title">Incisioni Rupestri</h2>
+    <div class="piece-meta">
+      solo pianoforte &middot; 2004 &middot; 9&prime;<br>
+      <em>commissioned by</em> Michael Kieran Harvey<br>
+      <em>first performance:</em> S&atilde;o Paulo, Brazil, 16 November 2004
+    </div>
+  </div>
+
+  <p class="section-intro appear">
+    The final piece. <em>Incisioni rupestri</em> is the ordinary Italian for <em>rock carvings</em>.
+    The solo piano is, in many ways, a distillation of what came before. Direct transcriptions
+    of the rock carvings are superimposed on the stave. Time-space notation is used, but more
+    simply: a single durational indication at the top of each line (three minutes per line).
+    Familiar-looking dynamics, floridly graphic but monochromatic. There is no ensemble and
+    no conductor, which engenders an inevitable rubato &mdash; the latitude of a cadenza.
+  </p>
+
+  <p class="section-intro appear">
+    This is one of only a handful of works I've written for solo piano. I was a pianist myself
+    once, but fell out of love with the instrument, largely because of a bad experience with
+    a professor at university. This piece I love, though &mdash; and the care and detail that
+    Mark Knoop brought to his performance was humbling, and deeply touching.
+  </p>
+
+  <div class="audio-unavailable appear">Recording to be added &mdash; Mark Knoop, 2007</div>
+
+  <div class="piece-performances appear">
+    <div class="pp-label">Other performances</div>
+    <div class="pp-row">Mark Knoop &middot; Libra Ensemble, Fairfax Studio, Arts Centre Melbourne, 10&ndash;11 May 2007 <em>&mdash; complete series, broadcast by ABC Classic FM, 13 October 2007</em></div>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- MOUNTAINS AT EQUINOX -->
+  <p class="section-label appear">The spirit of the mountain</p>
+
+  <p class="section-intro appear">
+    Studying the rock carvings, the question arises as to why so many inscriptions are
+    concentrated in this particular valley. It was only in 2002, standing in Capo di Ponte
+    for the first time, that an explanation presented itself.
+  </p>
+
+  <p class="section-intro appear">
+    The town is flanked by two mountains &mdash; Pizzo Badile on one side, Monte Conarena on the
+    other. At the spring and autumn equinoxes, both are subject to unusual optical phenomena.
+    Before sunrise, the ghostlike shadow of Badile Peak appears in the sky behind itself.
+    At sunset, a cleft at the top of Monte Conarena opens and a shaft of light appears to shine
+    out from inside the mountain.
+  </p>
+
+  <p class="section-intro appear">
+    To the people of this valley since the Bronze Age, these manifestations were and still are
+    a cause for bewilderment and veneration. Despite Anati and his many disciples, we still
+    do not know who made the rock carvings, nor what they were intended to signify.
+  </p>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- FURTHER READING -->
+  <p class="section-label appear">Further reading &amp; links</p>
+
+  <div class="links-list appear">
+    <a class="link-row" href="https://aphids.net/projects/val-camonica-pieces/" target="_blank">
+      <span class="link-type">Production</span>
+      Val Camonica Pieces &mdash; Aphids (2007 project)
+    </a>
+    <a class="link-row" href="https://archive.org/details/val-camonica-pieces-inventario" target="_blank">
+      <span class="link-type">Recordings</span>
+      Val Camonica Pieces &mdash; all tracks on Archive.org
+    </a>
+    <a class="link-row" href="https://www.realtime.org.au/musical-archaeology/" target="_blank">
+      <span class="link-type">Review</span>
+      Chris Reid, &lsquo;Musical archaeology&rsquo; &mdash; RealTime #79, June&ndash;July 2007
+    </a>
+    <a class="link-row" href="https://www.australianmusiccentre.com.au/search?q=david+young+val+camonica" target="_blank">
+      <span class="link-type">Scores &amp; catalogue</span>
+      Val Camonica Pieces &mdash; Australian Music Centre
+    </a>
+    <a class="link-row" href="https://cynthiatroup.com/publications/essays-interviews" target="_blank">
+      <span class="link-type">Essay</span>
+      Cynthia Troup &mdash; publications index
+    </a>
+    <a class="link-row" href="https://archive.org/details/dy-thesis" target="_blank">
+      <span class="link-type">PhD thesis</span>
+      Chapter 3: Val Camonica Pieces &mdash; Scratching the Surface
+    </a>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- PERFORMANCE HISTORY -->
+  <p class="section-label appear">Performance history &mdash; complete series</p>
+
+  <div class="perf-list">
+    <div class="perf-row appear">
+      <strong>Aphids &amp; Libra Ensemble &mdash; first performance of the complete series</strong>
+      10&ndash;11 May 2007 &middot; Fairfax Studio, The Arts Centre, Melbourne<br>
+      as part of <em>Full Tilt</em>, with film by Louise Curham
+    </div>
+    <div class="perf-row appear">
+      <strong>ABC Classic FM 105.9 &mdash; first broadcast of the complete series</strong>
+      13 October 2007 &middot; produced by Duncan Yardley
+    </div>
+  </div>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- CREDITS -->
+  <p class="section-label appear">Credits &mdash; 2007 recording</p>
+
+  <div class="credits-block appear">
+    <strong>Composer</strong> David Young<br>
+    <strong>Writer</strong> Cynthia Troup<br>
+    <strong>Film artist</strong> Louise Curham<br>
+    <strong>Pianoforte &amp; conductor</strong> Mark Knoop<br>
+    <strong>Violin</strong> Yasutaka Hemmi<br><br>
+
+    <strong>Libra Ensemble</strong><br>
+    Flute &mdash; Elizabeth Barcan<br>
+    Oboe &mdash; Anne Gilby<br>
+    Clarinet &mdash; Martin Mackerras<br>
+    Bass clarinet &mdash; Karen Heath<br>
+    Horn &mdash; Geoff Viking Lierse<br>
+    Trombone &mdash; Benjamin Marks<br>
+    Percussion &mdash; Peter Neville &amp; Eugene Ughetti<br>
+    Guitar &mdash; Geoffrey Morris<br>
+    Violin &mdash; Zoe Black<br>
+    Viola &mdash; Jason Bunn &amp; Paul McMillan<br>
+    Violoncello &mdash; Geoffrey Gartner &amp; Caerwen Martin<br>
+    Contrabass &mdash; Dorit Herskovits &amp; Stuart Riley<br><br>
+
+    <strong>Lighting &amp; production</strong> Richard Vabre<br>
+    <strong>Animation &amp; multimedia</strong> Matthew Gardiner &amp; My Trinh Gardiner<br>
+    <strong>Video technician</strong> Peter Humble<br>
+    <strong>Co-artistic directors, Libra Ensemble</strong> Mark Knoop &amp; Carl Rosman
+
+    <span class="credits-sub">
+      Presented by Aphids in association with Libra Ensemble.<br>
+      Supported by Arts Victoria, Federation Square, The Arts Centre, Airstrip and ABC Classic FM.
+    </span>
+  </div>
+
+</div>
+
+<div class="closing appear">
+  <div class="closing-links">
+    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">&uarr;</a>
+    <a href="index.html">home</a>
+    <a href="art.html">art</a>
+    <a href="impressum.html">Impressum</a>
+    <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+  </div>
+</div>
+
+<script>
+  // Scroll reveal
+  document.querySelectorAll('.appear').forEach(el => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.disconnect(); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+  });
+
+  // Hero image reveal
+  document.querySelectorAll('.section-hero img').forEach(img => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('seen'); obs.disconnect(); }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+  });
+
+  // Audio player reveal
+  document.querySelectorAll('.audio-player').forEach(a => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { a.classList.add('seen'); obs.disconnect(); }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(a);
+  });
+  // Fallback: ensure audio visible after 3s
+  setTimeout(() => {
+    document.querySelectorAll('.audio-player:not(.seen)').forEach(a => a.classList.add('seen'));
+  }, 3000);
+</script>
+
+</body>
+</html>
