@@ -349,37 +349,45 @@
 
   /* FOOTER */
   .closing {
-    max-width: 600px;
-    margin: 6rem auto 4rem;
-    padding: 0 3.6rem;
-    text-align: center;
+    margin-top: 5rem;
+    padding: 3rem 0 16rem;
+    border-top: 1px solid var(--paper-dark);
   }
+
   .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 1.4rem;
-    font-size: 0.85rem;
+    gap: 0.8rem;
+    flex-wrap: wrap;
   }
+
   .closing-links a {
-    color: var(--ink-faint);
+    color: var(--ink-ghost);
     text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: color 0.4s, border-color 0.4s;
+    transition: color 0.4s;
   }
-  .closing-links a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
   .rainbow-flag {
+    display: inline-block;
     width: 42px;
     height: 28px;
-    opacity: 0.7;
     border-radius: 2px;
+    opacity: 0.7;
     object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
   }
+
+  .rainbow-flag:hover { opacity: 0.9; }
 
   @media (max-width: 640px) {
     html { font-size: 17px; }
     .page { padding: 0 1.6rem; }
-    .closing { padding: 0 1.6rem; }
     .work-title { font-size: 1.6rem; }
     .piece-title { font-size: 1.15rem; }
     .closing-links { gap: 0.9rem; flex-wrap: wrap; }
@@ -908,16 +916,16 @@
     </span>
   </div>
 
-</div>
-
-<div class="closing appear">
-  <div class="closing-links">
-    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">&uarr;</a>
-    <a href="index.html">home</a>
-    <a href="art.html">art</a>
-    <a href="impressum.html">Impressum</a>
-    <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+  <div class="closing appear">
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">&uarr;</a>
+      <a href="index.html">home</a>
+      <a href="art.html">art</a>
+      <a href="impressum.html">Impressum</a>
+      <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
   </div>
+
 </div>
 
 <script>
