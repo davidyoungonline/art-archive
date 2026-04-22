@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Change — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 1.8rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+
+  .work-byline {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    letter-spacing: 0.015em;
+    color: var(--ink-faint);
+    margin-bottom: 2.5rem;
+  }
+
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+    scroll-margin-top: 2rem;
+  }
+
+  /* AUDIO PROGRAMME */
+  .audio-list { margin: 0; }
+
+  .audio-item {
+    border-bottom: 1px solid var(--paper-dark);
+    padding: 0.65rem 0 0.8rem;
+  }
+
+  .audio-item:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .audio-header {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0 0.8rem;
+    align-items: baseline;
+    margin-bottom: 0.45rem;
+  }
+
+  .audio-day {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    color: var(--ink-ghost);
+    letter-spacing: 0.06em;
+  }
+
+  .audio-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .audio-player {
+    margin: 0 0 0.55rem 2.8rem;
+  }
+
+  .audio-player audio {
+    width: 100%;
+    height: 28px;
+    accent-color: var(--ink);
+    opacity: 0.75;
+    transition: opacity 0.3s;
+  }
+
+  .audio-player audio:hover,
+  .audio-player audio:focus { opacity: 1; }
+
+  .audio-meta {
+    margin-left: 2.8rem;
+  }
+
+  .audio-position {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
+
+  /* TRACK IMAGE */
+  .track-image {
+    margin: 0.9rem 0 0 2.8rem;
+  }
+
+  .track-image img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .track-image img.seen { opacity: 1; }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 16rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink-ghost);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease, color 0.4s;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { color: var(--ink-light); }
+
+  @media (max-width: 768px) {
+    .scroll-top { display: none; }
+  }
+
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="alexander-technique.html">&#8592; Alexander Technique</a></p>
+
+    <h1 class="work-title appear">Change</h1>
+    <div class="work-byline appear">
+      David Young<br>
+      Audio series &mdash; March 2021
+    </div>
+
+    <p class="appear">
+      Seven audio episodes sent over the course of March 2021, on the theme of change. Each includes reflections, <a href="alexander-technique.html">Alexander Technique</a>, meditation, and an optional exercise.
+    </p>
+
+    <p class="appear">
+      Each recording runs 10&ndash;15 minutes. A listening position is suggested for each episode &mdash; but find your own rhythm.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <p class="section-label appear" id="programme">Programme</p>
+
+    <div class="audio-list appear">
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">1</span>
+          <span class="audio-title">Hair</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/change-series-7-the-cellular-event/Change%20Series%20%231%20Hair.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-position">Lying on the floor, book under head, legs bent</p>
+        </div>
+        <div class="track-image">
+          <img src="change-image-1.jpg" alt="">
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">2</span>
+          <span class="audio-title">The Hanging Sword</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/change-series-7-the-cellular-event/Change%20Series%20%232%20The%20Hanging%20Sword.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-position">Sitting on a stool, both feet on the ground</p>
+        </div>
+        <div class="track-image">
+          <img src="change-image-2.jpg" alt="">
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">3</span>
+          <span class="audio-title">Narrative Machines</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/change-series-7-the-cellular-event/Change%20Series%20%233%20Narrative%20Machines.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-position">Lying on the floor, book under head, legs bent</p>
+        </div>
+        <div class="track-image">
+          <img src="change-image-3.jpg" alt="">
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">4</span>
+          <span class="audio-title">Footfalls</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/change-series-7-the-cellular-event/Change%20Series%20%234a%20Footfalls.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-position">Walking somewhere quiet, uninterrupted and as beautiful as possible</p>
+        </div>
+        <div class="track-image">
+          <img src="change-image-4.jpg" alt="">
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">4b</span>
+          <span class="audio-title">Footfalls <span style="font-size:0.82rem;color:var(--ink-faint);font-style:italic;">(without talking)</span></span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/change-series-7-the-cellular-event/Change%20Series%20%234b%20Footfalls.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-position">Lying on the floor, book under head, legs bent</p>
+        </div>
+        <div class="track-image">
+          <img src="change-image-4b.jpg" alt="">
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">5</span>
+          <span class="audio-title">Starfish</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/change-series-7-the-cellular-event/Change%20Series%20%235%20Starfish.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-position">Lying on the floor, book under head, legs bent, with room to stretch out</p>
+        </div>
+        <div class="track-image">
+          <img src="change-image-5.jpg" alt="">
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">6</span>
+          <span class="audio-title">Hunter &amp; Prey</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/change-series-7-the-cellular-event/Change%20Series%20%236%20Hunter%20%26%20Prey.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-position">In gentle movement &mdash; walking, sitting and standing, rolling on the floor</p>
+        </div>
+        <div class="track-image">
+          <img src="change-image-6.jpg" alt="">
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-header">
+          <span class="audio-day">7</span>
+          <span class="audio-title">The Cellular Event</span>
+        </div>
+        <div class="audio-player">
+          <audio controls preload="none">
+            <source src="https://archive.org/download/change-series-7-the-cellular-event/Change%20Series%20%237%20The%20Cellular%20Event.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="audio-meta">
+          <p class="audio-position">Lying on the floor, book under head, legs bent</p>
+        </div>
+        <div class="track-image">
+          <img src="change-image-7.jpg" alt="">
+        </div>
+      </div>
+
+    </div><!-- end .audio-list -->
+
+  </div><!-- end .prose -->
+
+  <div class="closing appear">
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
+      <a href="https://www.davidyoung.online">home</a>
+      <a href="alexander-technique.html">Alexander Technique</a>
+      <a href="meditation.html">meditation</a>
+      <a href="impressum.html">Impressum</a>
+      <img src="rainbow%20flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+document.querySelectorAll('.track-image img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+});
+
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY >= window.innerHeight * 0.9);
+});
+</script>
+
+</body>
+</html>
