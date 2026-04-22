@@ -224,6 +224,37 @@
   }
   .piece-meta em { font-style: italic; }
 
+  /* BACK TO TOP — small arrow at the end of each piece */
+  .section-top {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+    margin-top: 0.8rem;
+  }
+  .section-top:hover { color: var(--ink-light); }
+
+  /* MOVEMENT NAV — list of pieces with anchor links */
+  .movement-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin: 0.4rem 0 0.2rem;
+  }
+  .movement-nav a {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    text-decoration: none;
+    line-height: 1.9;
+    letter-spacing: 0.015em;
+    transition: color 0.4s;
+  }
+  .movement-nav a:hover { color: var(--ink); }
+
   /* AUDIO PLAYER — native HTML5 */
   .audio-player {
     width: 100%;
@@ -719,6 +750,19 @@
 
   <div class="pause appear">&middot; &middot; &middot;</div>
 
+  <p class="section-label appear">The pieces</p>
+  <nav class="movement-nav appear">
+    <a href="#stile">Stile I, II &amp; III</a>
+    <a href="#lexicon">Lexicon</a>
+    <a href="#sarcophagus">Sarcophagus</a>
+    <a href="#inventario">Inventario</a>
+    <a href="#animali">Animali</a>
+    <a href="#roccia">Roccia</a>
+    <a href="#incisioni-rupestri">Incisioni Rupestri</a>
+  </nav>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
   <p class="section-intro appear">
     The pieces can be performed in any order and in any combination &mdash; as one
     might encounter individual rock carvings or sweeping scenes wandering through
@@ -729,7 +773,7 @@
   <div class="pause appear">&middot; &middot; &middot;</div>
 
   <!-- STILE I, II, III -->
-  <div class="piece appear">
+  <div class="piece appear" id="stile">
     <h2 class="piece-title">Stile I, II &amp; III</h2>
     <div class="piece-meta">
       guitar &amp; violoncello &middot; 1995<br>
@@ -811,10 +855,12 @@
   </a>
 
 
+  <a class="section-top appear" href="#" onclick="window.scrollTo({top:0,behavior:\'smooth\'}); return false;">&uarr;</a>
+
   <div class="pause appear">&middot; &middot; &middot;</div>
 
   <!-- LEXICON -->
-  <div class="piece appear">
+  <div class="piece appear" id="lexicon">
     <h2 class="piece-title">Lexicon</h2>
     <div class="piece-meta">
       three violoncelli &middot; 1997<br>
@@ -847,6 +893,8 @@
     Val Camonica Pieces &mdash; <em>Lexicon</em> &mdash; score (PDF)
   </a>
 
+  <a class="section-top appear" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">&uarr;</a>
+
   <div class="pause appear">&middot; &middot; &middot;</div>
 
   <!-- CYNTHIA PULL QUOTE — her 1999 note was written for Sarcophagus and Inventario -->
@@ -863,7 +911,7 @@
   <div class="pause appear">&middot; &middot; &middot;</div>
 
   <!-- SARCOPHAGUS -->
-  <div class="piece appear">
+  <div class="piece appear" id="sarcophagus">
     <h2 class="piece-title">Sarcophagus</h2>
     <div class="piece-meta">
       string octet &mdash; 2 violins, 2 violas, 2 cellos, 2 basses &middot; 1999 &middot; 6&prime; 45&Prime;<br>
@@ -923,10 +971,12 @@
   </a>
 
 
+  <a class="section-top appear" href="#" onclick="window.scrollTo({top:0,behavior:\'smooth\'}); return false;">&uarr;</a>
+
   <div class="pause appear">&middot; &middot; &middot;</div>
 
   <!-- INVENTARIO -->
-  <div class="piece appear">
+  <div class="piece appear" id="inventario">
     <h2 class="piece-title">Inventario</h2>
     <div class="piece-meta">
       fifteen instruments &middot; 1999<br>
@@ -981,6 +1031,8 @@
   </a>
 
 
+  <a class="section-top appear" href="#" onclick="window.scrollTo({top:0,behavior:\'smooth\'}); return false;">&uarr;</a>
+
   <div class="pause appear">&middot; &middot; &middot;</div>
 
   <!-- CYNTHIA PULL QUOTE 2 -->
@@ -998,7 +1050,7 @@
   <div class="pause appear">&middot; &middot; &middot;</div>
 
   <!-- ANIMALI -->
-  <div class="piece appear">
+  <div class="piece appear" id="animali">
     <h2 class="piece-title">Animali</h2>
     <div class="piece-meta">
       solo violin &middot; 2002 &middot; 9&prime;<br>
@@ -1058,10 +1110,12 @@
   </a>
 
 
+  <a class="section-top appear" href="#" onclick="window.scrollTo({top:0,behavior:\'smooth\'}); return false;">&uarr;</a>
+
   <div class="pause appear">&middot; &middot; &middot;</div>
 
   <!-- ROCCIA -->
-  <div class="piece appear">
+  <div class="piece appear" id="roccia">
     <h2 class="piece-title">Roccia</h2>
     <div class="piece-meta">
       clarinet, violin, pianoforte, percussion &middot; 2003 &middot; 7&prime;<br>
@@ -1108,10 +1162,12 @@
   </a>
 
 
+  <a class="section-top appear" href="#" onclick="window.scrollTo({top:0,behavior:\'smooth\'}); return false;">&uarr;</a>
+
   <div class="pause appear">&middot; &middot; &middot;</div>
 
   <!-- INCISIONI RUPESTRI -->
-  <div class="piece appear">
+  <div class="piece appear" id="incisioni-rupestri">
     <h2 class="piece-title">Incisioni Rupestri</h2>
     <div class="piece-meta">
       solo pianoforte &middot; 2004 &middot; 9&prime;<br>
@@ -1156,6 +1212,8 @@
       David Young and Mark Knoop with the score. Fairfax Studio, Arts Centre Melbourne, 2007.
     </div>
   </div>
+
+  <a class="section-top appear" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">&uarr;</a>
 
   <div class="pause appear">&middot; &middot; &middot;</div>
 
