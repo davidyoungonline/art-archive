@@ -259,6 +259,24 @@
   .audio-note a { color: var(--ink-faint); text-decoration: none; border-bottom: 1px solid var(--ink-ghost); }
   .audio-note a:hover { color: var(--ink-light); border-bottom-color: var(--ink); }
 
+  /* VIDEO EMBED */
+  .video-embed {
+    position: relative;
+    width: 100%;
+    height: 0;
+    background: var(--paper-dark);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+  .video-embed.ratio-16-9 { padding-bottom: 56.25%; }
+  .video-embed.seen { opacity: 1; }
+  .video-embed iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%; border: none;
+  }
+
   /* PER-PIECE PERFORMANCES — small block under each piece */
   .piece-performances {
     margin: 1.6rem 0 0.6rem;
@@ -456,19 +474,46 @@
   }
 
   /* GALLERY & LIGHTBOX */
+  .image-grid {
+    margin: 0 0 0.8rem;
+    columns: 2;
+    column-gap: 5px;
+  }
+  @media (max-width: 500px) { .image-grid { columns: 1; } }
+
+  .grid-item {
+    break-inside: avoid;
+    cursor: pointer;
+    background: var(--paper-dark);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    margin-bottom: 5px;
+  }
+  .grid-item.seen { opacity: 1; }
+  .grid-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: saturate(0.88) contrast(1.02);
+    transition: transform 0.9s ease, filter 0.6s ease;
+  }
+  .grid-item:hover img { transform: scale(1.02); filter: saturate(1) contrast(1.02); }
+
   .view-all-btn {
     background: none;
     border: none;
+    padding: 0;
     font-family: var(--serif);
     font-size: 0.88rem;
     font-style: italic;
-    color: var(--ink-faint);
+    color: var(--ink-light);
     cursor: pointer;
-    padding: 0;
-    letter-spacing: 0.015em;
-    transition: color 0.4s;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+    margin-top: 0.9rem;
+    display: inline-block;
   }
-  .view-all-btn:hover { color: var(--ink-light); }
+  .view-all-btn:hover { color: var(--ink); border-bottom-color: var(--ink-ghost); }
 
   .gallery-overlay {
     position: fixed;
@@ -650,7 +695,7 @@
     directly onto the page.
   </p>
 
-  <p class="section-intro appear">
+  <p class="prose appear">
     The series began with books and illustrations. Some of the music was composed
     before I had ever seen the valley. I first went there in 2002, and it was standing
     above the Mappa di Bedolina at Capo di Ponte, with the roads and river below
@@ -862,6 +907,8 @@
     </audio>
   </div>
   <p class="audio-note appear"><em>Sarcophagus</em> &middot; string octet</p>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
 
   <p class="section-label appear">Film</p>
   <div class="video-embed ratio-16-9 appear">
@@ -1103,6 +1150,12 @@
     Val Camonica Pieces &mdash; <em>Incisioni Rupestri</em> &mdash; score (PDF)
   </a>
 
+  <div class="piece-image appear">
+    <img src="val-camonica-knoop-young.jpg" alt="David Young and Mark Knoop with the score, Fairfax Studio, 2007">
+    <div class="piece-image-caption">
+      David Young and Mark Knoop with the score. Fairfax Studio, Arts Centre Melbourne, 2007.
+    </div>
+  </div>
 
   <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -1173,10 +1226,6 @@
       <span class="link-type">Lecture</span>
       Cynthia Troup &mdash; lecture on the Val Camonica rock carvings, 2007
     </a>
-    <a class="link-row" href="https://cynthiatroup.com/publications/essays-interviews" target="_blank">
-      <span class="link-type">Essay</span>
-      Cynthia Troup &mdash; publications index
-    </a>
     <a class="link-row" href="https://archive.org/details/dy-thesis" target="_blank">
       <span class="link-type">PhD thesis</span>
       Chapter 3: Val Camonica Pieces &mdash; Scratching the Surface
@@ -1187,7 +1236,8 @@
 
   <!-- PHOTOGRAPHS -->
   <p class="section-label appear">Photographs</p>
-  <button class="view-all-btn appear" onclick="openGallery()">View photographs &rarr;</button>
+  <div class="image-grid" id="featuredGrid"></div>
+  <button class="view-all-btn appear" onclick="openGallery()">View all photographs &rarr;</button>
 
   <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -1282,6 +1332,16 @@
     }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
   });
 
+  // Video embed reveal
+  document.querySelectorAll('.video-embed').forEach(v => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting) { v.classList.add('seen'); obs.disconnect(); } });
+    }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(v);
+  });
+  setTimeout(() => {
+    document.querySelectorAll('.video-embed:not(.seen)').forEach(v => v.classList.add('seen'));
+  }, 3000);
+
   // Audio player reveal
   document.querySelectorAll('.audio-player').forEach(a => {
     new IntersectionObserver((entries, obs) => {
@@ -1297,7 +1357,6 @@
 
   // GALLERY
   const images = [
-    { src: 'val-camonica-knoop-young.jpg',    caption: 'David Young and Mark Knoop with the score. Fairfax Studio, Arts Centre Melbourne, 2007.' },
     { src: 'val-camonica-rock-01.jpg',        caption: 'Roccia 1, Parco Nazionale delle Incisioni Rupestri, Capo di Ponte.' },
     { src: 'val-camonica-rock-02.jpg',        caption: 'A Cemmo mass — one of the large carved boulders outside Capo di Ponte.' },
     { src: 'val-camonica-lecture-01.jpg',     caption: 'The rock surface at Capo di Ponte, with the valley below.' },
@@ -1308,7 +1367,26 @@
     { src: 'val-camonica-lecture-06.jpg',     caption: 'Animals and hunters in raking light, Val Camonica.' },
   ];
 
-  // Build gallery thumbs
+  // Build featured grid (first 4)
+  const grid = document.getElementById('featuredGrid');
+  images.slice(0, 4).forEach((img, i) => {
+    const item = document.createElement('div');
+    item.className = 'grid-item';
+    const el = document.createElement('img');
+    el.src = img.src;
+    el.alt = img.caption;
+    el.loading = 'lazy';
+    item.appendChild(el);
+    item.addEventListener('click', () => openLightbox(i, images));
+    grid.appendChild(item);
+    setTimeout(() => {
+      new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { item.classList.add('seen'); obs.disconnect(); } });
+      }, { threshold: 0.05 }).observe(item);
+    }, i * 80);
+  });
+
+  // Build gallery thumbs (all 8)
   const thumbsEl = document.getElementById('galleryThumbs');
   images.forEach((img, i) => {
     const thumb = document.createElement('div');
