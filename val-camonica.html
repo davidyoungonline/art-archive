@@ -281,6 +281,53 @@
   }
   .piece-performances .pp-row em { color: var(--ink-faint); font-style: italic; }
 
+  /* HERO TRANSPARENT — special case for the page hero */
+  .hero-transparent {
+    margin: 1rem 0 2.5rem;
+    text-align: center;
+  }
+  .hero-transparent img {
+    width: 100%;
+    max-width: 520px;
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 1.8s ease;
+  }
+  .hero-transparent img.seen { opacity: 1; }
+
+  /* PIECE IMAGE — inline illustration for a movement */
+  .piece-image {
+    margin: 1.2rem 0 0.4rem;
+    text-align: center;
+  }
+  .piece-image img {
+    width: 100%;
+    max-width: 440px;
+    display: inline-block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+  .piece-image img.seen { opacity: 1; }
+  .piece-image .piece-image-caption {
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.5;
+    letter-spacing: 0.015em;
+  }
+  .piece-image .piece-image-caption a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: color 0.4s, border-color 0.4s;
+  }
+  .piece-image .piece-image-caption a:hover {
+    color: var(--ink-light);
+    border-bottom-color: var(--ink);
+  }
+
   /* LINK ROWS — for Further reading */
   .links-list { margin: 0.5rem 0 1.5rem; }
 
@@ -429,13 +476,10 @@
     lining up with the scratched lines in the rock, that the work found its ground.
   </p>
 
-  <!-- HERO IMAGE (placeholder — needs uploading) -->
-  <!--
-  <div class="section-hero appear">
-    <img src="val-camonica-rockface.jpg" alt="A carved rock surface at Capo di Ponte">
-    <div class="video-label">Roccia 1, Parco Nazionale delle Incisioni Rupestri, Capo di Ponte.</div>
+  <!-- HERO — rock carving figures, transparent -->
+  <div class="hero-transparent appear">
+    <img src="val-camonica-pieces.png" alt="Rock carving figures from Val Camonica">
   </div>
-  -->
 
   <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -514,6 +558,14 @@
     the empty space between figures becomes rest.
   </p>
 
+  <div class="piece-image appear">
+    <img src="val-camonica-stile-III-carving.jpg" alt="Rock carving from Roccia 1, Parco Nazionale delle Incisioni Rupestri">
+    <div class="piece-image-caption">
+      Roccia 1, Parco Nazionale delle Incisioni Rupestri &mdash; the tribal procession transcribed in <em>Stile III</em>.
+      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
+    </div>
+  </div>
+
   <div class="audio-player appear">
     <audio controls preload="none"
       src="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/Val%20Camonica%20Pieces%20-%20Stile%20III.mp3">
@@ -547,6 +599,14 @@
     of the seven sections, all three musicians turn the page simultaneously. Twenty audible
     page-turns: Anati's persistence leaving no stone unturned.
   </p>
+
+  <div class="piece-image appear">
+    <img src="val-camonica-lexicon.jpg" alt="Lexicon score — three cello parts in 5/8">
+    <div class="piece-image-caption">
+      <em>Lexicon</em> &mdash; three cellos in 5/8, building the vocabulary of articulations.
+      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
+    </div>
+  </div>
 
   <div class="audio-unavailable appear">Recording to be added</div>
 
@@ -590,6 +650,14 @@
     course of the river. Glacial shards of sound &mdash; scratching the surface &mdash; encase
     something less reachable below.
   </p>
+
+  <div class="piece-image appear">
+    <img src="val-camonica-sarcophagus.jpg" alt="Mappa di Bedolina — an ancient rock carving map">
+    <div class="piece-image-caption">
+      The Mappa di Bedolina &mdash; fields, paths, and dwellings etched into the rock above Capo di Ponte.
+      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
+    </div>
+  </div>
 
   <p class="section-intro appear">
     <em>Sarcophagus</em> is dedicated to my grandmother, Marie Burnett, who died not long
@@ -639,6 +707,14 @@
     scattered across the score much as they appear on the rockfaces. By this point, the ensemble
     has learned how to read them.
   </p>
+
+  <div class="piece-image appear">
+    <img src="val-camonica-inventario.jpg" alt="Inventario score — bar 119, with rock carvings on the staves">
+    <div class="piece-image-caption">
+      <em>Inventario</em> &mdash; bar 119, where the pictographs break through the score.
+      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
+    </div>
+  </div>
 
   <p class="section-intro appear">
     This was the piece where I first let go of conventional notation and trusted graphic symbols
@@ -707,6 +783,14 @@
     in a relatively unusual act of compositional humility, I write myself out of the piece.
   </p>
 
+  <div class="piece-image appear">
+    <img src="val-camonica-animali.jpg" alt="Animali final page — rock carvings on an empty stave">
+    <div class="piece-image-caption">
+      <em>Animali</em> &mdash; the final page. Rock carvings superimposed on an otherwise blank stave.
+      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
+    </div>
+  </div>
+
   <div class="pull-quote appear">
     The listener gains the impression that Young has painstakingly decrypted and translated
     every detail of the site into note-by-note musical ideas, as if creating new words and
@@ -748,6 +832,14 @@
     across the pages &mdash; <em>con calma</em>, <em>con sorpresa</em>,
     <em>fuori controllo</em> &mdash; always with an edge of irony.
   </p>
+
+  <div class="piece-image appear">
+    <img src="val-camonica-roccia.jpg" alt="Roccia score — first page, in colour">
+    <div class="piece-image-caption">
+      <em>Roccia</em> &mdash; pitch runs vertically, duration horizontally in seconds, each instrument in its own colour.
+      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
+    </div>
+  </div>
 
   <p class="section-intro appear">
     The notation is deceptively exacting. Despite the appearance of freedom, the relative
@@ -798,6 +890,14 @@
     Mark Knoop brought to his performance was humbling, and deeply touching.
   </p>
 
+  <div class="piece-image appear">
+    <img src="val-camonica-incisioni-rupestri.jpg" alt="Incisioni Rupestri score — three 3-minute staves">
+    <div class="piece-image-caption">
+      <em>Incisioni Rupestri</em> &mdash; three staves, three minutes each. The rock carvings transcribed directly onto the score.
+      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
+    </div>
+  </div>
+
   <div class="audio-unavailable appear">Recording to be added &mdash; Mark Knoop, 2007</div>
 
   <div class="piece-performances appear">
@@ -824,6 +924,16 @@
     out from inside the mountain.
   </p>
 
+  <div class="section-hero appear">
+    <img src="val-camonica-morning-aura.jpg" alt="Pizzo Badile at the equinox dawn, with its ghostlike shadow in the sky">
+    <div class="video-label">Pizzo Badile at the equinox dawn.</div>
+  </div>
+
+  <div class="section-hero appear">
+    <img src="val-camonica-spirit-mountain.jpg" alt="Monte Conarena at the equinox sunset, with a shaft of light from the summit">
+    <div class="video-label">Monte Conarena at the equinox sunset.</div>
+  </div>
+
   <p class="section-intro appear">
     To the people of this valley since the Bronze Age, these manifestations were and still are
     a cause for bewilderment and veneration. Despite Anati and his many disciples, we still
@@ -843,6 +953,10 @@
     <a class="link-row" href="https://archive.org/details/val-camonica-pieces-inventario" target="_blank">
       <span class="link-type">Recordings</span>
       Val Camonica Pieces &mdash; all tracks on Archive.org
+    </a>
+    <a class="link-row" href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">
+      <span class="link-type">Score</span>
+      Val Camonica Pieces &mdash; full score (PDF)
     </a>
     <a class="link-row" href="https://www.realtime.org.au/musical-archaeology/" target="_blank">
       <span class="link-type">Review</span>
@@ -938,8 +1052,8 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
   });
 
-  // Hero image reveal
-  document.querySelectorAll('.section-hero img').forEach(img => {
+  // Image reveal (hero, hero-transparent, piece-image)
+  document.querySelectorAll('.section-hero img, .hero-transparent img, .piece-image img').forEach(img => {
     new IntersectionObserver((entries, obs) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('seen'); obs.disconnect(); }
