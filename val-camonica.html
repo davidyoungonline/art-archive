@@ -281,6 +281,51 @@
   }
   .piece-performances .pp-row em { color: var(--ink-faint); font-style: italic; }
 
+  /* PIECE SCORE ROW — a link to the movement's score, sits under the recording */
+  .score-row {
+    display: block;
+    margin: 1.1rem 0 0;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--paper-dark);
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.4s, padding-left 0.35s;
+  }
+  .score-row:hover { color: var(--ink-light); padding-left: 0.35rem; }
+  .score-row .link-type {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  }
+
+  /* SCORE EMBED — for inline PDF viewing, full column width, A4 portrait ratio */
+  .score-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 141.4%;
+    margin: 1.2rem 0 0.4rem;
+    background: var(--paper-dark);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+  .score-embed.seen { opacity: 1; }
+  .score-embed iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
   /* HERO TRANSPARENT — special case for the page hero */
   .hero-transparent {
     margin: 1rem 0 2.5rem;
@@ -518,6 +563,13 @@
     The three can be played in any order.
   </p>
 
+  <div class="piece-image appear">
+    <img src="val-camonica-stile-III-carving.jpg" alt="Rock carving from Roccia 1, Parco Nazionale delle Incisioni Rupestri">
+    <div class="piece-image-caption">
+      A rock carving from Roccia 1, Parco Nazionale delle Incisioni Rupestri.
+    </div>
+  </div>
+
   <p class="section-intro appear">
     <em>Stile&nbsp;I</em> takes its material from the Cemmo masses &mdash; huge boulders just outside
     Capo di Ponte covered in repetitions of animals and tools, like an inventory or a list
@@ -559,10 +611,9 @@
   </p>
 
   <div class="piece-image appear">
-    <img src="val-camonica-stile-III-carving.jpg" alt="Rock carving from Roccia 1, Parco Nazionale delle Incisioni Rupestri">
+    <img src="val-camonica-stile-III-score.jpg" alt="Stile III score — direct transcription of the Roccia 1 procession">
     <div class="piece-image-caption">
-      Roccia 1, Parco Nazionale delle Incisioni Rupestri &mdash; the tribal procession transcribed in <em>Stile III</em>.
-      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
+      <em>Stile III</em> &mdash; the carving transcribed note by note. Spears become ascending glissandi; feathered headdresses become tremoli.
     </div>
   </div>
 
@@ -572,6 +623,11 @@
     </audio>
   </div>
   <p class="audio-note appear"><em>Stile III</em></p>
+
+  <a class="score-row appear" href="https://archive.org/download/val-camonica-pieces-inventario/val-camonica-pieces-stile-I-II-III.pdf" target="_blank">
+    <span class="link-type">Score</span>
+    <em>Stile I, II &amp; III</em> &mdash; full score (PDF)
+  </a>
 
   <div class="piece-performances appear">
     <div class="pp-label">Other performances</div>
@@ -604,11 +660,15 @@
     <img src="val-camonica-lexicon.jpg" alt="Lexicon score — three cello parts in 5/8">
     <div class="piece-image-caption">
       <em>Lexicon</em> &mdash; three cellos in 5/8, building the vocabulary of articulations.
-      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
     </div>
   </div>
 
   <div class="audio-unavailable appear">Recording to be added</div>
+
+  <a class="score-row appear" href="https://archive.org/download/val-camonica-pieces-inventario/val-camonica-pieces-lexicon.pdf" target="_blank">
+    <span class="link-type">Score</span>
+    <em>Lexicon</em> &mdash; full score (PDF)
+  </a>
 
   <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -655,7 +715,6 @@
     <img src="val-camonica-sarcophagus.jpg" alt="Mappa di Bedolina — an ancient rock carving map">
     <div class="piece-image-caption">
       The Mappa di Bedolina &mdash; fields, paths, and dwellings etched into the rock above Capo di Ponte.
-      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
     </div>
   </div>
 
@@ -671,6 +730,15 @@
     </audio>
   </div>
   <p class="audio-note appear"><em>Sarcophagus</em> &middot; string octet</p>
+
+  <a class="score-row appear" href="https://archive.org/download/val-camonica-pieces-inventario/val-camonica-pieces-sarcophagus.pdf" target="_blank">
+    <span class="link-type">Score</span>
+    <em>Sarcophagus</em> &mdash; full score (PDF)
+  </a>
+
+  <div class="score-embed">
+    <iframe src="https://archive.org/download/val-camonica-pieces-inventario/val-camonica-pieces-sarcophagus.pdf" title="Sarcophagus score"></iframe>
+  </div>
 
   <div class="piece-performances appear">
     <div class="pp-label">Other performances</div>
@@ -712,7 +780,6 @@
     <img src="val-camonica-inventario.jpg" alt="Inventario score — bar 119, with rock carvings on the staves">
     <div class="piece-image-caption">
       <em>Inventario</em> &mdash; bar 119, where the pictographs break through the score.
-      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
     </div>
   </div>
 
@@ -729,6 +796,11 @@
     </audio>
   </div>
   <p class="audio-note appear"><em>Inventario</em> &middot; fifteen instruments</p>
+
+  <a class="score-row appear" href="https://archive.org/download/val-camonica-pieces-inventario/val-camonica-pieces-inventario.pdf" target="_blank">
+    <span class="link-type">Score</span>
+    <em>Inventario</em> &mdash; full score (PDF)
+  </a>
 
   <div class="piece-performances appear">
     <div class="pp-label">Other performances</div>
@@ -787,7 +859,6 @@
     <img src="val-camonica-animali.jpg" alt="Animali final page — rock carvings on an empty stave">
     <div class="piece-image-caption">
       <em>Animali</em> &mdash; the final page. Rock carvings superimposed on an otherwise blank stave.
-      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
     </div>
   </div>
 
@@ -804,6 +875,11 @@
     </audio>
   </div>
   <p class="audio-note appear"><em>Animali</em> &middot; Yasutaka Hemmi, violin</p>
+
+  <a class="score-row appear" href="https://archive.org/download/val-camonica-pieces-inventario/val-camonica-pieces-animali.pdf" target="_blank">
+    <span class="link-type">Score</span>
+    <em>Animali</em> &mdash; full score (PDF)
+  </a>
 
   <div class="piece-performances appear">
     <div class="pp-label">Other performances</div>
@@ -837,7 +913,6 @@
     <img src="val-camonica-roccia.jpg" alt="Roccia score — first page, in colour">
     <div class="piece-image-caption">
       <em>Roccia</em> &mdash; pitch runs vertically, duration horizontally in seconds, each instrument in its own colour.
-      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
     </div>
   </div>
 
@@ -855,6 +930,11 @@
     </audio>
   </div>
   <p class="audio-note appear"><em>Roccia</em> &middot; clarinet, violin, piano, percussion</p>
+
+  <a class="score-row appear" href="https://archive.org/download/val-camonica-pieces-inventario/val-camonica-pieces-roccia.pdf" target="_blank">
+    <span class="link-type">Score</span>
+    <em>Roccia</em> &mdash; full score (PDF)
+  </a>
 
   <div class="piece-performances appear">
     <div class="pp-label">Other performances</div>
@@ -894,11 +974,15 @@
     <img src="val-camonica-incisioni-rupestri.jpg" alt="Incisioni Rupestri score — three 3-minute staves">
     <div class="piece-image-caption">
       <em>Incisioni Rupestri</em> &mdash; three staves, three minutes each. The rock carvings transcribed directly onto the score.
-      <a href="https://ia601608.us.archive.org/13/items/val-camonica-pieces-inventario/val-camonica-pieces-full-score.pdf" target="_blank">View score</a>
     </div>
   </div>
 
   <div class="audio-unavailable appear">Recording to be added &mdash; Mark Knoop, 2007</div>
+
+  <a class="score-row appear" href="https://archive.org/download/val-camonica-pieces-inventario/val-camonica-pieces-incisioni-rupestri.pdf" target="_blank">
+    <span class="link-type">Score</span>
+    <em>Incisioni Rupestri</em> &mdash; full score (PDF)
+  </a>
 
   <div class="piece-performances appear">
     <div class="pp-label">Other performances</div>
@@ -1060,6 +1144,18 @@
       });
     }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
   });
+
+  // Score embed reveal
+  document.querySelectorAll('.score-embed').forEach(el => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { el.classList.add('seen'); obs.disconnect(); }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(el);
+  });
+  setTimeout(() => {
+    document.querySelectorAll('.score-embed:not(.seen)').forEach(el => el.classList.add('seen'));
+  }, 3000);
 
   // Audio player reveal
   document.querySelectorAll('.audio-player').forEach(a => {
