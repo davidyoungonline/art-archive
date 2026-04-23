@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overheard at Inveresk — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  /* PROSE */
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 1.8rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  /* NAV BACK */
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  /* TITLE / BYLINE */
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .work-byline {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    line-height: 1.9;
+    letter-spacing: 0.015em;
+    margin-bottom: 3rem;
+  }
+
+  .work-byline a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .work-byline a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+  }
+
+  /* SECTION INTRO */
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  /* PAUSE */
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  /* SECTION HERO */
+  .section-hero {
+    margin: 0 0 1.8rem;
+  }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  /* MARGIN NOTE */
+  .margin-note {
+    margin: 1.5rem 0 2.5rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+
+  .margin-note p {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .margin-note a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .margin-note a:hover { border-bottom-color: var(--ink); }
+
+  .margin-note .note-sub {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    margin-top: 0.5rem;
+    line-height: 1.9;
+  }
+
+  /* VIDEO */
+  .video-item { margin: 2.2rem 0; }
+
+  .video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    background: var(--paper-dark);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .video-embed.seen { opacity: 1; }
+
+  .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  .video-label a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .video-label a:hover { border-bottom-color: var(--ink); }
+
+  /* LINKS */
+  .links-list { margin: 0.5rem 0 2rem; }
+
+  .link-row {
+    display: block;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 1rem;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.4s, padding-left 0.35s;
+  }
+
+  .link-row:first-child { border-top: 1px solid var(--paper-dark); }
+  .link-row:hover { color: var(--ink-light); padding-left: 0.35rem; }
+
+  .link-row .link-type {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  }
+
+  /* CREDITS */
+  .credits-block {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    line-height: 2.1;
+    letter-spacing: 0.015em;
+    color: var(--ink-light);
+  }
+
+  .credits-block strong { font-weight: 500; color: var(--ink); }
+
+  /* PERFORMANCE LIST */
+  .perf-list { margin: 0.5rem 0 2rem; }
+
+  .perf-row {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    letter-spacing: 0.015em;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+
+  .perf-row:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .perf-row strong {
+    display: block;
+    font-weight: 400;
+    color: var(--ink);
+    font-size: 1rem;
+  }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 16rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  /* APPEAR */
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="art.html">&#8592; art</a></p>
+
+    <h1 class="work-title appear">Overheard at Inveresk</h1>
+    <p class="work-byline appear">
+      David Young with Michael Hewes<br>
+      sound installation &amp; chamber opera &middot; 2001<br>
+      Ten Days on the Island, Launceston, Tasmania
+    </p>
+
+    <p class="appear">
+      The Inveresk Railyards Workshop was left exactly as it was when it shut down. The machinery was still there. The tools. Coffee cups and timesheets. Two thousand workers had streamed out through the gates every evening in the seventies, and the place had simply stopped.
+    </p>
+
+    <p class="appear">
+      <em>Overheard at Inveresk</em> was commissioned by Robyn Archer for the inaugural Ten Days on the Island festival in 2001. Working with sound designer Michael Hewes, I spent months in Launceston on residency &mdash; interviewing former workers, learning the names of machines, getting the machinery running again and recording it. The resulting audio was broadcast from outside the building. From the street, the workshop appeared to be alive. You could hear it working.
+    </p>
+
+    <p class="appear">
+      Inside, there was silence until soprano Maria Lurighi and percussionist Tom O'Kelly performed it back into life.
+    </p>
+
+    <div class="section-hero appear">
+      <img src="inveresk-workshop.jpg" alt="Inveresk Railyards Blacksmiths Shop — as it was left, Launceston, 2001" id="heroImg">
+      <div class="video-label">The Blacksmiths Shop, Inveresk Railyards, Launceston. From the Ten Days on the Island 2001 festival brochure.</div>
+    </div>
+
+    <div class="margin-note appear">
+      <p><em>&ldquo;O'Kelly conjuring crystalline sounds from the rusted rollers of a 3 metre ex-industrial gamelan.&rdquo;</em></p>
+      <p class="note-sub">Jeremy Eccles, <a href="https://www.realtime.org.au/musics-industrial-and-rural/" target="_blank">RealTime</a> #43, 2001</p>
+    </div>
+
+    <p class="section-intro appear">
+      Within that silence, we made a small chamber opera in ten parts &mdash; for soprano, percussionist, and electronics. The sound world drew on the machinery recordings, but also on the local university choir, a brass band, and the Launceston Pigeon Fanciers Club. The libretto wove together the voices of the former workers with the Tasmanian Government Railways <em>Book of Rules and Regulations</em> from 1950, and the myth of Icarus &mdash; in the figure of Naucrate, his mother.
+    </p>
+
+    <p class="section-intro appear">
+      Above the performers, a boy soprano sat on a girder. He was silent for most of the work, looking down. He sang only briefly, towards the end.
+    </p>
+
+    <div class="section-hero appear">
+      <img src="inveresk-rehearsal.jpg" alt="Maria Lurighi and Tom O'Kelly — Inveresk Railyards Blacksmiths Shop, Launceston, 2001" id="rehearsalImg">
+      <div class="video-label">Maria Lurighi and Tom O'Kelly &mdash; Inveresk Railyards Blacksmiths Shop, Launceston, 2001.</div>
+    </div>
+
+    <div class="margin-note appear">
+      <p><em>&ldquo;Positive blocks of light in this smoke-blackened negative world.&rdquo;</em></p>
+      <p class="note-sub">Jeremy Eccles, <a href="https://www.realtime.org.au/musics-industrial-and-rural/" target="_blank">RealTime</a> #43, 2001</p>
+    </div>
+
+    <p class="section-intro appear">
+      About 500 people flocked to see what was going on inside this building that had been such an important part of Launceston's life. After the festival, the Queen Victoria Museum commissioned Michael to make the sound installation permanent.
+    </p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- VIDEO -->
+    <p class="section-label appear">Film</p>
+
+    <div class="video-item appear">
+      <div class="video-embed" id="videoEmbed">
+        <iframe src="https://archive.org/embed/overheard-at-inveresk-profile_202604"
+                title="Overheard at Inveresk — ABC profile"
+                allowfullscreen></iframe>
+      </div>
+      <div class="video-label">ABC profile &mdash; interviews with David Young, Michael Hewes, Maria Lurighi, Tom O'Kelly, and former Inveresk workers. 2001.</div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- FURTHER READING -->
+    <p class="section-label appear">Further reading</p>
+
+    <div class="links-list appear">
+      <a class="link-row" href="https://www.tendays.org.au/wp-content/uploads/2020/11/brochure_2001.pdf" target="_blank">
+        <span class="link-type">Festival programme</span>
+        Ten Days on the Island 2001 &mdash; festival brochure, p. 25
+      </a>
+      <a class="link-row" href="https://www.realtime.org.au/musics-industrial-and-rural/" target="_blank">
+        <span class="link-type">Review</span>
+        Jeremy Eccles &mdash; &ldquo;Musics industrial and rural&rdquo;, <em>RealTime</em> #43, 2001
+      </a>
+      <a class="link-row" href="https://www.australianmusiccentre.com.au/product/overheard-at-inveresk-sound-installation-miniature-opera-in-ten-parts" target="_blank">
+        <span class="link-type">Catalogue</span>
+        <em>Overheard at Inveresk</em> &mdash; Australian Music Centre
+      </a>
+      <span class="link-row pending">
+        <span class="link-type">Score</span>
+        <em>Overheard at Inveresk</em> &mdash; full score &nbsp;[to be scanned]
+      </span>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- PERFORMANCE HISTORY -->
+    <p class="section-label appear">Performances</p>
+
+    <div class="perf-list appear">
+      <div class="perf-row">
+        <strong>Sound installation &mdash; Inveresk Railyards Blacksmiths Shop, Launceston</strong>
+        March 30 &ndash; April 8, 2001
+      </div>
+      <div class="perf-row">
+        <strong>Chamber opera performances &mdash; Inveresk Railyards, Launceston</strong>
+        April 5&ndash;7, 2001 (with additional performance added)
+      </div>
+      <div class="perf-row">
+        <strong>Permanent installation &mdash; Queen Victoria Museum and Art Gallery, Launceston</strong>
+        From 2001
+      </div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- CREDITS -->
+    <p class="section-label appear">Credits</p>
+
+    <div class="credits-block appear">
+      <strong>Composer / director</strong> David Young<br>
+      <strong>Sound design &amp; live processing</strong> Michael Hewes<br>
+      <strong>Soprano</strong> Maria Lurighi<br>
+      <strong>Percussion</strong> Tom O'Kelly<br><br>
+      <strong>Commissioned by</strong> Robyn Archer for Ten Days on the Island, 2001<br>
+      <strong>Permanent installation</strong> Queen Victoria Museum and Art Gallery, Launceston
+    </div>
+
+  </div>
+
+  <div class="closing appear">
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
+      <a href="index.html">home</a>
+      <a href="art.html">art</a>
+      <a href="impressum.html">Impressum</a>
+      <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Scroll-reveal
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.disconnect(); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+// Hero image fade
+const heroImg = document.getElementById('heroImg');
+if (heroImg) {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { heroImg.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.1 }).observe(heroImg);
+}
+
+// Rehearsal image fade
+const rehearsalImg = document.getElementById('rehearsalImg');
+if (rehearsalImg) {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { rehearsalImg.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.1 }).observe(rehearsalImg);
+}
+
+// Video fade
+const videoEmbed = document.getElementById('videoEmbed');
+if (videoEmbed) {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { videoEmbed.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.15 }).observe(videoEmbed);
+}
+</script>
+
+</body>
+</html>
