@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graphic Score Player</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: black; overflow: hidden; color: white; font-family: sans-serif; }
+        #stage { position: relative; display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh; }
+        #score-image { display: block; max-width: 100vw; max-height: 100vh; }
+        #playhead { position: absolute; top: 0; left: 0; height: 100%; background-color: white; width: 5px; pointer-events: none; z-index: 10; box-shadow: 0 0 15px white; display: none; }
+        #ui { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
+        .btn { background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 5px; border: 1px solid white; cursor: pointer; }
+        #meta { position: fixed; top: 20px; left: 20px; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+<div id="meta">Loading...</div>
+<div id="ui">
+    <div id="start-btn" class="btn" onclick="init()">START PIECE</div>
+    <div id="play-btn" class="btn" style="display:none" onclick="togglePause()">PAUSE</div>
+</div>
+
+<div id="stage">
+    <img id="score-image">
+    <div id="playhead"></div>
+</div>
+
+<audio id="audio-engine"></audio>
+
+<script src="score-data.js"></script>
+
+<script>
+    let sectionIdx = 0; let pageIdx = 0; let isPaused = true;
+    let timer = null; let startTime = 0; let remaining = 0;
+    const audio = document.getElementById('audio-engine');
+    const img = document.getElementById('score-image');
+    const playhead = document.getElementById('playhead');
+    const meta = document.getElementById('meta');
+
+    function init() {
+        document.getElementById('start-btn').style.display = 'none';
+        document.getElementById('play-btn').style.display = 'block';
+        playhead.style.display = 'block';
+        loadPage();
+    }
+
+    function loadPage() {
+        clearTimeout(timer);
+        const section = composition.sections[sectionIdx];
+        const page = section.pages[pageIdx];
+
+        if (!audio.src.includes(section.audio)) {
+            audio.src = section.audio;
+            audio.load();
+        }
+
+        img.src = page.f;
+        img.onload = () => {
+            meta.innerText = `${composition.title} - ${section.name} (${pageIdx + 1}/${section.pages.length})`;
+            playhead.style.height = img.clientHeight + "px";
+            startAnimation(page.d * 1000);
+        };
+    }
+
+    function startAnimation(ms) {
+        isPaused = false;
+        remaining = ms;
+        startTime = Date.now();
+        audio.play();
+        playhead.style.transition = 'none';
+        playhead.style.left = '0%';
+        playhead.offsetHeight; 
+        playhead.style.transition = `left ${ms}ms linear`;
+        playhead.style.left = (img.clientWidth - 5) + "px";
+        timer = setTimeout(nextStep, ms);
+    }
+
+    function nextStep() {
+        pageIdx++;
+        if (pageIdx >= composition.sections[sectionIdx].pages.length) {
+            pageIdx = 0;
+            sectionIdx++;
+        }
+        if (sectionIdx < composition.sections.length) loadPage();
+        else { meta.innerText = "FINISH"; audio.pause(); }
+    }
+
+    function togglePause() {
+        if (!isPaused) {
+            isPaused = true; audio.pause(); clearTimeout(timer);
+            remaining -= (Date.now() - startTime);
+            playhead.style.transition = 'none';
+            playhead.style.left = window.getComputedStyle(playhead).left;
+            document.getElementById('play-btn').innerText = "RESUME";
+        } else {
+            isPaused = false; audio.play(); startTime = Date.now();
+            playhead.style.transition = `left ${remaining}ms linear`;
+            playhead.style.left = (img.clientWidth - 5) + "px";
+            timer = setTimeout(nextStep, remaining);
+            document.getElementById('play-btn').innerText = "PAUSE";
+        }
+    }
+</script>
+</body>
+</html>
