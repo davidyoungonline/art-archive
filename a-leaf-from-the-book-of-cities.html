@@ -325,41 +325,21 @@
     opacity: 0.8;
   }
 
-  /* ARCHIVE EMBED */
-  .archive-embed-wrap {
-    position: relative;
-    padding-bottom: 68.57%;
-    background: var(--paper-dark);
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 1.4s ease;
-    margin-bottom: 0.75rem;
-  }
-
-  .archive-embed-wrap.seen { opacity: 1; }
-
-  .archive-embed-wrap iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
   /* PDF EMBED */
-  .pdf-embed-wrap {
+  .video-embed {
     position: relative;
-    padding-top: 141.4%;
+    width: 100%;
+    height: 0;
     background: var(--paper-dark);
     overflow: hidden;
     opacity: 0;
     transition: opacity 1.4s ease;
-    margin-bottom: 0.75rem;
   }
 
-  .pdf-embed-wrap.seen { opacity: 1; }
+  .video-embed.ratio-pdf { padding-bottom: 133%; }
+  .video-embed.seen { opacity: 1; }
 
-  .pdf-embed-wrap iframe {
+  .video-embed iframe {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -367,6 +347,7 @@
     border: none;
   }
 
+  /* EMBED LABEL */
   .embed-label {
     margin-top: 0.75rem;
     font-family: var(--serif);
@@ -401,42 +382,58 @@
     transition: color 0.4s, padding-left 0.35s;
   }
 
-  a.link-row:hover { color: var(--ink-light); padding-left: 0.3rem; }
+  .link-row:first-child { border-top: 1px solid var(--paper-dark); }
+  a.link-row:hover { color: var(--ink-light); padding-left: 0.35rem; }
 
   .link-type {
-    display: inline-block;
+    display: block;
     font-size: 0.72rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ink-ghost);
-    margin-right: 0.7em;
-    vertical-align: middle;
+    color: var(--ink-faint);
+    margin-bottom: 0.1rem;
   }
+
+  .link-row.pending {
+    color: var(--ink-faint);
+    cursor: default;
+  }
+
+  .link-row.pending:hover { padding-left: 0; color: var(--ink-faint); }
 
   /* PERFORMANCE LIST */
   .perf-list { margin: 0.5rem 0 2rem; }
 
   .perf-row {
-    padding: 0.85rem 0;
+    padding: 0.7rem 0;
     border-bottom: 1px solid var(--paper-dark);
     font-family: var(--serif);
-    font-size: 0.96rem;
-    line-height: 1.6;
-    color: var(--ink);
+    font-size: 0.95rem;
+    letter-spacing: 0.015em;
+    line-height: 1.7;
+    color: var(--ink-light);
   }
 
-  .perf-row strong { font-weight: 500; }
+  .perf-row:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .perf-row strong {
+    display: block;
+    font-weight: 400;
+    color: var(--ink);
+    font-size: 1rem;
+  }
 
   /* CREDITS */
   .credits-block {
     font-family: var(--serif);
-    font-size: 0.96rem;
-    line-height: 2;
-    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 2.1;
+    letter-spacing: 0.015em;
+    color: var(--ink-light);
     margin-bottom: 2rem;
   }
 
-  .credits-block strong { font-weight: 500; }
+  .credits-block strong { font-weight: 500; color: var(--ink); }
 
   /* CLOSING FOOTER */
   .closing {
@@ -527,7 +524,7 @@
 
   <!-- INTRO -->
   <p class="section-intro appear">
-    Two movements, each taking its title from a Paul Klee painting held in the Öffentliche Kunstsammlung Basel. Klee's titles are among the strangest and most accurate acts of naming in twentieth-century art. Borrowing two of them felt less like homage than like permission.
+    Commissioned by the Ives Ensemble, these two movements each take their title from Paul Klee paintings held in the Öffentliche Kunstsammlung Basel. Klee's titles are among the strangest and most intriguing acts of naming in twentieth-century art. I have always held this piece precious and it is my small homage to Klee and his work.
   </p>
 
   <p class="section-intro appear">
@@ -556,10 +553,10 @@
   <!-- RECORDING -->
   <p class="section-label appear">Rehearsal recording</p>
 
-  <div class="archive-embed-wrap appear">
-    <iframe src="https://archive.org/embed/a-leaf-from-the-book-of-cities-rehearsal-recording_202604"
-            title="A Leaf from the Book of Cities — rehearsal recording, Ives Ensemble 2006"
-            allowfullscreen></iframe>
+  <div class="audio-embed appear">
+    <audio controls>
+      <source src="https://archive.org/download/a-leaf-from-the-book-of-cities-rehearsal-recording_202604/a-leaf-from-the-book-of-cities-rehearsal-recording.m4a" type="audio/mp4">
+    </audio>
   </div>
   <p class="embed-label appear">
     Ives Ensemble, rehearsal recording, Stuttgart 2006. Both movements. &mdash;
@@ -571,29 +568,14 @@
   <!-- SCORE -->
   <p class="section-label appear">Score</p>
 
-  <div class="pdf-embed-wrap appear">
-    <iframe src="https://archive.org/embed/a-leaf-from-the-book-of-cities-rehearsal-recording_202604/a-leaf-from-the-book-of-cities-score.pdf"
-            title="A Leaf from the Book of Cities — full score"
-            allowfullscreen></iframe>
+  <div class="appear">
+    <div class="video-embed ratio-pdf">
+      <iframe src="https://archive.org/download/a-leaf-from-the-book-of-cities-rehearsal-recording_202604/a-leaf-from-the-book-of-cities-score.pdf"
+              title="A Leaf from the Book of Cities — full score"
+              loading="lazy"></iframe>
+    </div>
+    <p class="embed-label"><a href="https://archive.org/download/a-leaf-from-the-book-of-cities-rehearsal-recording_202604/a-leaf-from-the-book-of-cities-score.pdf" target="_blank">Download score (PDF)</a></p>
   </div>
-  <p class="embed-label appear">
-    Full score (PDF). &mdash;
-    <a href="https://archive.org/download/a-leaf-from-the-book-of-cities-rehearsal-recording_202604/a-leaf-from-the-book-of-cities-score.pdf" target="_blank">Download</a>
-  </p>
-
-  <div class="pause appear">&middot; &middot; &middot;</div>
-
-  <!-- PROGRAMME -->
-  <p class="section-label appear">Festival programme</p>
-
-  <div class="pdf-embed-wrap appear">
-    <iframe src="https://archive.org/embed/a-leaf-from-the-book-of-cities-rehearsal-recording_202604/world-new-music-festival-2006-stuttgart.pdf"
-            title="World New Music Days 2006, Stuttgart — festival programme"
-            allowfullscreen></iframe>
-  </div>
-  <p class="embed-label appear">
-    ISCM World New Music Days, Stuttgart, 2006 &mdash; festival programme (PDF).
-  </p>
 
   <div class="pause appear">&middot; &middot; &middot;</div>
 
@@ -614,6 +596,10 @@
   <p class="section-label appear">Further reading</p>
 
   <div class="links-list appear">
+    <a class="link-row" href="https://archive.org/download/a-leaf-from-the-book-of-cities-rehearsal-recording_202604/world-new-music-festival-2006-stuttgart.pdf" target="_blank">
+      <span class="link-type">Programme</span>
+      ISCM World New Music Days, Stuttgart, 2006 &mdash; festival programme (PDF)
+    </a>
     <a class="link-row" href="https://ives-ensemble.nl/" target="_blank">
       <span class="link-type">Ensemble</span>
       Ives Ensemble &mdash; Amsterdam
@@ -734,6 +720,13 @@ document.querySelectorAll('.section-hero img').forEach(img => {
 
 // Archive/PDF embed fade
 document.querySelectorAll('.archive-embed-wrap, .pdf-embed-wrap').forEach(v => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { v.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.1 }).observe(v);
+});
+
+// PDF embed fade
+document.querySelectorAll('.video-embed').forEach(v => {
   new IntersectionObserver((entries, obs) => {
     entries.forEach(e => { if (e.isIntersecting) { v.classList.add('seen'); obs.disconnect(); } });
   }, { threshold: 0.1 }).observe(v);
