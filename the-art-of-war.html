@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Art of War — David Young</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  /* PROSE */
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 1.8rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  /* NAV BACK */
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  /* TITLE / BYLINE */
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .work-byline {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    line-height: 1.9;
+    letter-spacing: 0.015em;
+    margin-bottom: 3rem;
+  }
+
+  .work-byline a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .work-byline a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+  }
+
+  /* SECTION INTRO */
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  /* PAUSE */
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  /* SCROLL REVEAL */
+  .appear {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1.1s ease, transform 1.1s ease;
+  }
+
+  .appear.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* SECTION HERO */
+  .section-hero {
+    margin: 0 0 0.8rem;
+  }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  /* SECONDARY IMAGE */
+  .section-secondary {
+    margin: 0 0 0.8rem;
+  }
+
+  .section-secondary img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-secondary img.seen { opacity: 1; }
+
+  /* AUDIO */
+  .audio-embed {
+    width: 100%;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    margin-bottom: 1rem;
+  }
+
+  .audio-embed.seen { opacity: 1; }
+
+  .audio-embed audio {
+    width: 100%;
+    height: 40px;
+    display: block;
+    filter: saturate(0);
+    opacity: 0.8;
+  }
+
+  /* EMBED LABEL */
+  .embed-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  .embed-label a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .embed-label a:hover { border-bottom-color: var(--ink); }
+
+  /* IMAGE CAPTION */
+  .image-caption {
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.7;
+    margin-top: 0.6rem;
+    margin-bottom: 1.8rem;
+  }
+
+  /* LINKS */
+  .links-list { margin: 0.5rem 0 2rem; }
+
+  .link-row {
+    display: block;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 1rem;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.4s, padding-left 0.35s;
+  }
+
+  .link-row:first-child { border-top: 1px solid var(--paper-dark); }
+  a.link-row:hover { color: var(--ink-light); padding-left: 0.35rem; }
+
+  .link-type {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.1rem;
+  }
+
+  /* CREDITS */
+  .credits-block {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    line-height: 2.1;
+    letter-spacing: 0.015em;
+    color: var(--ink-light);
+    margin-bottom: 2rem;
+  }
+
+  .credits-block strong { font-weight: 500; color: var(--ink); }
+
+  /* NOTE (footnote-style) */
+  .footnote {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.65;
+    margin-bottom: 1.8rem;
+  }
+
+  .footnote a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s;
+  }
+
+  .footnote a:hover { border-bottom-color: var(--ink-faint); }
+
+  /* CLOSING FOOTER */
+  .closing {
+    padding: 5rem 0 3rem;
+    border-top: 1px solid var(--paper-dark);
+    margin-top: 3rem;
+  }
+
+  .closing-links {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    font-family: var(--serif);
+    font-size: 0.85rem;
+  }
+
+  .closing-links a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .rainbow-flag {
+    height: 1em;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0.7;
+    transition: opacity 0.4s;
+  }
+
+  .rainbow-flag:hover { opacity: 1; }
+
+  /* MOVEMENT LIST */
+  .perf-list { margin: 0.5rem 0 2rem; }
+
+  .perf-row {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    letter-spacing: 0.015em;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .perf-row:first-child { border-top: 1px solid var(--paper-dark); }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <!-- NAV -->
+  <p class="nav-back appear"><a href="art.html">← art</a></p>
+
+  <!-- TITLE -->
+  <h1 class="work-title appear">The Art of War</h1>
+  <div class="work-byline appear">
+    David Young, 2013<br>
+    for double bass and percussion
+  </div>
+
+  <!-- INTRO -->
+  <p class="section-intro appear"><em>The Art of War</em> is a composition for double bass and percussion, written for Mark Cauvin and Matthias Schack-Arnott. The movement titles draw from Sun Tzu's ancient military treatise; the score was rendered as a series of miniature watercolours, maps for the musicians to navigate with.</p>
+
+  <p class="section-intro appear">The score has been lost. The recording survives.</p>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- HERO IMAGE -->
+  <div class="section-hero appear">
+    <img src="the-art-of-war-mark-hero.jpg" alt="Mark Cauvin performing The Art of War" id="heroImg">
+  </div>
+  <p class="image-caption appear">Mark Cauvin. Photograph: [photographer TBC]</p>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- RECORDING — EXCERPTS -->
+  <p class="section-label appear">Recording — excerpts</p>
+
+  <div class="audio-embed appear" id="audioExcerpts">
+    <audio controls preload="none">
+      <source src="https://ia800508.us.archive.org/1/items/the-art-of-war-sketches-recordings/the-art-of-war-sketches-recordings-excerpts.m4a" type="audio/mp4">
+    </audio>
+  </div>
+  <p class="embed-label appear">
+    Excerpts. Mark Cauvin (bass), Matthias Schack-Arnott (percussion).
+  </p>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- RECORDING — FULL -->
+  <p class="section-label appear">Recording — full version</p>
+
+  <div class="audio-embed appear" id="audioFull">
+    <audio controls preload="none">
+      <source src="https://ia600508.us.archive.org/1/items/the-art-of-war-sketches-recordings/the-art-of-war-sketches-recordings.m4a" type="audio/mp4">
+    </audio>
+  </div>
+  <p class="embed-label appear">
+    Full recording. Mark Cauvin (bass), Matthias Schack-Arnott (percussion). —
+    <a href="https://archive.org/details/the-art-of-war-sketches-recordings" target="_blank">Archive.org</a>
+  </p>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- MOVEMENTS -->
+  <p class="section-label appear">Movements</p>
+
+  <div class="perf-list appear">
+    <div class="perf-row">1. Strike with chaos <span style="color:var(--ink-faint); font-size:0.85rem;">— for percussion</span></div>
+    <div class="perf-row">2. Exploit the disarray <span style="color:var(--ink-faint); font-size:0.85rem;">— for double bass and percussion</span></div>
+    <div class="perf-row">3. Attack strategy itself <span style="color:var(--ink-faint); font-size:0.85rem;">— for double bass</span></div>
+    <div class="perf-row">4. Like pent-up water <span style="color:var(--ink-faint); font-size:0.85rem;">— for percussion</span></div>
+    <div class="perf-row">5. Like round boulders <span style="color:var(--ink-faint); font-size:0.85rem;">— for percussion</span></div>
+    <div class="perf-row">6. No constant dynamic <span style="color:var(--ink-faint); font-size:0.85rem;">— for double bass and percussion</span></div>
+    <div class="perf-row">7. Into the fray <span style="color:var(--ink-faint); font-size:0.85rem;">— for double bass</span></div>
+    <div class="perf-row">8. On death terrain <span style="color:var(--ink-faint); font-size:0.85rem;">— for percussion</span></div>
+    <div class="perf-row">9. Birds rising in flight <span style="color:var(--ink-faint); font-size:0.85rem;">— for double bass</span></div>
+    <div class="perf-row">10. Flight, impotence, decay, collapse, chaos, rout <span style="color:var(--ink-faint); font-size:0.85rem;">— for double bass and percussion</span></div>
+    <div class="perf-row">11. Plunder <span style="color:var(--ink-faint); font-size:0.85rem;">— for double bass</span></div>
+    <div class="perf-row">12. Move if there is gain <span style="color:var(--ink-faint); font-size:0.85rem;">— for percussion</span></div>
+    <div class="perf-row">13. The mysterious skein <span style="color:var(--ink-faint); font-size:0.85rem;">— for double bass and percussion</span></div>
+  </div>
+
+  <!-- SECONDARY IMAGE -->
+  <div class="section-secondary appear">
+    <img src="the-art-of-war-matthias.jpg" alt="Matthias Schack-Arnott at his percussion setup" id="secondaryImg">
+  </div>
+  <p class="image-caption appear">Matthias Schack-Arnott. Photograph: [photographer TBC]</p>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- LINKS -->
+  <div class="links-list appear">
+    <a class="link-row" href="https://www.chambermade.org/index/work/0ce3b" target="_blank">
+      <span class="link-type">Production</span>
+      Captives of the City — Chamber Made Opera
+    </a>
+  </div>
+
+  <p class="footnote appear">The composition was written for and performed as part of <em>Captives of the City</em>, a Chamber Made Opera production. Full production credits — direction, design, cast — are documented at the link above.</p>
+
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- CREDITS -->
+  <p class="section-label appear">Credits</p>
+
+  <div class="credits-block appear">
+    <strong>Composer</strong> David Young<br>
+    <strong>Bass</strong> Mark Cauvin<br>
+    <strong>Percussion</strong> Matthias Schack-Arnott<br>
+    <strong>Commissioned and premiered by</strong> Chamber Made Opera
+  </div>
+
+  <div class="closing appear">
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Back to top">↑</a>
+      <a href="index.html">home</a>
+      <a href="art.html">art</a>
+      <a href="impressum.html">Impressum</a>
+      <img src="rainbow flag.png" alt="Progress Pride flag" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Scroll-reveal
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.disconnect(); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+// Hero image fade
+document.querySelectorAll('.section-hero img, .section-secondary img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { img.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.1 }).observe(img);
+});
+
+// Audio fade
+document.querySelectorAll('.audio-embed').forEach(a => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { a.classList.add('seen'); obs.disconnect(); } });
+  }, { threshold: 0.15 }).observe(a);
+});
+</script>
+
+</body>
+</html>
