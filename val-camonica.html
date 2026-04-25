@@ -1206,12 +1206,11 @@
     Val Camonica Pieces &mdash; <em>Incisioni Rupestri</em> &mdash; score (PDF)
   </a>
 
-  <div class="piece-image appear">
-    <img src="val-camonica-knoop-young.jpg" alt="David Young and Mark Knoop with the score, Fairfax Studio, 2007">
-    <div class="piece-image-caption">
-      David Young and Mark Knoop with the score. Fairfax Studio, Arts Centre Melbourne, 2007.
-    </div>
-  </div>
+  <div class="pause appear">&middot; &middot; &middot;</div>
+
+  <!-- PERFORMANCE DOCUMENTATION -->
+  <p class="section-label appear">Performance documentation</p>
+  <div class="image-grid" id="performanceGrid"></div>
 
   <a class="section-top appear" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">&uarr;</a>
 
@@ -1424,6 +1423,35 @@
     { src: 'val-camonica-lecture-05.jpg',     caption: 'Flat rock slabs with carvings, Capo di Ponte.' },
     { src: 'val-camonica-lecture-06.jpg',     caption: 'Animals and hunters in raking light, Val Camonica.' },
   ];
+
+  // PERFORMANCE DOCUMENTATION
+  const performanceImages = [
+    { src: 'val-camonica-knoop-young.jpg',    caption: 'David Young and Mark Knoop with the score. Fairfax Studio, Arts Centre Melbourne, 2007.' },
+    { src: 'q4l7898.jpg',                      caption: 'Performance documentation.' },
+    { src: 'q4l7922.jpg',                      caption: 'Performance documentation.' },
+    { src: 'q4l8011.jpg',                      caption: 'Performance documentation.' },
+    { src: 'q4l8057.jpg',                      caption: 'Performance documentation.' },
+    { src: 'q4l8108.jpg',                      caption: 'Performance documentation.' },
+  ];
+
+  // Build performance grid (6 items)
+  const perfGrid = document.getElementById('performanceGrid');
+  performanceImages.forEach((img, i) => {
+    const item = document.createElement('div');
+    item.className = 'grid-item';
+    const el = document.createElement('img');
+    el.src = img.src;
+    el.alt = img.caption;
+    el.loading = 'lazy';
+    item.appendChild(el);
+    item.addEventListener('click', () => openLightbox(i, performanceImages));
+    perfGrid.appendChild(item);
+    setTimeout(() => {
+      new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { item.classList.add('seen'); obs.disconnect(); } });
+      }, { threshold: 0.05 }).observe(item);
+    }, i * 80);
+  });
 
   // Build featured grid (first 4)
   const grid = document.getElementById('featuredGrid');
