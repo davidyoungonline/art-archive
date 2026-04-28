@@ -814,9 +814,11 @@ document.querySelectorAll('.audio-embed').forEach(a => {
 
 // Scroll-to-top button
 const scrollTopBtn = document.getElementById('scrollTop');
-window.addEventListener('scroll', () => {
-  scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
-});
+if (scrollTopBtn) {
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+}
 </script>
 
 </body>
