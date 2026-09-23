@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexander-Technik — David Young</title>
+<link rel="alternate" hreflang="en" href="https://davidyoung.online/alexander-technique.html">
+<link rel="alternate" hreflang="de" href="https://davidyoung.online/de/alexander-technik.html">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #253d75;
+    --ink-light: #4566a0;
+    --ink-faint: #7893bf;
+    --ink-ghost: #a8bed9;
+    --paper: #faf9f6;
+    --paper-dark: #f0eee9;
+    --serif: 'EB Garamond', 'Georgia', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 19px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #c4d0e8; color: #1a2a50; }
+
+  .page {
+    max-width: 600px;
+    padding: 0 3.6rem;
+    margin: 0 auto;
+  }
+
+  .breath {
+    height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .breath-mark {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--ink-ghost));
+    opacity: 0;
+    animation: breathIn 2.5s ease 0.8s forwards;
+  }
+
+  @keyframes breathIn {
+    from { opacity: 0; height: 0; }
+    to   { opacity: 1; height: 50px; }
+  }
+
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 1.8rem; }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .prose a:hover { border-bottom-color: var(--ink); }
+
+  .nav-back {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-bottom: 3rem;
+  }
+
+  .nav-back a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .nav-back a:hover { color: var(--ink-light); border-bottom-color: var(--ink-ghost); }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 2.5rem;
+  }
+
+  .pause {
+    padding: 3rem 0;
+    color: var(--ink-ghost);
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.7em;
+    user-select: none;
+  }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .section-intro {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  .section-intro a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.5s ease;
+  }
+
+  .section-intro a:hover { border-bottom-color: var(--ink); }
+
+  /* HERO IMAGE */
+  .section-hero { margin: 0 0 1.8rem; }
+
+  .section-hero img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.88) contrast(1.02);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .section-hero img.seen { opacity: 1; }
+
+  .video-label {
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* VIDEO EMBED */
+  .video-item { margin: 2.2rem 0; }
+
+  .video-embed {
+    position: relative;
+    width: 100%;
+    height: 0;
+    background: var(--paper-dark);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  .video-embed.ratio-16-9 { padding-bottom: 56.25%; }
+  .video-embed.seen { opacity: 1; }
+
+  .video-embed iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials { margin: 0 0 2.5rem; }
+
+  .testimonial {
+    margin-bottom: 2rem;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--ink-ghost);
+  }
+
+  .testimonial p {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ink-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .testimonial .attribution {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-style: normal;
+    letter-spacing: 0.04em;
+  }
+
+  .testimonial .attribution a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-ghost);
+    transition: border-color 0.4s;
+  }
+
+  .testimonial .attribution a:hover { border-bottom-color: var(--ink-light); }
+
+  /* FEES */
+  .fees { margin: 0 0 1.2rem; }
+
+  .fee-item {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink);
+    padding: 0.3rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+
+  .fee-item:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .fee-note {
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-light);
+    line-height: 1.65;
+    margin-top: 1rem;
+    margin-bottom: 1.8rem;
+  }
+
+  /* PROJECT LIST */
+  .project-list { margin: 0; }
+
+  .project-item {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+
+  .project-item:first-child { border-top: 1px solid var(--paper-dark); }
+
+  .project-item a {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.4s, padding-left 0.35s;
+    display: block;
+  }
+
+  .project-item a:hover { color: var(--ink-light); padding-left: 0.35rem; }
+  .project-item .unlinked { color: var(--ink-faint); }
+
+  /* DROPDOWN */
+  details.more-list {
+    margin-top: -1px;
+    margin-bottom: 2.5rem;
+  }
+
+  details.more-list summary {
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-light);
+    padding: 0.5rem 0 0.3rem;
+    transition: color 0.4s;
+    border-bottom: 1px solid var(--ink-ghost);
+    display: inline-block;
+  }
+
+  details.more-list summary::-webkit-details-marker { display: none; }
+  details.more-list summary:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  details.more-list summary::after { content: '\00a0\00a0\00a0\00a0\00a0↓'; }
+  details.more-list[open] summary::after { content: '\00a0\00a0\00a0\00a0\00a0↑'; }
+  details.more-list .project-list { margin-top: 0.3rem; }
+  details.more-list .project-list .project-item:first-child { border-top: 1px solid var(--paper-dark); }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 5rem;
+    padding: 3rem 0 16rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .closing-links {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    color: var(--ink-ghost);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .closing-links a:hover { color: var(--ink-light); }
+
+  .rainbow-flag {
+    display: inline-block;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    opacity: 0.7;
+    object-fit: cover;
+    transition: opacity 0.4s;
+    vertical-align: middle;
+  }
+
+  .rainbow-flag:hover { opacity: 0.9; }
+
+  /* PHOTO GRID */
+  .image-grid {
+    margin: 0 0 0.8rem;
+    columns: 2;
+    column-gap: 5px;
+  }
+
+  @media (max-width: 500px) { .image-grid { columns: 1; } }
+
+  .grid-item {
+    break-inside: avoid;
+    cursor: pointer;
+    background: var(--paper-dark);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    margin-bottom: 5px;
+  }
+
+  .grid-item.seen { opacity: 1; }
+
+  .grid-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: saturate(0.88) contrast(1.02);
+    transition: transform 0.9s ease, filter 0.6s ease;
+  }
+
+  .grid-item:hover img { transform: scale(1.02); filter: saturate(1) contrast(1.02); }
+
+  /* LIGHTBOX */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(14, 20, 38, 0.95);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    padding: 2.5rem 1rem;
+  }
+
+  .lightbox.open { opacity: 1; pointer-events: all; }
+
+  .lightbox-inner { position: relative; max-width: 860px; width: 100%; }
+
+  .lightbox-img {
+    display: block;
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    filter: saturate(0.9) contrast(1.01);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .lightbox-img.ready { opacity: 1; }
+
+  .lightbox-caption {
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: rgba(173, 189, 214, 0.6);
+    text-align: center;
+    min-height: 1.2rem;
+  }
+
+  .lb-close {
+    position: absolute;
+    top: -2.2rem;
+    right: 0;
+    background: none;
+    border: none;
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    color: var(--ink-ghost);
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: color 0.3s;
+    padding: 0;
+  }
+
+  .lb-close:hover { color: #fff; }
+
+  .lb-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: rgba(173, 189, 214, 0.35);
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 0.5rem;
+    line-height: 1;
+  }
+
+  .lb-nav:hover { color: rgba(173, 189, 214, 0.9); }
+  .lb-prev { left: -3.5rem; }
+  .lb-next { right: -3.5rem; }
+
+  @media (max-width: 700px) {
+    .lb-prev { left: -1.8rem; }
+    .lb-next { right: -1.8rem; }
+  }
+
+  /* APPEAR */
+  .appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 1.4s ease, transform 1.6s ease;
+  }
+
+  .appear.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="breath">
+    <div class="breath-mark"></div>
+  </div>
+
+  <div class="prose">
+
+    <p class="nav-back appear"><a href="index.html">&#8592;</a></p>
+
+    <h1 class="page-title appear">Alexander-Technik</h1>
+
+    <!-- First paragraph: full prose size -->
+    <p class="appear">
+      Die Alexander-Technik hat alles ver&auml;ndert. In einer Zeit, in der ich arbeitss&uuml;chtig war, hat sie mich das Innehalten gelehrt.
+    </p>
+
+    <!-- Hero image: immediately after first paragraph -->
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/bd8bc6de-6e40-4d1f-996d-49e6a6eefef9/david+young+-+alexandertechnique-17.jpg"
+           alt="David Young — Alexander-Technik">
+    </div>
+
+    <!-- Remaining intro paragraphs: smaller font -->
+    <p class="section-intro appear">
+      W&auml;hrend meines Musikstudiums hatte ich an einigen Gruppenstunden teilgenommen, die mich neugierig machten, aber es gab zu viele andere aufregende Dinge zu entdecken. Viel sp&auml;ter stellte mir meine liebe Freundin und k&uuml;nstlerische Weggef&auml;hrtin Margaret Cameron <a href="http://janerefshauge.com" target="_blank">Jane Refshauge</a> vor. Sie legte mich f&uuml;r etwa 20 Minuten auf den Tisch, und die Wirkung hallte sechs Monate nach. Trotzdem dauerte es weitere zwei Jahre, bis ich einen Termin vereinbarte. Dann war ich unterwegs.
+    </p>
+
+    <p class="section-intro appear">
+      F&uuml;nf Jahre sp&auml;ter, nachdem ich meine Stelle gek&uuml;ndigt hatte, besuchte ich die <a href="http://alexander-technik-schule.de" target="_blank">Alexander-Technik-Schule Berlin</a> und schrieb mich sofort in die dreij&auml;hrige Ausbildung bei J&ouml;rg A&szlig;hoff ein. Ich bin im <a href="https://www.alexander-technik.org/" target="_blank">ATVD</a> in Deutschland und im <a href="https://alexandertechnique.org.au/" target="_blank">AUSTAT</a> in Australien registriert.
+    </p>
+
+    <p class="section-intro appear">
+      In Berlin, Paleopoli oder Melbourne arbeite ich im Einzelunterricht und stelle f&uuml;r jede Person ein eigenes Programm zusammen, das ihren Weg in der Alexander-Technik begleitet. Von Zeit zu Zeit biete ich Workshops und Retreats an. Wenn dich hier etwas anspricht, <a href="index.html#contact">melde dich</a>.
+    </p>
+
+    <p class="section-intro appear">
+      <a href="https://alexandertechnique.co.uk/alexander-technique" target="_blank">Mehr &uuml;ber die Alexander-Technik.</a>
+    </p>
+
+    <!-- Second AT image -->
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/63c6982f-b8fc-406a-ad65-53210b8f1735/david+young+-+alexandertechnique-32+Kopie.jpg"
+           alt="David Young — Alexander-Technik-Stunde">
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- AUDIO SERIES -->
+    <p class="section-label appear" id="audio-series">Audio-Serien</p>
+
+    <p class="section-intro appear">
+      &Uuml;ber die Jahre sind mehrere Audio-Serien entstanden, die aus Alexander-Technik, Meditation und Kunst sch&ouml;pfen: kurze &Uuml;bungen zum Anh&ouml;ren zu Hause, in deiner eigenen Zeit.
+    </p>
+
+    <!-- Semi-supine image: belongs to the audio series -->
+    <div class="section-hero appear">
+      <img src="../david-young-semi-supine.jpg" alt="David Young in der Konstruktiven Ruhelage — Brandenburg 2020">
+      <div class="video-label">Konstruktive Ruhelage &mdash; Brandenburg 2020</div>
+    </div>
+
+    <div class="project-list appear">
+      <div class="project-item"><a href="../21-days-of-perceptual-practice.html">21 Days of Perceptual Practice</a></div>
+    </div>
+
+    <details class="more-list appear">
+      <summary>mehr Audio-Serien</summary>
+      <div class="project-list">
+        <div class="project-item"><a href="../change.html">Change</a></div>
+        <div class="project-item"><span class="unlinked">Stopping</span></div>
+      </div>
+    </details>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- FILM -->
+    <p class="section-label appear">Film</p>
+
+    <div class="video-item appear">
+      <div class="video-embed ratio-16-9">
+        <iframe src="https://player.vimeo.com/video/243967147?title=0&byline=0&portrait=0"
+                title="Where are your feet? — David Young"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <div class="video-label">Where are your feet? &mdash; gedreht in Berlin, Br&uuml;ssel, Paris, Melbourne und Sydney, 2017</div>
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- TESTIMONIALS -->
+    <p class="section-label appear">Stimmen</p>
+
+    <div class="testimonials appear">
+      <div class="testimonial">
+        <p>Ich verstehe Stille und Bewegung, Ausrichtung und Fluss inzwischen auf neue Weise.</p>
+        <div class="attribution"><a href="https://estheranatolitis.net/2018/01/30/new-techniques-for-a-practice-of-letting-go/" target="_blank">Esther</a>, Kulturmanagerin &amp; Autorin</div>
+      </div>
+      <div class="testimonial">
+        <p>Es hat mich &uuml;berrascht, dass so einfach erkl&auml;rbare Prinzipien so viel bewirken und zugleich eine fortlaufende, immer tiefere Erkundung er&ouml;ffnen k&ouml;nnen.</p>
+        <div class="attribution">Daniel, Theaterregisseur</div>
+      </div>
+      <div class="testimonial">
+        <p>Vor allem ist Davids Herangehensweise ganzheitlich und st&auml;rkend: Er f&uuml;hrt mich behutsam dahin, meine eigenen Ressourcen in mir zu finden.</p>
+        <div class="attribution">Cassie, Textil- &amp; Webdesignerin</div>
+      </div>
+      <div class="testimonial">
+        <p>Ich litt unter extremer arbeitsbedingter Schlaflosigkeit, und nach jeder Stunde schlief ich eine ganze Nacht gut.</p>
+        <div class="attribution">Bronwyn, Lehrerin</div>
+      </div>
+      <div class="testimonial">
+        <p>Davids Alexander-Arbeit hat mir geholfen, an meinen inneren Zufluchtsort zur&uuml;ckzukehren. Diese Stunden haben mich ermutigt, mich neu auszurichten.</p>
+        <div class="attribution">Vicki, Altenpflegerin</div>
+      </div>
+    </div>
+
+    <!-- Third AT image: below testimonials -->
+    <div class="section-hero appear">
+      <img src="https://images.squarespace-cdn.com/content/v1/695cf5532f6c5a3605637979/adfd6c57-8d04-4c01-af8a-ff02e916ac0c/david+young+-+alexandertechnique-71.jpg"
+           alt="David Young — Alexander-Technik">
+    </div>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <!-- SESSIONS & FEES -->
+    <p class="section-label appear">Stunden &amp; Honorare</p>
+
+    <p class="section-intro appear"><a href="index.html#contact">Melde dich</a> f&uuml;r einen Termin.</p>
+
+    <div class="fees appear">
+      <div class="fee-item">Einzelstunde, 60 Minuten &mdash; 120&nbsp;&euro;</div>
+      <div class="fee-item">Einf&uuml;hrungsprogramm &mdash; 5 Stunden in 2 Wochen, 400&nbsp;&euro;</div>
+      <div class="fee-item">Intensivprogramm &mdash; 3 Stunden pro Woche &uuml;ber 4 Wochen, 800&nbsp;&euro;</div>
+    </div>
+
+    <p class="fee-note appear">F&uuml;r mehrere und regelm&auml;&szlig;ige Stunden gibt es Erm&auml;&szlig;igungen. Termine k&ouml;nnen bis 48 Stunden vorher verschoben oder abgesagt werden, danach wird das volle Honorar f&auml;llig. Anzahlungen und Vorverk&auml;ufe werden nicht erstattet. Wenn Geld ein Hindernis ist, melde dich, dann finden wir eine L&ouml;sung. Bequeme, lockere Kleidung wird empfohlen.</p>
+
+    <div class="pause appear">&middot; &middot; &middot;</div>
+
+    <p class="section-label appear">Fotografien</p>
+
+    <div class="image-grid appear" id="atGrid"></div>
+
+  </div>
+
+    <div class="closing appear">
+    <div class="closing-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" title="Nach oben">↑</a>
+      <a href="index.html">Start</a>
+      <a href="../alexander-technique.html">English</a>
+      <a href="../impressum.html">Impressum</a>
+      <img src="../rainbow%20flag.png" alt="Progress Pride Flagge" class="rainbow-flag" title="Pride">
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lb-close" onclick="closeLightbox()">schlie&szlig;en</button>
+    <button class="lb-nav lb-prev" onclick="lbStep(-1)">&#8592;</button>
+    <img class="lightbox-img" id="lbImg" src="" alt="">
+    <button class="lb-nav lb-next" onclick="lbStep(1)">&#8594;</button>
+    <p class="lightbox-caption" id="lbCaption"></p>
+  </div>
+</div>
+
+<script>
+// Appear on scroll
+document.querySelectorAll('.appear').forEach(el => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }).observe(el);
+});
+
+// Hero image fade-in
+document.querySelectorAll('.section-hero img').forEach(img => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(img);
+});
+
+// Video fade-in
+document.querySelectorAll('.video-embed').forEach(v => {
+  new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { v.classList.add('seen'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }).observe(v);
+});
+setTimeout(() => {
+  document.querySelectorAll('.video-embed:not(.seen)').forEach(v => v.classList.add('seen'));
+}, 3000);
+
+// Dropdown toggle text
+document.querySelectorAll('details.more-list').forEach(details => {
+  const summary = details.querySelector('summary');
+  const moreText = summary.textContent.trim();
+  const lessText = moreText.replace(/^mehr/, 'weniger');
+  details.addEventListener('toggle', () => {
+    summary.textContent = details.open ? lessText : moreText;
+  });
+});
+
+// Photo grid
+const atImages = [
+  { src: '../david young - alexandertechnique-45.jpg', caption: '' },
+  { src: '../david young - alexandertechnique-41.jpg', caption: '' },
+  { src: '../david young - alexandertechnique-70.jpg', caption: '' },
+  { src: '../david young - alexandertechnique-49.jpg', caption: '' },
+];
+
+const atGrid = document.getElementById('atGrid');
+atImages.forEach((img, i) => {
+  const item = document.createElement('div');
+  item.className = 'grid-item';
+  const el = document.createElement('img');
+  el.src = img.src;
+  el.alt = img.caption;
+  el.loading = 'lazy';
+  item.appendChild(el);
+  item.addEventListener('click', () => openLightbox(i));
+  atGrid.appendChild(item);
+  setTimeout(() => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting) { item.classList.add('seen'); obs.disconnect(); } });
+    }, { threshold: 0.05 }).observe(item);
+  }, i * 80);
+});
+
+// Lightbox
+let lbIndex = 0;
+
+function openLightbox(index) {
+  lbIndex = index;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  loadLbImage();
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function loadLbImage() {
+  const el = document.getElementById('lbImg');
+  const cap = document.getElementById('lbCaption');
+  el.classList.remove('ready');
+  const d = atImages[lbIndex];
+  cap.textContent = d.caption || '';
+  el.onload = () => el.classList.add('ready');
+  el.src = d.src;
+}
+function lbStep(dir) {
+  lbIndex = (lbIndex + dir + atImages.length) % atImages.length;
+  loadLbImage();
+}
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (lb.classList.contains('open')) {
+    if (e.key === 'ArrowRight') lbStep(1);
+    if (e.key === 'ArrowLeft')  lbStep(-1);
+    if (e.key === 'Escape') closeLightbox();
+  }
+});
+
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+</script>
+
+</body>
+</html>
